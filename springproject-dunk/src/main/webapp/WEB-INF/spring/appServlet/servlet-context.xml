@@ -21,6 +21,8 @@
 	<view-controller path="/" view-name="user/loginForm" />
 	<view-controller path="/loginForm" view-name="user/loginForm" />
 	
+	<!-- place 경로 -->
+	<view-controller path="/placeWriteForm" view-name="place/placeWriteForm" />
 	
 	
 </beans:beans>
