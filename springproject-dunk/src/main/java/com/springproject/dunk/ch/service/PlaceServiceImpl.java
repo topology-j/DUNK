@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.springproject.dunk.ch.dao.PlaceDao;
-import com.springproject.dunk.ch.domain.Board;
+import com.springproject.dunk.ch.domain.PlaceBoard;
 import com.springproject.dunk.ch.domain.PlaceBook;
 
 
@@ -33,7 +33,7 @@ public class PlaceServiceImpl implements PlaceService {
 
 	//no장소 상세보기
 	@Override
-	public Board getPlaceDetail(int no, boolean isCount) {
+	public PlaceBoard getPlaceDetail(int no, boolean isCount) {
 			if(isCount) {
 				dao.incrementReadCount(no);
 			}

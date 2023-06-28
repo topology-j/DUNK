@@ -4,7 +4,7 @@ package com.springproject.dunk.ch.dao;
 import java.sql.Date;
 import java.util.List;
 
-import com.springproject.dunk.ch.domain.Board;
+import com.springproject.dunk.ch.domain.PlaceBoard;
 import com.springproject.dunk.ch.domain.PlaceBook;
 
 public interface PlaceDao {
@@ -16,7 +16,7 @@ public interface PlaceDao {
     public abstract void insertPlaceBook(PlaceBook placeBook);
     
     //no장소 상세보기
-  	public abstract Board getPlaceDetail(int no);
+  	public abstract PlaceBoard getPlaceDetail(int no);
 
   	
   	//장소 조회수 증가 

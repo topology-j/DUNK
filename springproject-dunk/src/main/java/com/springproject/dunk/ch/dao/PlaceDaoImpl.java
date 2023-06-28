@@ -9,7 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.springproject.dunk.ch.domain.Board;
+import com.springproject.dunk.ch.domain.PlaceBoard;
 import com.springproject.dunk.ch.domain.PlaceBook;
 @Repository
 public class PlaceDaoImpl implements PlaceDao {
@@ -42,7 +42,7 @@ public class PlaceDaoImpl implements PlaceDao {
 
 	//no에 해당하는 장소정보 불러오는 메서드
 	@Override
-	public Board getPlaceDetail(int no) {
+	public PlaceBoard getPlaceDetail(int no) {
 		return sqlSession.selectOne(NAME_SPACE + ".getPlaceDetail", no);
 	}	
 	

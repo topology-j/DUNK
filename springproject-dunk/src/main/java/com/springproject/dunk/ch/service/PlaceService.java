@@ -3,7 +3,7 @@ package com.springproject.dunk.ch.service;
 import java.sql.Date;
 import java.util.List;
 
-import com.springproject.dunk.ch.domain.Board;
+import com.springproject.dunk.ch.domain.PlaceBoard;
 import com.springproject.dunk.ch.domain.PlaceBook;
 
 public interface PlaceService {
@@ -14,5 +14,5 @@ public interface PlaceService {
 	// placeBook 정보 DB에 추가
     public abstract void insertPlaceBook(PlaceBook placeBook);
 
-    public Board getPlaceDetail(int no, boolean isCount);
+    public PlaceBoard getPlaceDetail(int no, boolean isCount);
 }

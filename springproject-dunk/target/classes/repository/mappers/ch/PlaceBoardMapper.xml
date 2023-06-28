@@ -42,7 +42,7 @@
 	</insert>
 	
 		 <!-- 장소상세보기 상세보기 -->
-	<select id="getPlaceDetail" resultType="Board" resultMap="boardResultMap">
+	<select id="getPlaceDetail" resultType="PlaceBoard" resultMap="boardResultMap">
 		SELECT 
 			* 
 		FROM place
@@ -50,7 +50,7 @@
 	</select>
 	
 	
-	<resultMap id="boardResultMap" type="Board">
+	<resultMap id="boardResultMap" type="PlaceBoard">
 		<id property="no" column="no" />
 		<result property="name" column="name" />
 		<result property="zipcode" column="zipcode" />

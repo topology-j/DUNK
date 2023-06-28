@@ -12,11 +12,15 @@
     		
 		<property name="typeAliases">
 			<list>
-				<value>com.springproject.dunk.hy.domain</value>
-				<value>com.springproject.dunk.ms.domain</value>
-				<value>com.springproject.dunk.mj.domain</value>
-				<value>com.springproject.dunk.ch.domain</value>		
-				<!-- 승태님은 도메인 등록을 위와 같이 해서 아래에 붙여주세요. -->
+				<value>com.springproject.dunk.hy.domain.Event</value>
+				<value>com.springproject.dunk.hy.domain.User</value>
+				<value>com.springproject.dunk.ms.domain.Board</value>
+				<value>com.springproject.dunk.ms.domain.Reply</value>
+				<value>com.springproject.dunk.mj.domain.Matching</value>
+				<value>com.springproject.dunk.mj.domain.MatchingApply</value>
+				<value>com.springproject.dunk.ch.domain.PlaceBoard</value>	
+				<value>com.springproject.dunk.ch.domain.PlaceBook</value>	
+				<!-- 도메인 등록을 위와 같이 해서 아래에 붙여주세요. -->
 			</list>
 		</property>
 

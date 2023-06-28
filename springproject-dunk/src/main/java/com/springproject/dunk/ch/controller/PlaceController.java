@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.springproject.dunk.ch.domain.Board;
+import com.springproject.dunk.ch.domain.PlaceBoard;
 import com.springproject.dunk.ch.domain.PlaceBook;
 import com.springproject.dunk.ch.service.PlaceService;
 
@@ -30,8 +30,8 @@ public class PlaceController {
 	// 장소 예약 약관 동의 창 이동
 		 //@RequestMapping(value="/placeBookTerms", method=RequestMethod.POST) 
 		 @RequestMapping(value="/placeBookTerms") 
-		 public String placeBookTermsProcess(Model model, Board board, @RequestParam(name = "no", required=false, defaultValue="24")   int no) { 
-			 Board b1 = service.getPlaceDetail(no, false); 
+		 public String placeBookTermsProcess(Model model, PlaceBoard board, @RequestParam(name = "no", required=false, defaultValue="24")   int no) { 
+			 PlaceBoard b1 = service.getPlaceDetail(no, false); 
 			 model.addAttribute("b1", b1);
 			 
 		 
@@ -41,7 +41,7 @@ public class PlaceController {
 		 // 장소 예약 시간 창 이동
 		@RequestMapping(value="/placeBookTime", method=RequestMethod.POST) 
 		public String placeBookTimeProcess(Model model, int no) { 
-			Board b1 = service.getPlaceDetail(no, false);
+			PlaceBoard b1 = service.getPlaceDetail(no, false);
 			
 			// 오늘 날짜 + 1일차로 할 것
 			Calendar cal= Calendar.getInstance();
@@ -66,8 +66,8 @@ public class PlaceController {
 		
 		// 장소 예약 창 이동
 		@RequestMapping(value="/placeBook", method=RequestMethod.POST) 
-		public String placeBookProcess(Model model, Board board, int no) { 
-			Board b1 = service.getPlaceDetail(no, false); 
+		public String placeBookProcess(Model model, PlaceBoard board, int no) { 
+			PlaceBoard b1 = service.getPlaceDetail(no, false); 
 			model.addAttribute("b1", b1);
 
 			 return "placeBook/placeBook"; 

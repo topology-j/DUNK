@@ -17,12 +17,23 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.springproject.dunk" />
-	
-	<view-controller path="/" view-name="user/loginForm" />
-	<view-controller path="/loginForm" view-name="user/loginForm" />
+		
+	<!-- 로고클릭시 매칭리스트 -->
+   <view-controller path="/" view-name="redirect:matchingList" />
+   <!-- 매칭 -->
+   <view-controller path="/matchingWriteForm" view-name="matching/matchingWriteForm" />   
+   
+   <!-- 이벤트 -->
+   <view-controller path="/eventWriteForm" view-name="event/eventWriteForm" />
+   <view-controller path="/eventList" view-name="event/eventList" />
+   <!-- 마이페이지 user -->
+   <view-controller path="/myCalender" view-name="user/myCalender" />
+   <view-controller path="/loginForm" view-name="user/loginForm" />
+   <view-controller path="/joinForm" view-name="user/joinForm" />	
 	
 	<!-- place 경로 -->
 	<view-controller path="/placeWriteForm" view-name="place/placeWriteForm" />
+	
 	
 	
 </beans:beans>

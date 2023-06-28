@@ -28,7 +28,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.*;
 
 
-@Service
+@Service("pService")
 public class PlaceServiceImpl implements PlaceService {
 
 	private static final int PAGE_SIZE = 4; //한 페이지에 보여줄 게시글 수 

@@ -4,7 +4,7 @@ import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
 
-public class Board {
+public class PlaceBoard {
 
 	private int no;
 	private String name;	
@@ -29,9 +29,9 @@ public class Board {
 	private String image3;
 	private String image4;
 
-	public Board() {}
+	public PlaceBoard() {}
 
-	public Board(int no, String name, String zipcode, String address1, String address2, String area, String phone,
+	public PlaceBoard(int no, String name, String zipcode, String address1, String address2, String area, String phone,
 			int pay, Time startTime, Time endTime, int availNum, String content, boolean park, int readCount,
 			int recommend, int thank, float latitude, float longitude, String image1, String image2, String image3,
 			String image4) {

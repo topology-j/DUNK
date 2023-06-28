@@ -10,7 +10,8 @@ import org.springframework.stereotype.Repository;
 
 import com.springproject.dunk.ms.domain.Board;
 import com.springproject.dunk.ms.domain.Reply;
-@Repository
+
+@Repository("pDao")
 public class PlaceDaoImpl implements PlaceDao {
 
 	private final String NAME_SPACE = "springstudy.teamproject.mapper.ms.BoardMapper";

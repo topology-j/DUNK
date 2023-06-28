@@ -8,9 +8,7 @@
 <link href="resources/bootstrap/bootstrap.min.css" rel="stylesheet">
 <link href="resources/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-	<script src="resources/js/jquery-3.2.1.min.js"></script>
-	<!-- <script src="resources/js/formcheck.js"></script> -->
-	<script src="resources/js/teamrecruitformcheck.js"></script>
+	<script src="resources/js/jquery-3.2.1.min.js"></script>	
 	<script src="resources/js/user.js"></script>
 </head>
 <body>

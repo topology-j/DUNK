@@ -26,7 +26,7 @@ import com.springproject.dunk.ms.service.PlaceService;
 
 
 
-@Controller
+@Controller("pController")
 public class PlaceController {
 	
 	private final static String DEFAULT_PATH = "/resources/placeUpload/";
@@ -35,12 +35,6 @@ public class PlaceController {
 	@Autowired
 	public PlaceController(PlaceService service) {
 		this.service = service;
-	}
-	
-	//기본페이지	
-	@RequestMapping("/basic")
-	public String basic() {
-		return "place/basic";
 	}
 		
 	//장소리스트
