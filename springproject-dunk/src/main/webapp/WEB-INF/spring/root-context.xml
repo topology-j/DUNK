@@ -9,9 +9,16 @@
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="mapperLocations" value="classpath:repository/mappers/**/*Mapper.xml" />
-    
-		<property name="typeAliasesPackage" value="com.springproject.dunk.hy.domain, 
-		com.springproject.dunk.ms.domain, com.springproject.dunk.ch.domain, com.springproject.dunk.mj.domain" />
+    		
+		<property name="typeAliases">
+			<list>
+				<value>com.springproject.dunk.hy.domain</value>
+				<value>com.springproject.dunk.ms.domain</value>
+				<value>com.springproject.dunk.mj.domain</value>
+				<value>com.springproject.dunk.ch.domain</value>		
+				<!-- 승태님은 도메인 등록을 위와 같이 해서 아래에 붙여주세요. -->
+			</list>
+		</property>
 
 	</bean>
 	
