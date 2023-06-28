@@ -8,7 +8,7 @@
 	
 
 	
-		<h2 class="text-center mx-auto mt-5"><b>경기장 예약 약관 동의</b></h2>
+		<h2 class="text-center mx-auto mt-5"><b>${b1.name} 예약 약관 동의</b></h2>
 	<div class="text-center mx-auto" id="">
 	
 		<div class="" id="">

@@ -42,11 +42,9 @@ for (var i = 0; i < buttons.length; i++) {
 	<form id="placeBookTime" name="placeBookTime" action="placeBookTimeProcess">
 	</form>
 	
-	<h2 class="text-center mx-auto mt-5"><b>시간 선택</b></h2>
-	
-	<div class="text-center mx-auto mt-5"><b>(날짜를 선택하시면 예약 가능 시간이 출력됩니다.)</b></div>
-	
-	<table class="Calendar mt-3">
+	<h2 class="text-center mx-auto mt-5"><b>${b1.name} 예약 시간</b></h2>
+
+	<table class="Calendar mt-5">
 		<thead>
 			<tr>
 				<td onClick="prevCalendar();" style="cursor:pointer;">&#60;</td>
@@ -112,8 +110,7 @@ for (var i = 0; i < buttons.length; i++) {
 
 	<br><br>
 	<div class="d-flex justify-content-center">
-	<input type="button" class="btn btn-primary" id="placeBookBtn" style="display: none" value="장소 예약"/>&nbsp;&nbsp;
-	<button type="button" class="btn btn-primary" onclick="location.href='basic'">basic</button>
+		<input type="button" class="btn btn-primary" id="placeBookBtn" style="display: none" value="장소 예약"/>&nbsp;&nbsp;	
 	</div>
 </body>
 </html>
