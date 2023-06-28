@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.springproject.dunk.mapper.mj.MatchingMapper" >
+	
+	<!-- 유저의 포인트 불러오기 -->
+	<select id="getPoint" resultType="int">
+		SELECT 
+			point 
+		FROM user
+		WHERE id = #{id};
+	</select>
+	
+	
+	<!-- selectedDate에 해당하는 매칭리스트 반환 -->
+	<select id="matchingList" resultType="Matching" resultMap="matchingResultMap">
+	
+		SELECT
+		*
+		FROM matching
+		WHERE date = #{selectedDate}
+		ORDER BY time
+		LIMIT #{startRow}, #{num}
+	
+	</select>
+	
+	<!-- selectedDate에 해당하는 게시글 수 반환 -->
+	<select id="getMatchingCount" resultType="int">
+		SELECT
+		COUNT(no)
+		FROM matching
+		WHERE date = #{selectedDate};		
+	</select>
+	
+	<!-- 매칭 디테일로들어가게 하나 받아오기 -->
+	<select id="getMatching" resultType="Matching" resultMap="matchingResultMap">
+	
+		SELECT
+		*
+		FROM matching
+		WHERE no = #{no}
+	
+	</select>
+	
+	<!--no에 해당하는 게시글 조회 횟수 증가  -->
+	<update id="incrementReadCount">
+		UPDATE matching
+		SET read_count = read_count +1
+		WHERE no = #{no}
+	</update>
+	
+	<!-- 매칭모집 글쓰기 -->
+	<insert id="insertMatching" parameterType="Matching" useGeneratedKeys="true" keyProperty="no">
+	    INSERT INTO matching(place_no, title, date, time, inwon, gender, level, pay, information, read_count, user_id)
+	    VALUES(#{placeNo}, #{title}, #{date}, #{time}, #{inwon}, #{gender}, #{level}, #{pay}, #{information}, #{readCount}, #{userId})
+	</insert>
+
+	
+	<!-- 매칭모집 글 삭제 -->
+	<delete id="deleteMatching">
+		DELETE FROM matching
+		WHERE no = #{no}
+	</delete>
+	
+	<!-- 매칭에 지원하는 MatchingApply -->
+	<insert id="insertMatchingApply" parameterType="MatchingApply" useGeneratedKeys="true" keyProperty="no">
+		INSERT INTO matching_apply(matching_no, user_id, team_individual, team_no)
+	    VALUES(#{matchingNo}, #{userId}, #{teamIndividual}, #{teamNo})
+	</insert>
+	
+	<!-- 매칭 모집 테이블 -->
+	<resultMap type="Matching" id="matchingResultMap">
+		<id property="no" column="no" />
+		<result property="placeNo" column="place_no" />
+		<result property="title" column="title" />
+		<result property="date" column="date" />
+		<result property="time" column="time" />
+		<result property="inwon" column="inwon" />
+		<result property="gender" column="gender" />
+		<result property="level" column="level" />
+		<result property="pay" column="pay" />
+		<result property="possibleImpossible" column="possible_impossible" />
+		<result property="information" column="information" />
+		<result property="readCount" column="read_Count" />
+		<result property="userId" column="user_id" />
+	</resultMap>
+	
+	<!-- 매칭 모집 지원 테이블 -->
+	<resultMap type="MatchingApply" id="matchingApplyResultMap">
+		<id property="no" column="no"/>
+		<result property="matchingNo" column="matching_no"/>
+		<result property="userId" column="user_id"/>
+		<result property="teamIndividual" column="team_individual"/>
+		<result property="teamNo" column="team_no"/>
+	</resultMap>
+
+</mapper>	
+
+
+
