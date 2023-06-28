@@ -30,7 +30,8 @@ public class PlaceController {
 	// 장소 예약 약관 동의 창 이동
 		 //@RequestMapping(value="/placeBookTerms", method=RequestMethod.POST) 
 		 @RequestMapping(value="/placeBookTerms") 
-		 public String placeBookTermsProcess(Model model, PlaceBoard board, @RequestParam(name = "no", required=false, defaultValue="24")   int no) { 
+		public String placeBookTermsProcess(Model model, PlaceBoard board, int no) {
+		 //public String placeBookTermsProcess(Model model, PlaceBoard board, @RequestParam(name = "no", required=false, defaultValue="24")   int no) { 
 			 PlaceBoard b1 = service.getPlaceDetail(no, false); 
 			 model.addAttribute("b1", b1);
 			 
