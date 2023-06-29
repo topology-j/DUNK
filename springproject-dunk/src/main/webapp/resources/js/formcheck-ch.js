@@ -35,4 +35,18 @@ $(document).ready(function() {
 	
 	
 });
+	// 모달 창
+	$(document).ready(function() {
+		
+		// 모달 열기 클릭 시 이벤트 핸들러
+		$('#payModalOpen').on('click', function() {
+			$('#payModal').fadeIn(400);
+		});
+ 
+		// 닫기 버튼 클릭 시 이벤트 핸들러
+		$('#modalClose').on('click', function() {
+			$('#payModal').fadeOut(400);
+		});
+ 
+});
 

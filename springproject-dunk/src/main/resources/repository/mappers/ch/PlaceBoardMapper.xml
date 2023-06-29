@@ -49,6 +49,13 @@
 		WHERE no = #{no}
 	</select>
 	
+	<select id="getPoint" resultType="int">
+      SELECT 
+         point 
+      FROM user
+      WHERE id = #{id};
+   </select>
+	
 	
 	<resultMap id="boardResultMap" type="PlaceBoard">
 		<id property="no" column="no" />
