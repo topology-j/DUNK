@@ -80,5 +80,20 @@ public class MatchingDaoImpl implements MatchingDao {
 		return sqlSession.selectOne(NAME_SPACE +".getPoint", id);
 	}
 
+	//Matching에 해당하는 MatchingApply 수를 반환하는 메서드
+	@Override
+	public int getMatchingApplyCount(int matchingNo) {
+		return sqlSession.selectOne(NAME_SPACE + ".getMatchingApplyCount", matchingNo);
+	}
+
+	//매칭포인트차감
+	@Override
+	public void updateUserPoint(String userId, int pay) {
+		Map<String, Object> params = new HashMap<>();
+	    params.put("userId", userId);
+	    params.put("pay", pay);
+	    sqlSession.update(NAME_SPACE + ".updateUserPoint", params);
+		
+	}
 
 }
