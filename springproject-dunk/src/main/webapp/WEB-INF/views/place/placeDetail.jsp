@@ -28,7 +28,6 @@
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="resources/js/formcheck.js"></script>
-<script src="resources/js/formcheck-ch.js"></script><!-- ch 추가 -->
 <script src="resources/js/reply.js"></script>
 <link href="resources/css/place.css"  rel="stylesheet"/>
 </head>
