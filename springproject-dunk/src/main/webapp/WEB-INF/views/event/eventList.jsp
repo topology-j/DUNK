@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 
-<script src="resources/js/formcheck-hy.js"></script>	
+<script src="resources/js/formcheck-hy.js"></script>
 
 <form action="eventList" method="post">
 	<input type="hidden" name="type" value="title">

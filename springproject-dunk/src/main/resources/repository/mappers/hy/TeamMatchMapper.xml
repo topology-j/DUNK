@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.springproject.dunk.mapper.TeamMatchMapper" >
+
+	<insert id="addTeamMatch" parameterType="TeamMatch">
+		insert into team_match (title, writer_id, writer_nick, book_no, team_no, date, time, gender, 
+			level, pay, process, information, read_count) values(#{title}, #{writerId}, #{writerNick}, 
+			#{bookNo}, #{teamNo}, #{date}, #{time}, #{gender}, #{level}, #{pay}, #{process}, 
+			#{information}, 0)
+	</insert>
+
+	<insert id="addTeamMatchUser" parameterType="hashmap">
+		insert into team_match_user (book_no, team_no, user_id, user_nick) 
+			values(#{bookNo}, #{teamNo}, #{userId}, #{userNick})
+	</insert>
+	
+	<update id="addTeamMatchUserNick" parameterType="hashmap">
+		update team_match_user set user_nick=#{userNick} 
+			where book_no=#{bookNo} and team_no=#{teamNo} and user_id=#{userId}
+	</update>
+	
+	<select id="teamMatchList" resultMap="teamMatchResultMap">
+		select * from team_match
+	</select>
+	
+	<select id="getTeamMatch" resultMap="teamMatchResultMap">
+		select * from team_match where no=#{no}
+	</select>
+	
+	<select id="teamMatchUserList" resultMap="teamMatchUserResultMap">
+		select * from team_match_user where book_no=#{no}
+	</select>
+
+	<update id="updateTeamMatchProcess">
+		update team_match set process='마감' where no=#{no}
+	</update>
+
+
+	
+	
+	<resultMap id="teamMatchResultMap" type="TeamMatch">
+		<id property="no" column="no" />
+		<result property="title" column="title" />
+		<result property="writerId" column="writer_id" />
+		<result property="writerNick" column="writer_nick" />
+		<result property="bookNo" column="book_no" />
+		<result property="teamNo" column="team_no" />
+		<result property="date" column="date" />
+		<result property="time" column="time" />
+		<result property="gender" column="gender" />
+		<result property="level" column="level" />
+		<result property="pay" column="pay" />
+		<result property="information" column="information" />
+		<result property="readCount" column="read_count" />		
+	</resultMap>
+	
+	<resultMap id="teamMatchUserResultMap" type="TeamMatchUser">
+		<id property="no" column="no" />
+		<result property="bookNo" column="book_no" />
+		<result property="teamNo" column="team_no" />
+		<result property="userId" column="user_id" />
+		<result property="userNick" column="user_nick" />			
+	</resultMap>
+
+</mapper>	
+
+
+

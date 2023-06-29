@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 맵퍼의 namespace 속성은 맵핑 구문을 그룹핑 하는 역할을 한다. 여러 맵퍼에서 맵핑 구문의 id 속성의 값이 중복되더라도 
+	namespace와 맵핑 구문의 id 속성에 지정한 값을 합쳐서 호출하기 때문에 맵핑 구문이 중복되지 않게 분류하여 관리할 수 있다. 
+	테이블 이름을 바탕으로 namespace를 지정하고 맵핑 구문의 id 속성의 값은 SQL 문의 맥락에 따라서 명명하는 것이 일반적 
+	이다. parameterType 속성에는 주로 SQL 문의 조건에 사용할 파라미터의 데이터 타입을 지정하는 속성으로 자바 원시 타입(기본 
+	타입, String)과 자바빈, Map과 같은 타입을 지정할 수 있다. resultType 속성도 parameterType 속성에서 
+	지정한 타입을 많이 사용한다. parameterType과 resultType에 지정할 데이터 타입이 자바 원시 타입이면 생략가능하다. 
+	마이바티스 참고 사이트 - http://blog.mybatis.org/ - http://www.mybatis.org/mybatis-3/ko/index.html -->
+<mapper
+	namespace="com.springproject.dunk.mapper.TeamRecruitmentMapper">
+
+	<select id="teamRecruitmentList" parameterType="hashmap" resultMap="teamRecruitmentResultMap"  resultType="TeamRecruitment">
+		SELECT
+		*
+		FROM team_recruitment
+		ORDER BY NO DESC
+		LIMIT #{startRow}, #{num}
+	</select>
+
+	<select id="getTeamRecruitmentCount" resultType="int">
+		SELECT 
+			COUNT(no)
+		FROM team_recruitment
+	</select>
+
+	<select id="getTeamRecruitment" resultType="TeamRecruitment"
+		resultMap="teamRecruitmentResultMap" parameterType="hashmap">
+		SELECT
+		*
+		FROM
+		team_recruitment
+		WHERE no = #{no}
+	</select>
+
+	<insert id="insertTeamRecruitment"
+		parameterType="TeamRecruitment" useGeneratedKeys="true"
+		keyProperty="no">
+		INSERT INTO team_recruitment(title, user_id, user_nick, reg_date,
+		name, personnel, preferred_area, preferred_day, gender, read_count,
+		content)
+		VALUES(#{title}, #{userId}, #{userNick}, SYSDATE(), #{name}, #{personnel},
+		#{preferredArea}, #{preferredDay}, #{gender}, #{readCount},
+		#{content})
+	</insert>
+
+	<update id="updateTeamRecruitment"
+		parameterType="TeamRecruitment">
+		UPDATE team_recruitment
+		SET title=#{title}, user_id=#{userId}, reg_date=SYSDATE(), name=#{name},
+		personnel=#{personnel}, preferred_area=#{preferredArea},
+		preferred_day=#{preferredDay}, gender=#{gender},
+		read_count=#{readCount}, content=#{content}
+		WHERE no = #{no}
+	</update>
+
+	<delete id="deleteTeamRecruitment">
+		DELETE FROM team_recruitment
+		WHERE no = #{no}
+	</delete>
+
+	<resultMap id="teamRecruitmentResultMap"
+		type="TeamRecruitment">
+		<id property="no" column="no" />
+		<result property="userId" column="user_id" />
+		<result property="userNick" column="user_nick" />
+		<result property="teamNo" column="team_no" />
+		<result property="title" column="title" />
+		<result property="name" column="name" />
+		<result property="personnel" column="personnel" />
+		<result property="preferredArea" column="preferred_area" />
+		<result property="preferredDay" column="preferred_day" />
+		<result property="gender" column="gender" />
+		<result property="content" column="content" />
+		<result property="regDate" column="reg_date" />
+		<result property="readCount" column="read_count" />
+
+	</resultMap>
+
+</mapper>	
+
+
+

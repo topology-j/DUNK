@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.springproject.dunk.hy.dao.EventDao;
 import com.springproject.dunk.hy.domain.Event;
+import com.springproject.dunk.hy.domain.EventComment;
 
 @Service
 public class EvenServiceImpl implements EventService {
@@ -64,6 +65,53 @@ public class EvenServiceImpl implements EventService {
 		}		
 		
 		return modelMap;
-	}	
+	}
+
+	@Override
+	public Event getEvent(int no, boolean isCount) {		
+		
+		if(isCount) {
+			dao.incrementReadCount(no);
+		}
+		
+		return dao.getEvent(no);
+	}
+	
+
+	@Override
+	public void insertEvent(Event e) {
+		dao.insertEvent(e);		
+	}
+
+	@Override
+	public void updateEvent(Event e) {
+		dao.updateEvent(e);
+	}
+	
+	@Override
+	public void deleteEvent(int no) {
+		dao.deleteEvent(no);		
+	}
+	
+	@Override
+	public void recommend(int no) {
+		dao.recommend(no);		
+	}
+
+	@Override
+	public List<String> getImages(int no) {		
+		return dao.getImages(no);
+	}
+
+	@Override
+	public List<EventComment> commentList(int no) {		
+		return dao.commentList(no);
+	}
+	
+	@Override
+	public void addEventComment(EventComment ec) {
+		dao.addEventComment(ec);		
+	}
+	
 
 }
