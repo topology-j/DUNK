@@ -21,9 +21,14 @@ public interface MatchingDao {
 	
 	//Matching에 MatchingApply 신청하기
 	public void insertMatchingApply(MatchingApply matchingApply);
+	
+	//Matching에 해당하는 MatchingApply 수를 반환하는 메서드
+	public abstract int getMatchingApplyCount(int matchingNo);
 
 	//매칭에 지원시 포인트 불러오기
 	public abstract int getPoint(String id);
 	
-
+	// 유저 포인트 차감
+    public abstract void updateUserPoint(String userId, int pay);
+	
 }

@@ -27,8 +27,13 @@ public interface MatchingService {
 	//매칭에 지원 MatchingApply
 	public abstract void insertMatchingApply(MatchingApply matchingApply);
 	
+	//매칭에 지원한 MatchingApply 수를 반환하는 메서드
+	public abstract int getMatchingApplyCount(int matchingNo);
+	
 	//매칭 지원시 포인트 불러오기
 	public abstract int getPoint(String id);
-
+	
+	//포인트 차감
+	public abstract void updateUserPoint(String userId, int pay);
 
 }

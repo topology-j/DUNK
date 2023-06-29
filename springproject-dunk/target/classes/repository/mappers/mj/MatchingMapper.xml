@@ -12,7 +12,6 @@
 		WHERE id = #{id};
 	</select>
 	
-	
 	<!-- selectedDate에 해당하는 매칭리스트 반환 -->
 	<select id="matchingList" resultType="Matching" resultMap="matchingResultMap">
 	
@@ -68,6 +67,23 @@
 		INSERT INTO matching_apply(matching_no, user_id, team_individual, team_no)
 	    VALUES(#{matchingNo}, #{userId}, #{teamIndividual}, #{teamNo})
 	</insert>
+	
+	<!-- Matching에 해당하는 MatchingApply 수 반환 -->
+	<select id="getMatchingApplyCount" resultType="int">
+		SELECT COUNT(*)
+		FROM matching m, matching_apply ma
+		WHERE m.no=ma.matching_no
+		AND m.no = #{matchingNo}
+		<!-- GROUP BY matching_no = #{matchingNo} -->
+	</select>
+	
+	<!-- 유저 포인트 차감 -->
+	<update  id="updateUserPoint">
+		UPDATE user
+		SET point = point - #{pay}
+		WHERE user_id = #{userId}
+	</update>
+	
 	
 	<!-- 매칭 모집 테이블 -->
 	<resultMap type="Matching" id="matchingResultMap">

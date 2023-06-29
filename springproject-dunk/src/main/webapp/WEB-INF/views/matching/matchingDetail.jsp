@@ -24,7 +24,8 @@
 						<p>레벨</p>		
 						<p>성별</p>
 						<p>경기규칙</p>
-						<p>모집인원</p>
+						<p>지원인원${matchingApplyCount }명</p>
+						<p>모집인원${matching.inwon}</p>
 						<p>준비물ex)</p>
 						<hr>
 						<pre>${ matching.information }</pre>
@@ -78,7 +79,8 @@
 				<p>*주소불러오기</p>
 				<div><img src="resources/main_img/readCount.svg">${ matching.readCount }</div><hr>
 				<div>${ matching.pay}원/*몇시간</div><hr>
-				<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">신청하기</button>
+				<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+				${matchingApplyCount == matching.inwon ? "disabled" : ""}>신청하기</button>
 				
 				<!-- 매치신청하기 모달 -->
 				<form action="matchingApply" method="post">
@@ -130,7 +132,7 @@
 					      </div>
 					      <div class="modal-footer">
 					      	<div class="col text-center">
-								<input type="submit" class="btn btn-warning" id="detailUpdate" value="매칭신청하기">
+								<input type="submit" class="btn btn-warning" value="매칭신청하기">
 					        </div>
 					      </div>
 					    </div>

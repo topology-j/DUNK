@@ -57,7 +57,7 @@ public class MatchingServiceImpl implements MatchingService {
 		modelMap.put("startPage", startPage);
 		modelMap.put("endPage", endPage);
 		modelMap.put("currentPage", currentPage);
-		modelMap.put("listCount", listCount);
+		
 		modelMap.put("pageGroup", PAGE_GROUP);
 		
 		
@@ -96,5 +96,19 @@ public class MatchingServiceImpl implements MatchingService {
 	public  int getPoint(String id) {
 		return matchingDao.getPoint(id);
 	}
+
+	//매칭에 지원한 MatchingApply 수를 반환하는 메서드
+	@Override
+	public int getMatchingApplyCount(int matchingNo) {
+	    return matchingDao.getMatchingApplyCount(matchingNo);
+	}
+
+	//포인트 차감(트랜젝션)
+	@Override
+	public void updateUserPoint(String userId, int pay) {
+		matchingDao.updateUserPoint(userId, pay);
+		
+	}
+
 
 }
