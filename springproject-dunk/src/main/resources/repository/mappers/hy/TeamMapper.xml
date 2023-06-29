@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.springproject.dunk.mapper.TeamMapper" >
+
+	<insert id="addTeam" parameterType="Team" useGeneratedKeys="true" keyProperty="no">
+		insert into team(name, leader_id, leader_nick, people_num, match_num, explanation) 
+			values(#{name}, #{leaderId}, #{leaderNick}, #{peopleNum}, #{matchNum}, #{explanation})
+	</insert>	
+	
+	<select id="teamNoList" resultType="int">
+		select team_no from team_user where user_id=#{id}
+	</select>
+	
+	<select id="getTeam" resultMap="teamResultMap">
+		select * from team where no=#{no}
+	</select>
+	
+	<insert id="addTeamUser" parameterType="hashmap">
+		insert into team_user (team_no, user_id, user_nick) values(#{no}, #{id}, #{nick})
+	</insert>
+	
+	<select id="teamUserList" resultMap="teamUserResultMap">
+		select * from team_user where team_no=#{no}
+	</select>
+	
+	<delete id="deleteTeamUser" parameterType="hashmap">
+		delete from team_user where team_no=#{no} and user_id=#{id}
+	</delete>
+	
+	<update id="changeLeader" parameterType="hashmap">
+		update team set leader_id=#{id}, leader_nick=#{nick} where no=#{no}
+	</update>
+	
+	<update id="updateTeam" parameterType="Team">
+		update team set name=#{name}, leader_id=#{leaderId}, leader_nick=#{leaderNick},
+			people_num=#{peopleNum}, explanation=#{explanation} where no=#{no} 
+	</update>
+	
+	<delete id="deleteTeam">
+		delete from team where no=#{no}
+	</delete>
+	
+	<delete id="deleteTeamAllUser">
+		delete from team_user where team_no=#{no}
+	</delete>
+	
+	<select id="getTeamById" resultMap="teamResultMap">
+		select * from team where leader_id=#{id}
+	</select>
+	
+	<update id="updateTeamUser" parameterType="hashmap">
+		update team_user set user_nick=#{nick} where team_no=#{no} and user_id=#{id}
+	</update>
+
+	<resultMap id="teamResultMap" type="Team">
+		<id property="no" column="no" />
+		<result property="name" column="name" />
+		<result property="leaderId" column="leader_id" />
+		<result property="leaderNick" column="leader_nick" />
+		<result property="peopleNum" column="people_num" />
+		<result property="matchNum" column="match_num" />
+		<result property="explanation" column="explanation" />
+	</resultMap>
+	
+	<resultMap id="teamUserResultMap" type="TeamUser">
+		<id property="no" column="no" />
+		<result property="teamNo" column="team_no" />
+		<result property="userId" column="user_id" />
+		<result property="userNick" column="user_nick" />		
+	</resultMap>
+
+</mapper>	
+
+
+

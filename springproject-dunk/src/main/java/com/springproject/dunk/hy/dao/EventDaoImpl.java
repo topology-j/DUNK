@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.springproject.dunk.hy.domain.Event;
+import com.springproject.dunk.hy.domain.EventComment;
 
 @Repository
 public class EventDaoImpl implements EventDao {
@@ -34,7 +35,51 @@ public class EventDaoImpl implements EventDao {
 		
 		return sqlSession.selectList(NAME_SPACE+".eventList", params);
 	}
+
+	@Override
+	public Event getEvent(int no) {		
+		return sqlSession.selectOne(NAME_SPACE+".getEvent", no);
+	}
+
+	@Override
+	public void insertEvent(Event e) {
+		
+		sqlSession.insert(NAME_SPACE+".insertEvent", e);
+		
+		Event event=getEvent(e.getNo());
+		
+		Map<String, Object> params=new HashMap<>();
+		
+		params.put("no", event.getNo());
+				
+		for(int i=0; i<e.getImgFileNames().size(); i++) {
+			
+			params.put("img", e.getImgFileNames().get(i));
+			
+			sqlSession.insert(NAME_SPACE+".insertEventImg", params);
+		}		
+	}
 	
+	@Override
+	public void updateEvent(Event e) {
+		sqlSession.update(NAME_SPACE+".updateEvent", e);		
+	}
+	
+	@Override
+	public void deleteEvent(int no) {
+		sqlSession.delete(NAME_SPACE+".deleteEvent", no);			
+	}
+	
+	@Override
+	public void incrementReadCount(int no) {
+		sqlSession.update(NAME_SPACE+".incrementReadCount", no);		
+	}
+	
+	@Override
+	public void recommend(int no) {
+		sqlSession.update(NAME_SPACE+".recommend", no);		
+	}
+
 	@Override
 	public int getEventCount(String type, String keyword) {		
 		
@@ -45,5 +90,21 @@ public class EventDaoImpl implements EventDao {
 		
 		return sqlSession.selectOne(NAME_SPACE+".getEventCount", params);	
 	}
-		
+
+	@Override
+	public List<String> getImages(int no) {		
+		return sqlSession.selectList(NAME_SPACE+".getImages", no);
+	}
+
+	@Override
+	public List<EventComment> commentList(int no) {		
+		return sqlSession.selectList(NAME_SPACE+".commentList", no);
+	}
+
+	@Override
+	public void addEventComment(EventComment ec) {
+		sqlSession.insert(NAME_SPACE+".addEventComment", ec);		
+	}
+	
+	
 }

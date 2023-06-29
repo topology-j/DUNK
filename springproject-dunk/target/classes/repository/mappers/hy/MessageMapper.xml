@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.springproject.dunk.mapper.MessageMapper" >
+	
+	<select id="messageList" resultMap="messageResultMap">
+		select * from message where receive_id=#{id} order by no desc limit #{startRow}, #{num}
+	</select>
+	
+	<select id="messageList2" resultMap="messageResultMap">
+		select * from message where receive_id=#{id} order by no desc
+	</select>
+	
+	<select id="getMessage" resultMap="messageResultMap">
+		select * from message where no=#{no}
+	</select>
+	
+	<update id="addReadMessage">
+		update message set read_message=read_message+1 where no=#{no}
+	</update>
+	
+	<insert id="addMessage" parameterType="Message">
+		insert into message (send_id, receive_id, send_nick, receive_nick, reg_date, 
+			content, read_message) values (#{sendId}, #{receiveId}, #{sendNick}, 
+			#{receiveNick}, sysdate(), #{content}, 0)
+	</insert>
+	
+	<delete id="deleteMessage">
+		delete from message where no=#{no}
+	</delete>
+	
+	<select id="getMessageCount" resultType="int">
+		select count(*) from message where receive_id=#{id}
+	</select>
+	
+	<resultMap id="messageResultMap" type="Message">
+		<id property="no" column="no" />		
+		<result property="sendId" column="send_id" />
+		<result property="receiveId" column="receive_id" />
+		<result property="sendNick" column="send_nick" />
+		<result property="receiveNick" column="receive_nick" />
+		<result property="regDate" column="reg_date" />		
+		<result property="content" column="content" />
+		<result property="readMessage" column="read_message" />
+	</resultMap>	
+	
+</mapper>	
+
+
+
