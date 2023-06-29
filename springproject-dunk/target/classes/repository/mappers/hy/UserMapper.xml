@@ -7,7 +7,83 @@
 	<select id="getUser" resultMap="userResultMap">
 		select * from user where id=#{id}
 	</select>	
-		
+	
+	<select id="getUserNick" resultMap="userResultMap">
+		select * from user where nickname=#{nickname}
+	</select>
+	
+	<insert id="addUser" parameterType="User">
+		insert into user(id, pass, grade, name, nickname, mobile, email, zipcode, address1, address2, 
+		match_num, point, is_profile, profile_img) values (#{id}, #{pass}, #{grade}, 
+		#{name}, #{nickname}, 	#{mobile}, #{email}, #{zipcode}, #{address1}, #{address2}, 
+		#{matchNum}, #{point}, #{isProfile}, #{profileImg})
+	</insert>		
+	
+	<select id="getMannerCheck" resultMap="mannerCheckResultMap">
+		select * from manner_check where user_id=#{id}
+	</select>
+	
+	<select id="getProfile" resultMap="profileResultMap">
+		select * from profile where user_id=#{id}
+	</select>
+	
+	<insert id="insertProfile" parameterType="Profile">
+		insert into profile(user_id, birth, gender, position, preferred_area, img, introduction, agegroup, open_profile) 
+			values (#{userId}, #{birth}, #{gender}, #{position}, #{preferredArea}, #{img}, 
+			#{introduction}, #{agegroup}, #{openProfile})
+	</insert>
+	
+	<update id="addProfile">
+		update user set is_profile=is_profile+1 where id=#{id}
+	</update>
+	
+	<update id="addImg">
+		update user set profile_img=profile_img+1 where id=#{id}
+	</update>
+	
+	<update id="updateProfile" parameterType="Profile">
+		update profile set birth=#{birth}, gender=#{gender}, position=#{position}, 
+			preferred_area=#{preferredArea}, img=#{img}, introduction=#{introduction}, open_profile=#{openProfile}
+			where user_id=#{userId}
+	</update>
+	
+	<delete id="deleteProfile">
+		delete from profile where user_id=#{id}		
+	</delete>	
+	
+	<update id="minusImg">		
+		update user set profile_img=profile_img-1 where id=#{id}
+	</update>
+	
+	<update id="minusProfile">
+		update user set is_profile=is_profile-1 where id=#{id}
+	</update>
+	
+	<update id="deleteImg">		
+		update profile set img=null where user_id=#{id}
+	</update>
+	
+	<select id="getPass" resultType="String">
+		select pass from user where id=#{id}
+	</select>
+	
+	<update id="updateUser" parameterType="User">
+		update user set grade=#{grade}, nickname=#{nickname}, mobile=#{mobile}, 
+			email=#{email}, zipcode=#{zipcode}, address1=#{address1}, 
+			address2=#{address2} where id=#{id}
+	</update>
+	
+	<update id="updatePass" parameterType="hashmap">
+		update user set pass=#{pass} where id=#{id}
+	</update>
+	
+	<delete id="deleteUser">
+		delete from user where id=#{id}
+	</delete>
+	
+	<select id="getUserByNick" resultMap="userResultMap">
+		select * from user where nickname=#{nick}
+	</select>
 		
 	<resultMap id="userResultMap" type="User">
 		<id property="id" column="id" />
@@ -20,12 +96,32 @@
 		<result property="zipcode" column="zipcode" />
 		<result property="address1" column="address1" />
 		<result property="address2" column="address2" />		
-		<result property="matchNum" column="match_num" />
-		<result property="assessNum" column="assess_num" />
+		<result property="matchNum" column="match_num" />		
 		<result property="point" column="point" />		
 		<result property="isProfile" column="is_profile" />
 		<result property="profileImg" column="profile_img" />
-	</resultMap>	
+	</resultMap>
+	
+	<resultMap id="profileResultMap" type="Profile">
+		<id property="userId" column="user_id" />
+		<result property="birth" column="birth" />
+		<result property="gender" column="gender" />
+		<result property="position" column="position" />
+		<result property="preferredArea" column="preferred_area" />
+		<result property="img" column="img" />
+		<result property="introduction" column="introduction" />
+		<result property="agegroup" column="agegroup" />
+		<result property="openProfile" column="open_profile" />
+	</resultMap>
+	
+	<resultMap id="mannerCheckResultMap" type="MannerCheck">
+		<id property="userId" column="user_id" />
+		<result property="evalNum" column="eval_num" />
+		<result property="skillEval" column="skill_eval" />
+		<result property="mannerEval" column="manner_eval" />
+		<result property="preManner" column="pre_manner" />
+		<result property="timeManner" column="time_manner" />		
+	</resultMap>
 	
 </mapper>	
 
