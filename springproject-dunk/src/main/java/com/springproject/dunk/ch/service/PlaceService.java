@@ -15,4 +15,8 @@ public interface PlaceService {
     public abstract void insertPlaceBook(PlaceBook placeBook);
 
     public PlaceBoard getPlaceDetail(int no, boolean isCount);
+
+    
+    
+	public abstract int getPoint(String id);
 }

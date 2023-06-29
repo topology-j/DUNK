@@ -49,13 +49,13 @@
 		WHERE no = #{no}
 	</select>
 	
-	<select id="getPoint" resultType="int">
+	<!-- 유저의 포인트 불러오기 -->
+   <select id="getPoint" resultType="int">
       SELECT 
          point 
       FROM user
       WHERE id = #{id};
    </select>
-	
 	
 	<resultMap id="boardResultMap" type="PlaceBoard">
 		<id property="no" column="no" />

@@ -38,8 +38,18 @@ $(document).ready(function() {
 	// 모달 창
 	$(document).ready(function() {
 		
+
+		
 		// 모달 열기 클릭 시 이벤트 핸들러
 		$('#payModalOpen').on('click', function() {
+		var point = Number($('#point').val());
+   		var b1Pay = Number($('#placePay').val());
+			
+			if (point < b1Pay) {
+				alert("포인트가 부족합니다.")
+				return false;
+			}
+			
 			$('#payModal').fadeIn(400);
 		});
  

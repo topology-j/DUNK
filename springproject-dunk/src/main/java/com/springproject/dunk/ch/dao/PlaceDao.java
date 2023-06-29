@@ -21,4 +21,6 @@ public interface PlaceDao {
   	
   	//장소 조회수 증가 
   	public abstract void incrementReadCount(int no);
+
+	public abstract int getPoint(String id);
 }
