@@ -45,4 +45,11 @@ public class PlaceServiceImpl implements PlaceService {
 		return dao.getPoint(id);
 	}
 	
+	//신청하기 누르면 Matching에 해당하는 Pay만큼 user의 point차감
+	@Override
+	public void updateUserPoint(String id, int updatedPoint) {
+		dao.updateUserPoint(id, updatedPoint);
+	      
+	   }
+	
 }

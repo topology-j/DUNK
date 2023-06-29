@@ -76,6 +76,8 @@ public class PlaceController {
 		    //사용자 포인트 내역 가져오기
 			int point = service.getPoint(id);
 			
+			
+			
 		    if(id != null) {
 				
 		    	model.addAttribute("point", point);
@@ -89,7 +91,7 @@ public class PlaceController {
 
 			 return "placeBook/placeBook"; 
 		}
-		 // 
+		 // placeBook DB에 정보 추가
 		@RequestMapping(value = "/placeBookProcess", method=RequestMethod.POST)
 		public String insertPlaceBook(PlaceBook placeBook) {
 			
@@ -98,6 +100,8 @@ public class PlaceController {
 			return "redirect:placeList";
 					
 		}
+		
+
 		
 
 	

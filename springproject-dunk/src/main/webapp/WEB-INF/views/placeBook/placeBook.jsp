@@ -49,7 +49,9 @@
 			<input type="hidden" name="userNick" value="${sessionScope.nick}" />
 			<input type="hidden" name="isBook" id="isBook" value="0" />
 			
-			<input type="hidden" id="point" value="${point}">
+			<input type="hidden" id="currentPoint" value="${point}">
+			
+			<input type="hidden" id= "point" value="${point - b1.pay}">
 		
 			
 		
@@ -68,6 +70,7 @@
 			<div class="mt-3" id="timeBook" name="timeBook"><b>예약 시간</b> : <%= selectedTime %></div>
 			<div class="mt-3" id="placePay" name="placePay">&nbsp;&nbsp;&nbsp;&nbsp;<b>총 금액</b> : ${b1.pay}원</div>
 			<div class="mt-3" ><b>보유 포인트</b> : ${point}원</div>
+			<div class="mt-3" id=""><b>남은 포인트</b>: ${point - b1.pay}원</div>
 <!-- 			<div> -->
 <!-- 				<label class="font-weight-bold control-label col-sm-3 mt-3"><b>결제 방법</b></label> -->
 <!-- 				<div class="mt-2">					 -->

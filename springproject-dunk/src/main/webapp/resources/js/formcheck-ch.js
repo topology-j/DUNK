@@ -42,7 +42,7 @@ $(document).ready(function() {
 		
 		// 모달 열기 클릭 시 이벤트 핸들러
 		$('#payModalOpen').on('click', function() {
-		var point = Number($('#point').val());
+		var point = Number($('#currentPoint').val());
    		var b1Pay = Number($('#placePay').val());
 			
 			if (point < b1Pay) {

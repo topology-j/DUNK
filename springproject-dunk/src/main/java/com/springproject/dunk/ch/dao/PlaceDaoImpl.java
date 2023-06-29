@@ -56,4 +56,12 @@ public class PlaceDaoImpl implements PlaceDao {
 	public int getPoint(String id) {
 		return sqlSession.selectOne(NAME_SPACE + ".getPoint", id);
 	}
+
+	@Override
+	public void updateUserPoint(String id, int updatedPoint) {
+		Map<String, Object> params = new HashMap<>();
+	       params.put("id", id);
+	       params.put("updatedPoint", updatedPoint);
+	       sqlSession.update(NAME_SPACE + ".updateUserPoint", params);
+	}
 }

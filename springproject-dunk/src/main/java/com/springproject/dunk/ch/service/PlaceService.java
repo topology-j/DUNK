@@ -16,7 +16,9 @@ public interface PlaceService {
 
     public PlaceBoard getPlaceDetail(int no, boolean isCount);
 
-    
-    
 	public abstract int getPoint(String id);
+
+	void updateUserPoint(String id, int updatedPoint);
+	
+	 
 }
