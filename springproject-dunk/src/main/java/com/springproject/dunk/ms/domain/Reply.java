@@ -8,16 +8,18 @@ public class Reply {
 	private int no;
 	private int placeNo;
 	private String userId;
+	private String userNick;
 	private String replyContent;
 	private Timestamp regDate;
 	
 	public Reply() {}
 
-	public Reply(int no, int placeNo, String userId, String replyContent, Timestamp regDate) {
+	public Reply(int no, int placeNo, String userId, String userNick, String replyContent, Timestamp regDate) {
 		super();
 		this.no = no;
 		this.placeNo = placeNo;
 		this.userId = userId;
+		this.userNick = userNick;
 		this.replyContent = replyContent;
 		this.regDate = regDate;
 	}
@@ -46,6 +48,14 @@ public class Reply {
 		this.userId = userId;
 	}
 
+	public String getUserNick() {
+		return userNick;
+	}
+
+	public void setUserNick(String userNick) {
+		this.userNick = userNick;
+	}
+
 	public String getReplyContent() {
 		return replyContent;
 	}
@@ -61,7 +71,5 @@ public class Reply {
 	public void setRegDate(Timestamp regDate) {
 		this.regDate = regDate;
 	}
-		
-	
-	
+
 }

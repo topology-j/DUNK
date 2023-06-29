@@ -150,33 +150,43 @@ $(document).ready(function() {
 	//detail화면 상세내용
  	//1
 	$('#explanationBtn').click(function() {
-		//var result = document.getElementById('result');
-		//result.innerHTML = '<p>Hello, world!</p>';
 		
-		$("#result").html('<p>Hello, world!33333333</p>');
+		let result = document.getElementById('result');
+		let content= "#content";
+		//let contnent = "#{b1.content}";
+		//var content=$("#b1.content").val();
+		//$("#result").html('<p>Hello, world!33333333</p>');
+		//$("#result").append(content);
 		
-		let contnent = "#{b1.content}"
+		//result.innerHTML = content;
 		
-		$("#result").append(content);
-		
-		
-		let div = "<div class='row'>"
-						+ "<div class='col-8'>"
-						+ 		"<div>"
-						+			"<span> 하하하  </span>"
-						+ 		"</div>"
-						+ "</div>"
-						+ "<div class='col-4'>"
-						+ 		"<div>"
-						+			"<span> 호호호  </span>"
-						+		"</div>"
-						+ "</div>"
-					"</div>"
+		//let div = "<div class='row'>"
+		//				+ "<div class='col-8'>"
+		//				+ 		"<div>"
+		//				+			"<span>💙💙💙💙</span>"
+		//				+ 		"</div>"
+		//				+ "</div>"
+		//				+ "<div class='col-4'>"
+		//				+ 		"<div>"
+		//				+			"<span>💙💙💙💙</span>"
+		//				+		"</div>"
+		//				+ "</div>"
+		//			"</div>"
 			
 		$("#result").append(div);
 		$("#result").append(content);
 		console.log("Explanation button clicked!");
 	});
+	
+	// 다시설명을 눌렀을때 > 설명이 나오는?
+    $("#explanationBtn").on("click", function() {
+        $("#placeCheckForm").attr("action", "placeDetail");
+        $("#placeCheckForm").attr("method", "get");
+        $("#placeCheckForm").submit();
+        console.log("Button clicked!");
+    });
+	
+	
 	
 	//2
 	$('#refundBtn').click(function() {
@@ -185,32 +195,32 @@ $(document).ready(function() {
 		let div = "<div class='row'>"
 						+ "<div class='col-8'>"
 						+ 		"<div>"
-						+			"<span> 하하하  </span>"
+						+			"<span>💙💙💙💙 </span>"
 						+ 		"</div>"
 						+ "</div>"
 						+ "<div class='col-4'>"
 						+ 		"<div>"
-						+			"<span> 호호호  </span>"
+						+			"<span>💙💙💙💙 </span>"
 						+		"</div>"
 						+ "</div>"
 					"</div>"
 					
 		let refundrule = "<div>"
 			+		                           	"<ul>"
-			+		                           	"<li>7일 전 취소 시 100% 환불</li>"
-			+		                           	"<li>5일 전 취소 시 80% 환불</li>"
-			+		                           	"<li>3일 전 취소 시 50% 환불</li>"
-			+		                           	"<li>2일 전 ~ 예약 당일 환불 불가</li>"
-			+		                           	"<li>캐시는 규정에 따라 자동 환급되며 잔액 환불 희망 시 나의 충전 내역에서 신청바랍니다.</li>"
+			+		                           	"<li>💙7일 전 취소 시 100% 환불</li>"
+			+		                           	"<li>💙5일 전 취소 시 80% 환불</li>"
+			+		                           	"<li>💙3일 전 취소 시 50% 환불</li>"
+			+		                           	"<li>💙2일 전 ~ 예약 당일 환불 불가</li>"
+			+		                           	"<li>💙캐시는 규정에 따라 자동 환급되며 잔액 환불 희망 시 나의 충전 내역에서 신청바랍니다.</li>"
 			+		                           	"</ul>"
 			+		                           	"<ul>"
-			+		                           	"<li>천재지변</li>"
-			+		                           	"<li>당일 천재지변으로 인해 구장 이용이 불가한 경우 100% 환불</li>"
-			+		                           	"<li>적용기준: 호우경보, 대설경보, 태풍주의보, 태풍경보</li>"
-			+		                           	"<li>우천시 변경 기준</li>"
-			+		                           	"<li>시간 당 5mm 이상 시 날짜 변경 가능</li>"
-			+		                           	"<li>기준: 당일 이용 2시간 전 기상청 날씨누리 해당 주소지 기준</li>"
-			+		                           	"<li>단순 변심에 의한 날짜 변경은 불가</li>"
+			+		                           	"<li>💙천재지변</li>"
+			+		                           	"<li>💙당일 천재지변으로 인해 구장 이용이 불가한 경우 100% 환불</li>"
+			+		                           	"<li>💙적용기준: 호우경보, 대설경보, 태풍주의보, 태풍경보</li>"
+			+		                           	"<li>💙우천시 변경 기준</li>"
+			+		                           	"<li>💙시간 당 5mm 이상 시 날짜 변경 가능</li>"
+			+		                           	"<li>💙기준: 당일 이용 2시간 전 기상청 날씨누리 해당 주소지 기준</li>"
+			+		                           	"<li>💙단순 변심에 의한 날짜 변경은 불가</li>"
 			+		                           	"</ul>"
 			                "</div>"		
 			             

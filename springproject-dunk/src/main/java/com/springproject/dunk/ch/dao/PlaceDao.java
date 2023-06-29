@@ -18,7 +18,6 @@ public interface PlaceDao {
     //no장소 상세보기
   	public abstract PlaceBoard getPlaceDetail(int no);
 
-  	
   	//장소 조회수 증가 
   	public abstract void incrementReadCount(int no);
 }

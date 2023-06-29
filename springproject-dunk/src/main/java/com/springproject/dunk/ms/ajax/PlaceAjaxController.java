@@ -39,6 +39,7 @@ public class PlaceAjaxController {
 	@RequestMapping("/placeReplyUpdateProcess.ajax")
 	@ResponseBody
 	public List <Reply> placeReplyUpdate(Reply reply){
+		service.placeReplyUpdate(reply);
 		return service.placeReplyList(reply.getPlaceNo());
 	}
 	
