@@ -27,8 +27,8 @@
 <script src="resources/js/jquery-3.2.1.min.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="resources/js/formcheck.js"></script>
-<script src="resources/js/reply.js"></script>
+<script src="resources/js/formcheck-ms.js"></script>
+<script src="resources/js/reply-ms.js"></script>
 <link href="resources/css/place.css"  rel="stylesheet"/>
 </head>
 <body>
@@ -90,95 +90,85 @@
 	</div>
 	</div>
 	<!-- 세개 사진불러오기 끝 -->
+	
+	<div class="text-center">
+	  <p class="fs-1">${b1.name}</p>
+	</div>
 	<!-- 정보불러오는 테이블 -->
 	<div class="col-8 mx-auto text center mt-3">
 		<table class="table table-bordered">
 			<thead>
 			</thead>
 			<tbody>
-				<tr>
-					<th scope="row">장소이름 </th>
-					<td>${b1.name}</td>
-				</tr>
-				<tr>
-					<th scope="row">우편번호 </th>
-					<td>${b1.zipcode}</td>
-				</tr>
-				<tr><!-- 주소 -->
-					<th scope="row"><img src="./resources/icon/address.png"  style="width: 1cm; height: 1cm; cursor: pointer;" /></th>
-					<td>${b1.address1} ${b1.address2}</td>
-				</tr>
 				<tr><!-- 번호 -->
 					<th scope="row"><img src="./resources/icon/telephone.png" 
-	       style="width: 1cm; height: 1cm; cursor: pointer;" /> </th>
+	       style="width: 1cm; height: 1cm;" /> </th>
 					<td>${b1.phone}</td>
 				</tr>
 				<tr><!-- 가격 -->
-					<th scope="row"><img src="./resources/icon/dollar.png"  style="width: 1cm; height: 1cm; cursor: pointer;" /></th>
+					<th scope="row"><img src="./resources/icon/dollar.png"  style="width: 1cm; height: 1cm;" /></th>
 					<td>${b1.pay}</td>
 				</tr>
 				<tr><!-- 이용시간 -->
-					<th scope="row"><img src="./resources/icon/wall-clock.png"  style="width: 1cm; height: 1cm; cursor: pointer;" /> </th>
-					<td>${b1.startTime}${b1.endTime}</td>
+					<th scope="row"><img src="./resources/icon/wall-clock.png"  style="width: 1cm; height: 1cm;" /> </th>
+					<td>${b1.startTime} ${b1.endTime}</td>
 				</tr>
 				<tr><!-- 조회수 -->
-					<th scope="row"><img src="./resources/icon/vision.png"  style="width: 1cm; height: 1cm; cursor: pointer;" /></th>
+					<th scope="row"><img src="./resources/icon/vision.png"  style="width: 1cm; height: 1cm;" /></th>
 					<td>${b1.readCount}</td>
 				</tr>
-				<tr><!-- 추천수 -->
-					<th scope="row"><img src="./resources/icon/like.png" 
-	       style="width: 1cm; height: 1cm; cursor: pointer;" /> </th>
-					<td>${b1.recommend}</td>
+				<tr><!-- 추천수와 추천버튼 -->
+					<th scope="row"><img src="./resources/icon/hearts.png" 
+	       style="width: 1cm; height: 1cm;" /> </th>
+					<td>
+					 	<span>${b1.recommend}</span>
+						<span id="placerecommendbtn" class="PlaceRecommendbtn"> 
+							<img src="./resources/icon/like.png" style="width: 1cm; height: 1cm;  cursor: pointer;" />
+						</span>
+					</td>
 				</tr>
 				<tr><!-- 주차 -->
 					<th scope="row"><img src="./resources/icon/parking.png" 
-	       style="width: 1cm; height: 1cm; cursor: pointer;" /> </th>
+	       style="width: 1cm; height: 1cm;" /> </th>
 					<td>${b1.park}</td>
 				</tr>
 				<tr><!-- 인원수 -->
 					<th scope="row"><img src="./resources/icon/audience.png" 
-	       style="width: 1cm; height: 1cm; cursor: pointer;" /> </th>
+	       style="width: 1cm; height: 1cm;" /> </th>
 					<td>${b1.availNum}</td>
 				</tr>
-				<tr><!-- 공유 -->
-					<th scope="row"> <img src="./resources/icon/share.png" 
-	       style="width: 1cm; height: 1cm; cursor: pointer;" /> </th>
-					<td><button onclick="copyUrl()">현재 페이지 URL 복사하기</button></td>
+				<tr><!-- 공유 url복사 + 카카오톡 공유 보내기 -->
+					<th> 
+						<img src="./resources/icon/share.png"  style="width: 1cm; height: 1cm;" />
+	  			     </th>
+					<td>
+						<img src="./resources/icon/shareUrl.png"  style="width: 1cm; height: 1cm;" onclick="copyUrl()" />&nbsp;&nbsp;
+						<a href="javascript:sendLink()"><img src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" style="width: 1cm; height: 1cm;"/></a>
+					</td>
+				</tr>
+				<tr><!-- 주소 -->
+					<th scope="row"><img src="./resources/icon/address.png"  style="width: 1cm; height: 1cm;" /></th>
+					<td>${b1.address1} ${b1.address2}</td>
+				</tr>
+				<tr><!-- 주소맵 -->
+					<th></th>
+					<td><div class="text center" id="map2" style="width:700px;height:350px;"></div></td>
+				</tr>
+				<tr>
+					<th>결제</th><!-- 네이버페이, 예약하기 -->
+					<td>	
+						<!-- <img src="./resources/icon/naverPay.png" id="naverPayBtn" style="width: 4cm; height: 2cm; cursor: pointer;" />
+						<input type="button" id="naverPayBtn" value="네이버페이 결제 버튼">&nbsp;&nbsp; -->
+						<button type="button" id="naverPayBtn" class="btn text-white" style="background-color: #00FF00;">네이버페이</button>
+						<input type="button" class="btn btn-primary" id="placeBookTermsBtn" value="예약하기"/>
+					</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
 	<!-- 정보테이블 끝 -->
 	
-	
-	<!-- 기본규정 시작  -->
-	<div class="row p-3 mb-2 bg-warning text-dark" id="contentChange"><!-- 설명, 환불, 문의 비동기로? -->
-		  <div class="col-4"><button id="explanationBtn" style="background: none; border: none;">설명</button></div>
-		  <div class="col-4"><button id="refundBtn" style="background: none; border: none;">환불규정</button></div>
-		  <div class="col-4"><button id="inquiryBtn" style="background: none; border: none;">문의</button></div>
-	</div>
-	<div id="result"><p>${b1.content}</p></div>
-	
-
-		
-	
-	
-	<!-- url복사시도 -->
-	<script>
-	  function copyUrl() {
-	    var url = window.location.href;
-	    var textarea = document.createElement("textarea");
-	    document.body.appendChild(textarea);
-	    textarea.value = url;
-	    textarea.select();
-	    document.execCommand("copy");
-	    document.body.removeChild(textarea);
-	    alert("링크가 복사되었습니다. 필요하신 곳에 붙여넣기 하세요!");
-	  }
-	</script>
-	
 	<!--주소마커 시작-->
-	<div id="map2" style="width:700px;height:350px;"></div>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2dd64d952acef053eda67ee450923fd2&libraries=services"></script>
 	<script>
 		var mapContainer = document.getElementById('map2'); // 지도를 표시할 div
@@ -215,6 +205,28 @@
 		});
 	</script>
 	<!--주소마커 끝-->
+	
+	<!-- 기본규정 시작  -->
+	<div class="row p-3 mb-2 bg-warning text-dark" id="contentChange"><!-- 설명, 환불, 문의 비동기로? -->
+		  <div class="col-4"><button id="explanationBtn" style="background: none; border: none;">설명</button></div>
+		  <div class="col-4"><button id="refundBtn" style="background: none; border: none;">환불규정</button></div>
+		  <div class="col-4"><button id="inquiryBtn" style="background: none; border: none;">문의</button></div>
+	</div>
+	<div id="result"><p>${b1.content}</p></div>
+	
+	<!-- url복사시도 -->
+	<script>
+	  function copyUrl() {
+	    var url = window.location.href;
+	    var textarea = document.createElement("textarea");
+	    document.body.appendChild(textarea);
+	    textarea.value = url;
+	    textarea.select();
+	    document.execCommand("copy");
+	    document.body.removeChild(textarea);
+	    alert("링크가 복사되었습니다. 필요하신 곳에 붙여넣기 하세요!");
+	  }
+	</script>
 	
 	<!-- 	네이버결제api  -->
 	<script src="https://nsp.pay.naver.com/sdk/js/naverpay.min.js"></script>
@@ -258,33 +270,6 @@
 	</script>
 	<!-- 카톡공유하기 끝 -->
 	
-	<!--현재페이지복사, 네이버페이, 카톡공유버튼, 추천버튼, 메인으로가기, 예약하기, 수정하기, 삭제하기, 리스트로 돌아가기 -->
-	<div class="row">
-		<div class="col">
-			<button onclick="copyUrl()">현재 페이지 URL 복사하기</button>
-			<input type="button" id="naverPayBtn" value="네이버페이 결제 버튼">
-			<a href="javascript:sendLink()"><img src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" /></a>
-			<span id="placerecommendbtn" class="PlaceRecommendbtn"> <!--추천 버튼 -->
-			<img src="./resources/icon/hearts.png" style="width: 1cm; height: 1cm; cursor: pointer;" />
-			</span>
-			<button type="button" class="btn btn-primary" onclick="location.href='basic'">basic</button>&nbsp;&nbsp;
-			<input type="button" class="btn btn-primary" id="placeBookTermsBtn" value="예약하기"/>&nbsp;&nbsp;
-			<input type="button" class="btn btn-primary" id="updatebtn" value="수정form"/>&nbsp;&nbsp;
-			<input type="button" class="btn btn-danger" id="placeDetaildeletebtn" value="삭제"/>&nbsp;&nbsp;
-			<c:if test="${not searchOption}">
-				<button type="button" class="btn btn-primary" onclick="location.href='placeList?pageNum=${pageNum}'">listPlace</button>
-			</c:if>
-			<c:if test="${ searchOption}">
-				<button type="button" class="btn btn-primary" onclick="location.href='placeList?pageNum=${pageNum}
-														&type=${type}&keyword=${keyword}&area=${area}&orderBy=${orderBy}'">listPlace</button>
-		</c:if>
-		</div>
-	</div>
-	<!-- 버튼끝 -->
-	
-	
-	
-	
 	<!-- 댓글시작  -->
 	<!-- 추천/땡큐 영역 -->
 	<div class="row my-5">
@@ -296,6 +281,7 @@
 			</div>
 		</div>
 	</div>
+	
 	<!-- 댓글 헤더 영역 -->
 	<div class="row" id="replyTitle">
 		<div class="col p-2 text-center bg-dark text-white">	
@@ -331,6 +317,9 @@
 						</div>
 					</div>	
 					<div class="row">
+					<div class="col p-3">
+							<pre>${ reply.placeNo }</pre>
+						</div>
 						<div class="col p-3">
 							<pre>${ reply.replyContent }</pre>
 						</div>
@@ -355,8 +344,9 @@
 	<div class="row my-3 d-none" id="replyForm">
 		<div class="col">
 			<form name="replyWriteForm" id="replyWriteForm">
-				<input type="hidden" name="bbsNo" value="${ b1.no }"/>
-				<input type="hidden" name="replyWriter" value="" />  <!--  value="${ sessionScope.member.id }" -->
+				<input type="hidden" name="placeNo" value="${ b1.no }"/>
+				<input type="hidden" name="userId" value="${sessionScope.id}" />  <!--  value="${ sessionScope.member.id }" -->
+				<input type="hidden" name="userNick" value="${sessionScope.nick}" />  <!--  value="${ sessionScope.member.id }" -->
 				<div class="row bg-light my-3 p-3 border">
 					<div class="col">
 						<div class="row">
@@ -369,7 +359,7 @@
 								<textarea name="replyContent" id="replyContent" class="form-control" rows="4"></textarea>
 							</div>
 							<div class="col-md">
-								<input type="submit" value="댓글쓰기"	 class="btn btn-primary h-100 w-100" id="replyWriteButton">									
+								<input type="submit" value="댓글쓰기" class="btn btn-primary h-100 w-100" id="replyWriteButton">									
 							</div>
 						</div>
 					</div>
@@ -378,7 +368,21 @@
 		</div>	
 	</div><!-- end replyForm -->
 
- 
+	<!--버튼 = 수정하기, 삭제하기, 리스트로 돌아가기 -->
+	<div class="row">
+		<div class="col">			
+			<input type="button" class="btn btn-primary" id="updatebtn" value="수정form"/>&nbsp;&nbsp;
+			<input type="button" class="btn btn-danger" id="placeDetaildeletebtn" value="삭제"/>&nbsp;&nbsp;
+			<c:if test="${not searchOption}">
+				<button type="button" class="btn btn-primary" onclick="location.href='place/placeList?pageNum=${pageNum}'">listPlace</button>
+			</c:if>
+			<c:if test="${ searchOption}">
+				<button type="button" class="btn btn-primary" onclick="location.href='place/placeList?pageNum=${pageNum}
+														&type=${type}&keyword=${keyword}&area=${area}&orderBy=${orderBy}'">listPlace</button>
+		</c:if>
+		</div>
+	</div>
+	<!-- 버튼끝 -->
 
 </body>
 </html>

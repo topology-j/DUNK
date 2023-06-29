@@ -157,6 +157,7 @@
 		no,
 		place_no AS placeNo,
 		user_id AS userId, 
+		user_nick AS userNick,
 		reply_content AS replyContent, 
 		reg_date AS regDate
 		FROM
@@ -167,14 +168,13 @@
 	
 	<insert id="placeReplyAdd" parameterType="Reply">
 		INSERT INTO
-		placeReply(reply_content , reg_date)
-		VALUES(#{replyContent}, SYSDATE())
+		placeReply(place_no, user_id, user_nick, reply_content , reg_date)
+		VALUES(#{placeNo},#{userId}, #{userNick}, #{replyContent}, SYSDATE())
 	</insert>
 	
 	<update id="placeReplyUpdate" parameterType="Reply">
 		UPDATE placeReply
-		SET reply_content = #{replyContent}, 
-		reg_date = SYSDATE()
+		SET reply_content = #{replyContent}
 		WHERE no = #{no}
 	</update>
 	

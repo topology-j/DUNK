@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 <html>
 <head>
-<script src="resources/js/formcheck.js"></script>
+<script src="resources/js/formcheck-ms.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	<style>
 	  .carousel-item img {

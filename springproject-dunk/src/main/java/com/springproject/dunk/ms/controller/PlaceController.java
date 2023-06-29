@@ -59,7 +59,8 @@ public class PlaceController {
 			@RequestParam(value="pageNum", required=false, defaultValue="1") int pageNum,
 			@RequestParam(value="keyword", required=false, defaultValue="null") String keyword,
 			@RequestParam(value="area", required=false, defaultValue="null") String area,
-			@RequestParam(value="orderBy", required=false, defaultValue="no") String orderBy) throws Exception {
+			@RequestParam(value="orderBy", required=false, defaultValue="no") String orderBy,
+			@RequestParam(value="placeNo", required=false, defaultValue="1") String placeNo) throws Exception {
 
 		boolean searchOption = (keyword.equals("null")) ? false : true; 
 		
@@ -236,16 +237,7 @@ public class PlaceController {
 		return "redirect:placeList";
 	}
 
-	@RequestMapping(value="/weekCal")
-	public  String weekCal() {
-		return "weekCal";
-	}
 	
-	//캘린더
-	@RequestMapping("/monthCal")
-    public String monthCal(@RequestParam(required = false) String startDate, Model model) {
-        return "monthCal";
-    }
 	
 	//카카오 로그인 api
 	// https://velog.io/@ohjs813/Spring-%EC%B9%B4%EC%B9%B4%EC%98%A4-%EB%A1%9C%EA%B7%B8%EC%9D%B8-REST-API

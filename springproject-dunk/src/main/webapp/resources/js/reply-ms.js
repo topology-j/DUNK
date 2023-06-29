@@ -2,6 +2,7 @@
 $(document).ready(function() {
 	
 
+
 	// 댓글 쓰기가 클릭되었을 때 이벤트 처리 
 	$("#replyWrite").on("click", function() {
 		
@@ -56,7 +57,7 @@ $(document).ready(function() {
  			alert("댓글은 5자 이상 입력해야 합니다.");
  			return false;
  		}
- 
+ 		
  		var params = $(this).serialize();
  		console.log(params);	
  		
@@ -86,7 +87,7 @@ $(document).ready(function() {
 						+ '<div class="col">'
 						+ '	<div class="row bg-light p-2">'									
 						+ '		<div class="col-4">'						
-						+ '			<span>' + v.userId + '</span>'
+						+ '			<span>' + v.replyUserId + '</span>'
 						+ '		</div>'
 						+ '		<div class="col-8 text-end">'
 						+ '			<span class="me-3">' + strDate + "</span>"
@@ -230,7 +231,7 @@ $(document).ready(function() {
 						+ '<div class="col">'
 						+ '	<div class="row bg-light p-2">'									
 						+ '		<div class="col-4">'						
-						+ '			<span>' + v.userId + '</span>'
+						+ '			<span>' + v.replyUserId + '</span>'
 						+ '		</div>'
 						+ '		<div class="col-8 text-end">'
 						+ '			<span class="me-3">' + strDate + "</span>"
@@ -284,9 +285,9 @@ $(document).ready(function() {
 		
 		var no = $(this).attr("data-no");
 		var writer = $(this).parent().prev().find("span").text();
-		var bbsNo = $("#replyForm input[name=no]").val();
-		var params = "no=" + no;	
-		console.log(params);
+		var placeNo = $("#replyForm input[name=placeNo]").val();
+		var params = "no=" + no + "&placeNo=" + placeNo;	
+		console.log(no, writer, placeNo, params);
 		
 		/* 아래에서 $("#replyTable").empty(); 가 호출되면
 		 * 댓글 쓰기 폼이 문서에서 삭제될 수 있으므로 백업을 받아야 한다.
@@ -324,7 +325,7 @@ $(document).ready(function() {
 							+ '<div class="col">'
 							+ '	<div class="row bg-light p-2">'									
 							+ '		<div class="col-4">'						
-							+ '			<span>' + v.userId + '</span>'
+							+ '			<span>' + v.replyUserId + '</span>'
 							+ '		</div>'
 							+ '		<div class="col-8 text-end">'
 							+ '			<span class="me-3">' + strDate + "</span>"

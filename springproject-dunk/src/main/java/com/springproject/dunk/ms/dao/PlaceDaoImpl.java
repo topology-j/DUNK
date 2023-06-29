@@ -102,8 +102,7 @@ public class PlaceDaoImpl implements PlaceDao {
 	}
 	//댓글수정
 	public void placeReplyUpdate(Reply reply) {
-		sqlSession.update(NAME_SPACE+".updateReply", reply);
-		
+		sqlSession.update(NAME_SPACE+".placeReplyUpdate", reply);
 	}
 	
 	//댓글 삭제
