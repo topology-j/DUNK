@@ -39,4 +39,10 @@ public class PlaceServiceImpl implements PlaceService {
 			}
 			return dao.getPlaceDetail(no);
 	}
+
+	@Override
+	public int getPoint(String id) {
+		return dao.getPoint(id);
+	}
+	
 }

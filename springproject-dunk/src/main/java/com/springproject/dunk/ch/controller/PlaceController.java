@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,7 +32,8 @@ public class PlaceController {
 	// 장소 예약 약관 동의 창 이동
 		 //@RequestMapping(value="/placeBookTerms", method=RequestMethod.POST) 
 		 @RequestMapping(value="/placeBookTerms") 
-		 public String placeBookTermsProcess(Model model, PlaceBoard board, @RequestParam(name = "no", required=false, defaultValue="24")   int no) { 
+		public String placeBookTermsProcess(Model model, PlaceBoard board, int no) {
+		 //public String placeBookTermsProcess(Model model, PlaceBoard board, @RequestParam(name = "no", required=false, defaultValue="24")   int no) { 
 			 PlaceBoard b1 = service.getPlaceDetail(no, false); 
 			 model.addAttribute("b1", b1);
 			 
@@ -65,10 +68,24 @@ public class PlaceController {
 		
 		
 		// 장소 예약 창 이동
-		@RequestMapping(value="/placeBook", method=RequestMethod.POST) 
-		public String placeBookProcess(Model model, PlaceBoard board, int no) { 
+		@RequestMapping(value="/placeBook", method=RequestMethod.POST ) 
+		public String placeBookProcess(Model model, PlaceBoard board, int no, HttpSession session) { 
+		      
+			String id = (String) session.getAttribute("id");
+		      
+		    //사용자 포인트 내역 가져오기
+			int point = service.getPoint(id);
+			
+		    if(id != null) {
+				
+		    	model.addAttribute("point", point);
+			}
+			// 모델에 담기
+			
+			
 			PlaceBoard b1 = service.getPlaceDetail(no, false); 
 			model.addAttribute("b1", b1);
+			
 
 			 return "placeBook/placeBook"; 
 		}
@@ -81,5 +98,7 @@ public class PlaceController {
 			return "redirect:placeList";
 					
 		}
+		
+
 	
 }

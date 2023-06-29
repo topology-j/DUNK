@@ -51,4 +51,9 @@ public class PlaceDaoImpl implements PlaceDao {
 	public void incrementReadCount(int no) {
 		sqlSession.update(NAME_SPACE + ".incrementReadCount", no);
 	}
+
+	@Override
+	public int getPoint(String id) {
+		return sqlSession.selectOne(NAME_SPACE + ".getPoint", id);
+	}
 }
