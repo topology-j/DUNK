@@ -16,6 +16,30 @@
 		order by no desc limit #{startRow}, #{num}
 	</select>
 	
+	<select id="getEvent" resultMap="eventResultMap">
+		select * from event where no=#{no}
+	</select>
+	
+	<insert id="insertEvent" parameterType="Event" useGeneratedKeys="true" keyProperty="no">
+		insert into event (title, reg_date, content, read_count, recommend) values(#{title}, sysdate(), #{content}, 0, 0)
+	</insert>
+	
+	<update id="updateEvent" parameterType="Event">
+		update event set title=#{title}, content=#{content}, reg_date=sysdate() where no=#{no}
+	</update>
+	
+	<delete id="deleteEvent">
+		delete from event where no=#{no}		
+	</delete>
+	
+	<update id="incrementReadCount">
+		update event set read_count=read_count+1 where no=#{no}
+	</update>
+	
+	<update id="recommend">
+		update event set recommend=recommend+1 where no=#{no}		
+	</update>
+	
 	<select id="getEventCount" parameterType="hashmap" resultType="int">
 		select count(*) from event
 		
@@ -26,7 +50,21 @@
 		</where>		
 	</select>
 	
+	<insert id="insertEventImg" parameterType="hashmap">
+		insert into event_img (event_no, img) values (#{no}, #{img})
+	</insert>
 	
+	<select id="getImages" resultType="String">
+		select img from event_img where event_no=#{no}
+	</select>
+	
+	<select id="commentList" resultMap="eventCommentResultMap">
+		select * from event_comment where event_no=#{no}
+	</select>
+	
+	<insert id="addEventComment" parameterType="EventComment">
+		insert into event_comment (event_no, user_id, user_nick, reg_date, content) values(#{eventNo}, #{userId}, #{userNick}, sysdate(), #{content})
+	</insert>
 
 	<resultMap id="eventResultMap" type="Event">
 		<id property="no" column="no" />
@@ -35,7 +73,16 @@
 		<result property="content" column="content" />
 		<result property="readCount" column="read_count" />
 		<result property="recommend" column="recommend" />
-	</resultMap>	
+	</resultMap>
+	
+	<resultMap id="eventCommentResultMap" type="EventComment">
+		<id property="no" column="no" />
+		<result property="eventNo" column="event_no" />
+		<result property="userId" column="user_id" />
+		<result property="userNick" column="user_nick" />
+		<result property="regDate" column="reg_date" />
+		<result property="content" column="content" />		
+	</resultMap>
 	
 </mapper>	
 

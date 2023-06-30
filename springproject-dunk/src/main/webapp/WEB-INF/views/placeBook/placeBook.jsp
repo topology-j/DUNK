@@ -49,11 +49,7 @@
 			<input type="hidden" name="userNick" value="${sessionScope.nick}" />
 			<input type="hidden" name="isBook" id="isBook" value="0" />
 			
-			<input type="hidden" id="point" value="${point}">
-		
-			
-		
-			
+			<input type="hidden" id="currentPoint" value="${point}">
 			
 		<div class="text-center mx-auto" id="">
 			<div class="">			
@@ -68,6 +64,7 @@
 			<div class="mt-3" id="timeBook" name="timeBook"><b>예약 시간</b> : <%= selectedTime %></div>
 			<div class="mt-3" id="placePay" name="placePay">&nbsp;&nbsp;&nbsp;&nbsp;<b>총 금액</b> : ${b1.pay}원</div>
 			<div class="mt-3" ><b>보유 포인트</b> : ${point}원</div>
+			<div class="mt-3" id=""><b>남은 포인트</b>: ${point - b1.pay}원</div>
 <!-- 			<div> -->
 <!-- 				<label class="font-weight-bold control-label col-sm-3 mt-3"><b>결제 방법</b></label> -->
 <!-- 				<div class="mt-2">					 -->
@@ -97,9 +94,12 @@
 		<div id="payModal" class="text-center mx-auto">
 			<div id="payModalContainer" >
 				<div><b>예약 버튼을 누르면 최종 예약이 완료됩니다.</b></div>
+				
+				<div class="mt-3" id=""><b>결제 후 포인트</b>: ${point - b1.pay}원</div>
+				
 				<div class="mt-3">
 					
-					<div style="display: flex; justify-content: space-between;">
+					<div class="text-center mx-auto d-flex justify-content-center align-items-center">
 						<form id="placeBook" name="placeBook" action="placeBookProcess" method="post">
 							<input type="hidden" name="placeNo" id="placeNo" value="${b1.no}" />
 							<input type="hidden" name="placeName" value="${b1.name}" />
@@ -110,9 +110,10 @@
 							<input type="hidden" name="placePay" value="${b1.pay}" />
 							<input type="hidden" name="userId" id="userId" value="${sessionScope.id}" />
 							<input type="hidden" name="userNick" value="${sessionScope.nick}" />									
-							<button class="btn btn-primary" id="" type="submit">예 약</button>
+							<button class="btn btn-primary" id="" type="submit">예 약</button>&nbsp;&nbsp;
 						</form>
-						<button id="modalClose" class="btn btn-danger">닫기</button>
+							
+						<button id="modalClose" class="btn btn-danger">닫 기</button>
 					</div>
 				</div>
 			</div>
