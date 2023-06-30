@@ -56,6 +56,21 @@
       FROM user
       WHERE id = #{id};
    </select>
+   	
+   	<!-- 장소 예약에 pay 정보 불러오는 -->
+   	<select id="getPlacePay" resultType="int">
+		SELECT
+			pay
+		FROM place 
+		WHERE no = #{no}
+	</select>
+	
+   <!-- 매칭신청하며 포인트 차감!!!-->
+   <update id="updateUserPoint" parameterType="java.util.Map">
+      UPDATE user
+      SET point=#{updatedPoint}
+      WHERE id= #{id}
+   </update>
 	
 	<resultMap id="boardResultMap" type="PlaceBoard">
 		<id property="no" column="no" />

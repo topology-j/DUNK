@@ -18,7 +18,11 @@ public interface PlaceService {
 
 	public abstract int getPoint(String id);
 
-	void updateUserPoint(String id, int updatedPoint);
+	//매칭 신청할때 해당 Matching의 pay 불러오기
+    public abstract int getPlacePay(int no);
+	
+	public void updateUserPoint(String id, int updatedPoint);
+
 	
 	 
 }

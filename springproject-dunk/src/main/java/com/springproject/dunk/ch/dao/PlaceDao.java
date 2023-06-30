@@ -21,9 +21,12 @@ public interface PlaceDao {
   	//장소 조회수 증가 
   	public abstract void incrementReadCount(int no);
 
-  	//
-  	public abstract int getPoint(String id);
+  	//매칭에 지원시 포인트 불러오기
+    public abstract int getPoint(String id);
+    
+    //매칭 신청할때 해당 Matching의 pay 불러오기
+    public abstract int getPlacePay(int no);
 
-  	//
-	public void updateUserPoint(String id, int updatedPoint);
+    //신청하기 누르면 Matching에 해당하는 Pay만큼 user의 point차감
+    public void updateUserPoint(String id, int updatedPoint);
 }

@@ -57,6 +57,6 @@ $(document).ready(function() {
 		$('#modalClose').on('click', function() {
 			$('#payModal').fadeOut(400);
 		});
- 
+		
 });
 
