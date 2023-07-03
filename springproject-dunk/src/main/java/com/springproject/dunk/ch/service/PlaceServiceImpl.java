@@ -40,19 +40,19 @@ public class PlaceServiceImpl implements PlaceService {
 			return dao.getPlaceDetail(no);
 	}
 
-	//매칭 지원시 포인트 불러오기
+		//유저 포인트 불러오기
 	   public int getPoint(String id) {
 	      return dao.getPoint(id);
 	   }
 
 
-	   //매칭 신청할때 해당 Matching의 pay 불러오기
+	   //placePay 불러오기
 	   @Override
 	   public int getPlacePay(int no) {
 	      return dao.getPlacePay(no);
 	   }
 
-	   //신청하기 누르면 Matching에 해당하는 Pay만큼 user의 point차감
+	   //예약 시 userPoint-placePay 값 가져오기
 	   @Override
 	   public void updateUserPoint(String id, int updatedPoint) {
 	      dao.updateUserPoint(id, updatedPoint);

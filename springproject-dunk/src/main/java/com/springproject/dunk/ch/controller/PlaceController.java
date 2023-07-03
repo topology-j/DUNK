@@ -59,34 +59,34 @@ public class PlaceController {
 			
 			return "placeBook/placeBookTime";			  
 		}
-				 
+		
+		// DB에 장소 예약 완료된 시간 가져오기	 
 		@RequestMapping(value="/placeBookingList", method=RequestMethod.POST) 
 		@ResponseBody
 		public List<String> placeBookingList(int no, Date selectedDate) {
 			return service.placeBookingList(no, selectedDate);
 		}
 		
-		
-		// 장소 예약 창 이동
+		// 장소 시간 선택 → 장소 예약 창 이동
 		@RequestMapping(value="/placeBook", method=RequestMethod.POST ) 
 		public String placeBookProcess(Model model, PlaceBoard board, int no, HttpSession session) { 
 			
-//			// 모델에 담기
-
-			String id = (String) session.getAttribute("id");
-		      
+			// 모델에 담기
+			String id = (String) session.getAttribute("id");		      
 		    //사용자 포인트 내역 가져오기
-			int point = service.getPoint(id);
-			
-		    if(id != null) {				
-		    	model.addAttribute("point", point);
+			int point = service.getPoint(id);			
+			    
+			if(id != null) {				
+			   	model.addAttribute("point", point);
 			}
+			
 		    PlaceBoard b1 = service.getPlaceDetail(no, false); 
 			model.addAttribute("b1", b1);
 		    
 			 return "placeBook/placeBook";
 			 
 		}
+		
 		 // placeBook DB에 정보 추가
 		@RequestMapping(value = "/placeBookProcess", method=RequestMethod.POST)
 		public String insertPlaceBook(PlaceBook placeBook,

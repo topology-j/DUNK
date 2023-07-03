@@ -1,5 +1,6 @@
 window.onload = function () {
-    buildCalendar();  // 웹 페이지가 로드되면 buildCalendar 실행
+	// 웹 페이지가 로드되면 buildCalendar 실행
+    buildCalendar();  
     autoClickToday();
 }    
 
@@ -9,46 +10,57 @@ window.onload = function () {
 
         // 달력 생성 : 해당 달에 맞춰 테이블을 만들고, 날짜를 채워 넣는다.
         function buildCalendar() {       
-
-            let firstDate = new Date(nowMonth.getFullYear(), nowMonth.getMonth(), 1);     // 이번달 1일
-            let lastDate = new Date(nowMonth.getFullYear(), nowMonth.getMonth() + 1, 0);  // 이번달 마지막날
+			// 이번달 1일
+            let firstDate = new Date(nowMonth.getFullYear(), nowMonth.getMonth(), 1);    
+            // 이번달 마지막날
+            let lastDate = new Date(nowMonth.getFullYear(), nowMonth.getMonth() + 1, 0);  
 
             let tbody_Calendar = document.querySelector(".Calendar > tbody");
-            document.getElementById("calYear").innerText = nowMonth.getFullYear();             // 연도 숫자 갱신
-            document.getElementById("calMonth").innerText = leftPad(nowMonth.getMonth() + 1);  // 월 숫자 갱신
-
-            while (tbody_Calendar.rows.length > 0) {                        // 이전 출력결과가 남아있는 경우 초기화
+            // 연도 숫자 갱신
+            document.getElementById("calYear").innerText = nowMonth.getFullYear();       
+            // 월 숫자 갱신      
+            document.getElementById("calMonth").innerText = leftPad(nowMonth.getMonth() + 1);  
+			
+			 // 이전 출력결과가 남아있는 경우 초기화
+            while (tbody_Calendar.rows.length > 0) {
                 tbody_Calendar.deleteRow(tbody_Calendar.rows.length - 1);
             }
-
-            let nowRow = tbody_Calendar.insertRow();        // 첫번째 행 추가           
-
-            for (let j = 0; j < firstDate.getDay(); j++) {  // 이번달 1일의 요일만큼
-                let nowColumn = nowRow.insertCell();        // 열 추가
+			// 첫번째 행 추가 
+            let nowRow = tbody_Calendar.insertRow();               
+			
+			 // 이번달 1일의 요일만큼
+            for (let j = 0; j < firstDate.getDay(); j++) {  
+            	// 열 추가
+                let nowColumn = nowRow.insertCell();        
             }
+            // day는 날짜를 저장하는 변수, 이번달 마지막날까지 증가시키며 반복
+            for (let nowDay = firstDate; nowDay <= lastDate; nowDay.setDate(nowDay.getDate() + 1)) {    
+				
+				 // 새 열을 추가하고
+                let nowColumn = nowRow.insertCell();      
+                // 추가한 열에 날짜 입력
+                nowColumn.innerText = leftPad(nowDay.getDate());      
 
-            for (let nowDay = firstDate; nowDay <= lastDate; nowDay.setDate(nowDay.getDate() + 1)) {   // day는 날짜를 저장하는 변수, 이번달 마지막날까지 증가시키며 반복  
-
-                let nowColumn = nowRow.insertCell();        // 새 열을 추가하고
-                nowColumn.innerText = leftPad(nowDay.getDate());      // 추가한 열에 날짜 입력
-
-            
-                if (nowDay.getDay() == 0) {                 // 일요일인 경우 글자색 빨강으로
+            	// 일요일인 경우 글자색 빨강
+                if (nowDay.getDay() == 0) {                
                     nowColumn.style.color = "#DC143C";
                 }
-                if (nowDay.getDay() == 6) {                 // 토요일인 경우 글자색 파랑으로 하고
+                // 토요일인 경우 글자색 파랑
+                if (nowDay.getDay() == 6) {                 
                     nowColumn.style.color = "#0000CD";
                     nowRow = tbody_Calendar.insertRow();    // 새로운 행 추가
                 }
-
-                if (nowDay < today) {                       // 지난날인 경우
+				// 지난날인 경우
+                if (nowDay < today) {                      
                     nowColumn.className = "pastDay";
                 }
-                else if (nowDay.getFullYear() == today.getFullYear() && nowDay.getMonth() == today.getMonth() && nowDay.getDate() == today.getDate()) { // 오늘인 경우           
+                // 오늘인 경우 
+                else if (nowDay.getFullYear() == today.getFullYear() && nowDay.getMonth() == today.getMonth() && nowDay.getDate() == today.getDate()) {     
                     nowColumn.className = "today";
                     nowColumn.onclick = null;
                 }
-                else {                                      // 미래인 경우
+                 // 미래인 경우
+                else {                                    
                     nowColumn.className = "futureDay";
                     nowColumn.onclick = function () { 
                     choiceDate(this); 
@@ -81,9 +93,6 @@ window.onload = function () {
  			
  		}
         
-    
-        
-
         // 날짜 선택
         function choiceDate(nowColumn) {
         
@@ -93,12 +102,6 @@ window.onload = function () {
             }
             
             nowColumn.classList.add("choiceDay");           // 선택된 날짜에 "choiceDay" class 추가
-			
-			//nowColumn.onclick = function() {
-			// 클릭 이벤트 핸들러 함수 내용을 여기에 작성합니다.
-			// 예시로 "클릭됨"을 콘솔에 출력하는 동작을 추가했습니다.
-				//console.log("클릭됨");
-			//};        
 			
 			// 선택된 날짜
     		var selectedDate = new Date(nowMonth.getFullYear(), nowMonth.getMonth(), parseInt(nowColumn.innerText));
@@ -127,7 +130,7 @@ window.onload = function () {
 			console.log(reqData);
 				
 
-			//
+			//	DB에 저장되어 있는 시간 버튼 비활성화 및 색상 변경
 			$.ajax({
 			  url: "placeBookingList",
 			  type: "POST",
@@ -135,7 +138,6 @@ window.onload = function () {
 			  success: function(response) {
 			    console.log("서버 응답:", response);
 			    
-			    // response[i] 값과 timeBtn[i] 값이 같으면 해당 버튼을 화면에 출력하지 않음
 				var timeBtns = document.querySelectorAll("[id^=timeBtn]");
 				$(".timeBtnClass").css("background-color", "white");				
 				
@@ -155,16 +157,7 @@ window.onload = function () {
 			    console.error("오류:", error);
 			}			  
 		});
-								
-			// 날짜 선택되면 시간 버튼 활성화
-			document.getElementById("timeBtn1").style.display = "block";
-			document.getElementById("timeBtn2").style.display = "block";
-			document.getElementById("timeBtn3").style.display = "block";
-			document.getElementById("timeBtn4").style.display = "block";
-			document.getElementById("timeBtn5").style.display = "block";
-			document.getElementById("timeBtn6").style.display = "block";			
-			document.getElementById("placeBookBtn").style.display = "block";
-			
+
 			// 시간 선택 시 색상 변경 
 			var timeBtns = document.querySelectorAll("[id^=timeBtn]");
 			
@@ -178,13 +171,10 @@ window.onload = function () {
 							$(this).css("background-color", "#8C8C8C");	
 						}
 					});
-						
+	
 					this.style.backgroundColor = "#fa9300";					
 					var selectedTime = this.value; // 선택된 버튼의 값 가져오기
 					document.getElementById("selectedTime").value = selectedTime; // 선택 된 시간 버튼 벨류 값 jsp 페이지에 출력하기 위한 작업
-					
-					
-					
 					
 					console.log(selectedTime);	 // 선택 된 시간 버튼 벨류 값 콘솔 출력
 			
