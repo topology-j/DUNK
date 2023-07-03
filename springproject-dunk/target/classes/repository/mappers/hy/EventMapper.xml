@@ -19,7 +19,7 @@
 	<select id="getEvent" resultMap="eventResultMap">
 		select * from event where no=#{no}
 	</select>
-	
+
 	<insert id="insertEvent" parameterType="Event">
 		insert into event (title, title_img, reg_date, content, content_img, read_count, recommend) values(#{title}, #{titleImg}, sysdate(), #{content}, #{contentImg}, 0, 0)
 	</insert>
@@ -47,13 +47,12 @@
 			<if test="type=='title'">
 				title like concat('%', #{keyword}, '%')
 			</if>
-		</where>		
-	</select>	
+		</where>	
 	
 	<select id="commentList" resultMap="eventCommentResultMap">
 		select * from event_comment where event_no=#{no} order by no desc
 	</select>
-	
+
 	<insert id="addEventComment" parameterType="EventComment">
 		insert into event_comment (event_no, user_id, user_nick, reg_date, content) values(#{eventNo}, #{userId}, #{userNick}, sysdate(), #{content})
 	</insert>

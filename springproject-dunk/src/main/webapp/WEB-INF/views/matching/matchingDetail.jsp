@@ -3,16 +3,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script src="resources/js/formcheck-mj.js"></script>
+
 <!-- content -->
 <div class="row my-5" id="dunk-content">
 	<div class="col">
 		<form name="checkForm2" id="checkForm2">
-			<input type="hidden" name="no" id="no" value="${matching.no}" />
+			<input type="hidden" name="no" id="no" value="${matchingItem.no}" />
 			<input type="hidden" name="pageNum" value="${ pageNum }" />
 		</form>
 		<div class="row text-center">
 			<div class="col">
-				<h2 class=" fw-bold fs-3">매칭리스트상세보기</h2>
+				<h2 class=" fw-bold fs-3">${ matchingItem.title }</h2>
 			</div>
 		</div>
 		<div class="row my-3">
@@ -24,11 +25,11 @@
 						<p>레벨</p>		
 						<p>성별</p>
 						<p>경기규칙</p>
-						<p>지원인원${matchingApplyCount }명</p>
-						<p>모집인원${matching.inwon}</p>
+						<p>지원인원 : ${matchingApplyCount }명</p>
+						<p>모집인원 : ${matchingItem.inwon}</p>
 						<p>준비물ex)</p>
 						<hr>
-						<pre>${ matching.information }</pre>
+						<pre>${ matchingItem.information }</pre>
 					</div>	
 					<!-- 경기장정보 col1-row2-->
 					<div class="row">
@@ -67,18 +68,14 @@
 		<!-- 매치날짜,주소,타이틀(플랩이랑 유사하게) 상위col2-->
 		<div class="col">
 			<div class="row">
-				<div id="map">
-							<figure class="figure">
-							  <img src="resources/main_img/map.png" class="figure-img img-fluid rounded">
-							  <figcaption class="figure-caption text-end">지도영역구현</figcaption>
-							</figure>
-				</div>
-				
-				<p>날짜<fmt:formatDate value="${ matching.date }" pattern="yyyy-MM-dd" />/${ matching.time }시</p>
-				<h4>${ matching.title }</h4>
-				<p>*주소불러오기</p>
-				<div><img src="resources/main_img/readCount.svg">${ matching.readCount }</div><hr>
-				<div>${ matching.pay}원/*몇시간</div><hr>
+			<!-- 매칭장소지도구현 -->
+			<div id="map517" style="width:550px;height:400px;"></div>
+				<!-- 매칭정보 -->
+				<p>날짜<fmt:formatDate value="${ matchingItem.date }" pattern="yyyy-MM-dd" />/${ matchingItem.time }시</p>
+				<h4>${ matchingItem.title }</h4>
+				<p>주소${ matchingItem.name}</p>
+				<div><img src="resources/main_img/readCount.svg">${ matchingItem.readCount }</div><hr>
+				<div>${ matchingItem.pay}원/*몇시간</div><hr>
 				<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
 				${matchingApplyCount == matching.inwon ? "disabled" : ""}>신청하기</button>
 				
@@ -91,7 +88,7 @@
 					        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					      </div>
 					      <div class="modal-body">
-					      	<input type="hidden" name="matchingNo" value="${matching.no}"/>
+					      	<input type="hidden" name="matchingNo" value="${matchingItem.no}"/>
 					     
 					        <section>
 					        	<h5>신청하기</h5>
@@ -124,7 +121,7 @@
 					        		<div class="row">
 					        			<div class="d-flex justify-content-between p-2">
 						        			<h6>총결제 포인트</h6>
-						        			<h6 class="text-danger">${ matching.pay}</h6>
+						        			<h6 class="text-danger">${ matchingItem.pay}</h6>
 					        			</div>
 					        		</div>
 					        	</div>
@@ -142,12 +139,56 @@
 			</div>
 		</div>
 	</div>
-			<!-- 수정,삭제는 로그인 구현시 if처리 -->
+	<!-- 카카오지도생성 -->
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=12b3e50d52ec3f5f679638a93c481864&libraries=services"></script>
+		<script>
+			var mapContainer = document.getElementById('map517'), // 지도를 표시할 div 
+			mapOption = {
+				center : new kakao.maps.LatLng(0, 0), // 지도의 중심좌표
+				level : 3// 지도의 확대 레벨
+			};
+
+			// 지도를 생성합니다    
+			var map = new kakao.maps.Map(mapContainer, mapOption);
+
+			// 주소-좌표 변환 객체를 생성합니다
+			var geocoder = new kakao.maps.services.Geocoder();
+
+			// 주소로 좌표를 검색합니다
+			geocoder.addressSearch(
+							"${matchingItem.address1}",
+							function(result, status) {
+
+								// 정상적으로 검색이 완료됐으면 
+								if (status === kakao.maps.services.Status.OK) {
+
+									var coords = new kakao.maps.LatLng(
+											result[0].y, result[0].x);
+
+									// 결과값으로 받은 위치를 마커로 표시합니다
+									var marker = new kakao.maps.Marker({
+										map : map,
+										position : coords
+									});
+
+									// 인포윈도우로 장소에 대한 설명을 표시합니다
+									var infowindow = new kakao.maps.InfoWindow(
+											{
+												content : '<div style="width:150px;text-align:center;padding:6px 0;">${matchingItem.name}</div>'
+											});
+									infowindow.open(map, marker);
+
+									// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+									map.setCenter(coords);
+								}
+							});
+		</script>
+		<!-- 수정,삭제는 로그인 구현시 if처리 -->
 			<div class="row my-3">
 				<div class="col text-center">
 					<input type="button" class="btn btn-warning" id="detailUpdate" value="수정하기">&nbsp;&nbsp;
 					<input type="button" class="btn btn-danger" id="mDelete" value="삭제하기">&nbsp;&nbsp;
-					<input class="btn btn-primary" type="button" value="목록보기" onclick="location.href='matchingList?pageNum=${pageNum}'"/>
+					<input class="btn btn-primary" type="button" value="목록보기" onclick="location.href='matchingList?pageNum=${pageNum}&selectedDate=${selectedDate}'"/>
 				</div>
 			</div>
 		</div>

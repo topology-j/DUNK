@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.springproject.dunk.mj.domain.Matching;
 import com.springproject.dunk.mj.domain.MatchingApply;
+import com.springproject.dunk.mj.domain.MatchingItem;
 import com.springproject.dunk.mj.service.MatchingService;
 
 @Controller
@@ -49,9 +50,12 @@ public class MatchingController {
 	        selectedDate = todayDate;
 	    }
 	    
-	    Map<String, Object> modelMap = matchingService.matchingList(pageNum, selectedDate);
+	    Map<String, Object> modelMap = matchingService.matchingItemList(pageNum, selectedDate);
 	    
 	    model.addAllAttributes(modelMap);
+	    
+	    model.addAttribute("selectedDate", selectedDate);
+	    
 	    return "matching/matchingList";
 	}
 
@@ -61,28 +65,26 @@ public class MatchingController {
 	//매칭디테일
 	@RequestMapping("/matchingDetail")
 	public String matchingDetail(Model model, int no, HttpSession session,
-			@RequestParam(value = "pageNum", required = false, defaultValue = "1")int pageNum) 
+			@RequestParam(value = "pageNum", required = false, defaultValue = "1")int pageNum, String  selectedDate) 
 	throws Exception
 	{
 		//세션에있는 아이디 조회
 		String id = (String) session.getAttribute("id");
-		// 포인트 조회 메서드 - > Service - dao - mapper
-		//int point = matchingService.getPoint(id);
 		
+		//회원가입이 아니어도 디테일 볼수있게 if 처리
 		if(id != null) {
 			int point = matchingService.getPoint(id);
 			model.addAttribute("point", point);
 		}
-		// 모델에 담기
-		//model.addAttribute("point", point);
 		
 		//매칭에 지원한 MatchingApply 수
 		int matchingApplyCount = matchingService.getMatchingApplyCount(no);
 	    model.addAttribute("matchingApplyCount", matchingApplyCount);
 	    
-		Matching matching = matchingService.getMatching(no, true);
-		model.addAttribute("matching", matching);
+		MatchingItem matchingItem = matchingService.getMatchingItem(no, true);
+		model.addAttribute("matchingItem", matchingItem);
 		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("selectedDate", selectedDate);
 		
 		return "matching/matchingDetail";
 	}
@@ -90,10 +92,10 @@ public class MatchingController {
 	//매칭최초 글쓰기
 	@RequestMapping(value = "/matchingWriteProcess", method =RequestMethod.POST)
 	public String insertMatching(HttpServletRequest request,
-			Matching matching)throws IOException
+			MatchingItem matchingItem)throws IOException
 	
 	{	
-		matchingService.insertMatching(matching);
+		matchingService.insertMatching(matchingItem);
 		return "redirect:matchingList";
 		
 	}
@@ -113,29 +115,28 @@ public class MatchingController {
 	@RequestMapping(value="/matchingApply", method=RequestMethod.POST)
 	public String insertMatchingApply(HttpServletRequest request, HttpSession session,
 			MatchingApply matchingApply)throws IOException
-	{
-		
-		//트랜젝션문제있음.
-		
+	{	
 		//세션에서 아이디 가져옴
 		String id = (String) session.getAttribute("id");
 		
 		//사용자 포인트 내역 가져오기
 		int point = matchingService.getPoint(id);
 		
-		// 매칭 참가비 가져오기 //matchingApply에 pay추가수정??
-	    //int matchingPay = matchingApply.matchingPay();
+		// Matching 객체에서 매칭 참가비 가져오기
+		int matchingPay = matchingService.getMatchingPay(matchingApply.getMatchingNo());
 		
-	    // 사용자의 포인트에서 매칭 참가비 차감
-	    //int updatedPoint = point - matchingPay;
-	    //matchingService.updateUserPoint(id, updatedPoint);
-	    
-		//매칭 신청 처리
+		// 사용자의 포인트에서 매칭 참가비 차감
+		int updatedPoint = point - matchingPay;
+
+		// 유저 포인트 업데이트
+		matchingService.updateUserPoint(id, updatedPoint);
+
+		// 매칭 신청 처리
 		matchingService.insertMatchingApply(matchingApply);
-		
-		//매칭신청 성공시 알림
+
+		// 매칭신청 성공시 알림
 		request.setAttribute("msg", "매칭 신청이 처리되었습니다.");
-		 
+
 		return "redirect:/matchingList";
 	}
 
