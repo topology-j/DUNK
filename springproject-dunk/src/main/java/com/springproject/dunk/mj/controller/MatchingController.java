@@ -64,10 +64,7 @@ public class MatchingController {
 			@RequestParam(value = "pageNum", required = false, defaultValue = "1")int pageNum) 
 	throws Exception
 	{
-		
-		// 회원의 기본 정보는 세션에 있으니까.. - 뷰에서 세션에 있는 걸 찍으면 되지만
-		// 포인트는 어떻게? 없으니가.. 뷰로 가기전에 가져자야지? 
-		// 여기서 세션에 있는 아이디를 가져와서  - 아이디에 해당하는 포인트를 조회하고 - 이걸 모델로 뷰로 보내 출력하면 되지 않을까?
+		//세션에있는 아이디 조회
 		String id = (String) session.getAttribute("id");
 		// 포인트 조회 메서드 - > Service - dao - mapper
 		//int point = matchingService.getPoint(id);
@@ -79,6 +76,10 @@ public class MatchingController {
 		// 모델에 담기
 		//model.addAttribute("point", point);
 		
+		//매칭에 지원한 MatchingApply 수
+		int matchingApplyCount = matchingService.getMatchingApplyCount(no);
+	    model.addAttribute("matchingApplyCount", matchingApplyCount);
+	    
 		Matching matching = matchingService.getMatching(no, true);
 		model.addAttribute("matching", matching);
 		model.addAttribute("pageNum", pageNum);
@@ -110,22 +111,31 @@ public class MatchingController {
 	
 	//매칭신청 matchingApply
 	@RequestMapping(value="/matchingApply", method=RequestMethod.POST)
-	public String insertMatchingApply(HttpServletRequest request,
+	public String insertMatchingApply(HttpServletRequest request, HttpSession session,
 			MatchingApply matchingApply)throws IOException
 	{
 		
+		//트랜젝션문제있음.
+		
 		//세션에서 아이디 가져옴
-		//String userId = "";
+		String id = (String) session.getAttribute("id");
 		
-		//아이디에 해당하는 예치금 읽어와서 참가비보다 적으면 알림 진행종료
-
-		//예치금이 참가비보다 많으면 팀매치지원 테이블에 추가
+		//사용자 포인트 내역 가져오기
+		int point = matchingService.getPoint(id);
 		
-		//마이페이지 캘린더에서 예약내역이 보이게 한다.
+		// 매칭 참가비 가져오기 //matchingApply에 pay추가수정??
+	    //int matchingPay = matchingApply.matchingPay();
 		
+	    // 사용자의 포인트에서 매칭 참가비 차감
+	    //int updatedPoint = point - matchingPay;
+	    //matchingService.updateUserPoint(id, updatedPoint);
+	    
+		//매칭 신청 처리
 		matchingService.insertMatchingApply(matchingApply);
 		
-		
+		//매칭신청 성공시 알림
+		request.setAttribute("msg", "매칭 신청이 처리되었습니다.");
+		 
 		return "redirect:/matchingList";
 	}
 

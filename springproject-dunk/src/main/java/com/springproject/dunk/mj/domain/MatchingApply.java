@@ -36,8 +36,6 @@ public class MatchingApply {
 	}
 	public void setTeamNo(int teamNo) {
 		this.teamNo = teamNo;
-	}
-	
-	
+	}	
 
 }
