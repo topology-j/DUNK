@@ -34,6 +34,15 @@
 	<!-- place 경로 -->
 	<view-controller path="/placeWriteForm" view-name="place/placeWriteForm" />
 	
-	
+	<beans:bean id="loginCheckInterceptor" 	class="com.springproject.dunk.hy.interceptor.LoginCheckInterceptor" />
+	<interceptors>
+		<interceptor>					
+			<mapping path="/add*" />
+			<mapping path="/write*" />
+			<mapping path="/update*" />	
+			<mapping path="/delete*" />			
+			<beans:ref bean="loginCheckInterceptor" />			
+		</interceptor>			
+	</interceptors>	
 	
 </beans:beans>

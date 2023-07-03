@@ -14,9 +14,9 @@ import com.springproject.dunk.hy.domain.EventComment;
 @Service
 public class EvenServiceImpl implements EventService {
 	
-	private static final int PAGE_SIZE=10;
+	private static final int PAGE_SIZE=3;
 	
-	private static final int PAGE_GROUP=10;
+	private static final int PAGE_GROUP=5;
 	
 	private EventDao dao;
 	
@@ -36,7 +36,7 @@ public class EvenServiceImpl implements EventService {
 		
 		boolean searchOption=type.equals("null") || keyword.equals("null") ? false : true;
 		
-		List<Event> eventList=dao.eventList(startRow, PAGE_SIZE, type, keyword);
+		List<Event> eventList=dao.eventList(startRow, PAGE_SIZE, type, keyword);		
 		
 		int pageCount=listCount/PAGE_SIZE+(listCount%PAGE_SIZE==0  ? 0 : 1);
 		
@@ -50,7 +50,7 @@ public class EvenServiceImpl implements EventService {
 		
 		Map<String, Object> modelMap=new HashMap<>();
 		
-		modelMap.put("eList", eventList);
+		modelMap.put("eList", eventList);		
 		modelMap.put("pageNum", pageNum);
 		modelMap.put("listCount", listCount);
 		modelMap.put("pageCount", pageCount);
@@ -62,7 +62,7 @@ public class EvenServiceImpl implements EventService {
 		if(searchOption) {
 			modelMap.put("type", type);
 			modelMap.put("keyword", keyword);
-		}		
+		}			
 		
 		return modelMap;
 	}
@@ -96,12 +96,7 @@ public class EvenServiceImpl implements EventService {
 	@Override
 	public void recommend(int no) {
 		dao.recommend(no);		
-	}
-
-	@Override
-	public List<String> getImages(int no) {		
-		return dao.getImages(no);
-	}
+	}	
 
 	@Override
 	public List<EventComment> commentList(int no) {		
@@ -111,6 +106,11 @@ public class EvenServiceImpl implements EventService {
 	@Override
 	public void addEventComment(EventComment ec) {
 		dao.addEventComment(ec);		
+	}
+
+	@Override
+	public void updateEventComment(EventComment ec) {
+		dao.updateEventComment(ec);		
 	}
 	
 

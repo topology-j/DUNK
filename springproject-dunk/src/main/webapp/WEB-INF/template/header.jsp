@@ -55,7 +55,7 @@
 				    </a>
 				    <ul class="dropdown-menu">
 			    	  <li><a class="dropdown-item" href="#">매치</a></li>
-			    	  <li><a class="dropdown-item" href="#">팀 매치</a></li>
+			    	  <li><a class="dropdown-item" href="teamMatchList">팀 매치</a></li>
 			    	  <li><a class="dropdown-item" href="teamRecruitmentList">팀 모집</a></li>
 				      <li><a class="dropdown-item" href="placeList">장소예약</a></li>
 				      <li><a class="dropdown-item" href="eventList">이벤트</a></li>

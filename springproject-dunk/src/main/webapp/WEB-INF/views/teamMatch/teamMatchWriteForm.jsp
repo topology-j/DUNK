@@ -9,7 +9,11 @@
 </div>
 <form action="addTeamMatch" method="post">
 	<input type="hidden" name="bookNo" value="${pb.no}">	
-	<input type="hidden" name="teamNo" value="${t.no}">
+	<input type="hidden" name="teamNo1" value="${t.no}">
+	<input type="hidden" name="placeName" value="${pb.placeName}">
+	<input type="hidden" name="dates" value="${pb.dates}">
+	<input type="hidden" name="timeBook" value="${pb.timeBook}">
+	<input type="hidden" name="teamName" value="${t.name}">
 	<input type="hidden" name="writerId" value="${sessionScope.id}">
 	<div class="row">
 		<div class="col-6 offset-4">

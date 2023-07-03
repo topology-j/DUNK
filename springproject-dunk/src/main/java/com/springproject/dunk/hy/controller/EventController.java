@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,20 +18,24 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.springproject.dunk.hy.domain.Event;
 import com.springproject.dunk.hy.domain.EventComment;
+import com.springproject.dunk.hy.domain.Message;
 import com.springproject.dunk.hy.service.EventService;
+import com.springproject.dunk.hy.service.MessageService;
 
 @Controller
 public class EventController {
 	
 	private final static String DEFAULT_PATH = "/resources/eventimage/";
 
-	private EventService service;
+	private EventService service;	
+	private MessageService mService;
 	
-	@Autowired
-	public EventController(EventService service) {	
+	@Autowired	
+	public EventController(EventService service, MessageService mService) {		
 		this.service = service;
+		this.mService = mService;
 	}
-	
+
 	@RequestMapping("/eventList")
 	public String eventList(Model model, 
 			@RequestParam(value="pageNum", required=false, defaultValue="1") int pageNum, 
@@ -52,17 +55,14 @@ public class EventController {
 			@RequestParam(value="type", required=false, defaultValue="null") String type, 
 			@RequestParam(value="keyword", required=false, defaultValue="null") String keyword) {
 		
-		Event event=service.getEvent(no, true);
-		
-		List<String> imgList=service.getImages(no);
+		Event event=service.getEvent(no, true);		
 		
 		List<EventComment> cList=service.commentList(no);
 		
 		boolean searchOption=type.equals("null") || keyword.equals("null") ? false : true;
 				
 		model.addAttribute("e", event);	
-		model.addAttribute("pageNum", pageNum);
-		model.addAttribute("iList", imgList);
+		model.addAttribute("pageNum", pageNum);		
 		model.addAttribute("cList", cList);
 		model.addAttribute("searchOption", searchOption);
 		
@@ -77,26 +77,36 @@ public class EventController {
 	
 	@RequestMapping("/eventWriteProcess")
 	public String writeProcess(Event e, HttpServletRequest request, 
-			@RequestParam(value="file1", required=false) List<MultipartFile> imgFiles) throws Exception {
+			@RequestParam(value="file1", required=false) MultipartFile multipartFile1, 
+			@RequestParam(value="file2", required=false) MultipartFile multipartFile2) throws Exception {
 				
-		if(!imgFiles.isEmpty()) {			
+		if(!multipartFile1.isEmpty()) {				
 			
-			e.setImgFileNames(new ArrayList<String>());
+			String filePath = request.getServletContext().getRealPath(DEFAULT_PATH);						
+				
+			UUID uId = UUID.randomUUID();
+			String saveName = uId.toString() + "_" + multipartFile1.getOriginalFilename();			
 			
-			String filePath = request.getServletContext().getRealPath(DEFAULT_PATH);
+			File file = new File(filePath, saveName);
+							
+			multipartFile1.transferTo(file);		
 			
-			for(int i=0; i<imgFiles.size(); i++) {				
-				
-				UUID uId = UUID.randomUUID();
-				String saveName = uId.toString() + "_" + imgFiles.get(i).getOriginalFilename();			
-				
-				File file = new File(filePath, saveName);
-								
-				imgFiles.get(i).transferTo(file);			
-				
-				e.getImgFileNames().add(saveName);				
-			}			
+			e.setTitleImg(saveName);			
 		}
+		
+		if(!multipartFile2.isEmpty()) {				
+			
+			String filePath = request.getServletContext().getRealPath(DEFAULT_PATH);						
+				
+			UUID uId = UUID.randomUUID();
+			String saveName = uId.toString() + "_" + multipartFile2.getOriginalFilename();			
+			
+			File file = new File(filePath, saveName);
+							
+			multipartFile2.transferTo(file);		
+			
+			e.setContentImg(saveName);					
+		}			
 		
 		service.insertEvent(e);
 		
@@ -143,7 +153,7 @@ public class EventController {
 		
 		service.updateEvent(e);
 		
-		return "redirect:eventList?";
+		return "redirect:eventList";
 	}
 	
 	@RequestMapping("/eventDelete")
@@ -164,7 +174,7 @@ public class EventController {
 			reAttrs.addAttribute("keyword", keyword);
 		}
 		
-		return "redirect:eventList?pageNum="+pageNum;		
+		return "redirect:eventList";		
 	}	
 	
 	@RequestMapping("/eventRecommend")
@@ -181,5 +191,50 @@ public class EventController {
 		return "event/eventDetail";		
 	}	
 	
+	@RequestMapping("/questionAboutEvent")
+	public String questionAboutEvent(int no, String sendId, String sendNick, String receiveId, String receiveNick, Model model,  
+			@RequestParam(value="pageNum", required=false, defaultValue="1") int pageNum, 
+			@RequestParam(value="type", required=false, defaultValue="null") String type, 
+			@RequestParam(value="keyword", required=false, defaultValue="null") String keyword) {
+		
+		boolean searchOption=type.equals("null") || keyword.equals("null") ? false : true;
+		
+		model.addAttribute("no", no);	
+		model.addAttribute("sendId", sendId);	
+		model.addAttribute("sendNick", sendNick);	
+		model.addAttribute("receiveId", receiveId);	
+		model.addAttribute("receiveNick", receiveNick);	
+		model.addAttribute("pageNum", pageNum);		
+		model.addAttribute("searchOption", searchOption);
+		
+		if(searchOption) {
+			model.addAttribute("type", type);
+			model.addAttribute("keyword", keyword);
+		}		
+		
+		return "message/writeMessageForme";
+	}
+	
+	@RequestMapping("/writeMessageProcesse")
+	public String writeMessageProcesse(int no, Message message, RedirectAttributes reAttrs,  
+			@RequestParam(value="pageNum", required=false, defaultValue="1") int pageNum, 
+			@RequestParam(value="type", required=false, defaultValue="null") String type, 
+			@RequestParam(value="keyword", required=false, defaultValue="null") String keyword) {
+		
+		mService.addMessage(message);
+		
+		boolean searchOption=type.equals("null") || keyword.equals("null") ? false : true;
+		
+		reAttrs.addAttribute("no", no);
+		reAttrs.addAttribute("pageNum", pageNum);
+		reAttrs.addAttribute("searchOption", searchOption);
+		
+		if(searchOption) {
+			reAttrs.addAttribute("type", type);
+			reAttrs.addAttribute("keyword", keyword);
+		}
+		
+		return "redirect:eventDetail";
+	}
 	
 }

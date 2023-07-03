@@ -33,7 +33,9 @@
 							<img src="resources/userimage/${p.img}" class="rounded-circle" style="width:50px; height:50px">
 						</c:if>
 						${tm.writerNick}&nbsp;&nbsp;
-						<input type="button" class="btn btn-dark" value="쪽지" onclick="location.href='writeMessageFormtm?sendId=${sessionScope.id}&sendNick=${sessionScope.nick}&receiveId=${tm.writerId}&receiveNick=${tm.writerNick}&no=${tm.no}'" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+						<c:if test="${sessionScope.isLogin}">
+							<input type="button" class="btn btn-dark" value="쪽지" onclick="location.href='writeMessageFormtm?sendId=${sessionScope.id}&sendNick=${sessionScope.nick}&receiveId=${tm.writerId}&receiveNick=${tm.writerNick}&no=${tm.no}'" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+						</c:if>
 					</div>					
 				</div>
 				<div class="row my-3 border-bottom">
@@ -42,7 +44,12 @@
 					</div>
 					<div class="col-6">						
 						<c:forEach var="u" items="${tuList}">
-							<div class="my-1">${u.userNick}</div>
+							<div class="my-1">
+								<c:if test="${sessionScope.isLogin}">
+									<input type="button" class="btn btn-success" value="프로필" onclick="location.href='profile?id=${u.userId}'" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">&nbsp;&nbsp;
+								</c:if>
+								<span>${u.userNick}</span>
+							</div>
 						</c:forEach>
 					</div>
 				</div>
@@ -78,9 +85,23 @@
 						</div>
 						<div class="row my-3 py-2">
 							<div class="col">
-								<div class="d-grid gap-2">
-									<button class="btn btn-primary" type="button" onclick="location.href='applyTeamMatch?id=${sessionScope.id}&bookNo=${tm.bookNo}&tmNo=${tm.no}'">신청하기</button>					  
-								</div>
+								<c:if test="${tm.process=='신청가능'}">
+									<c:if test="${sessionScope.isLogin}">
+										<div class="d-grid gap-2">
+											<button class="btn btn-primary" type="button" onclick="location.href='applyTeamMatch?id=${sessionScope.id}&bookNo=${tm.bookNo}&tmNo=${tm.no}'">신청하기</button>					  
+										</div>
+									</c:if>
+									<c:if test="${!sessionScope.isLogin}">
+										<div class="d-grid gap-2">
+											<button class="btn btn-primary" type="button" onclick="location.href='applyTeamMatch?id=${sessionScope.id}&bookNo=${tm.bookNo}&tmNo=${tm.no}'" disabled>신청하기</button>					  
+										</div>
+									</c:if>
+								</c:if>
+								<c:if test="${tm.process=='마감'}">
+									<div class="d-grid gap-2">
+										<button class="btn btn-secondary" type="button" onclick="location.href='teamMatchList'">마감</button>					  
+									</div>
+								</c:if>
 							</div>
 						</div>
 					</div>

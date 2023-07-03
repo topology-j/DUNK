@@ -21,6 +21,7 @@
 				<value>com.springproject.dunk.ch.domain.PlaceBoard</value>	
 				<value>com.springproject.dunk.ch.domain.PlaceBook</value>	
 				<!-- 도메인 등록을 위와 같이 해서 아래에 붙여주세요. -->
+								
 				<value>com.springproject.dunk.hy.domain.EventComment</value>
 				<value>com.springproject.dunk.hy.domain.MannerCheck</value>
 				<value>com.springproject.dunk.hy.domain.Message</value>
@@ -31,6 +32,7 @@
 				<value>com.springproject.dunk.hy.domain.TeamRecruitment</value>
 				<value>com.springproject.dunk.hy.domain.TeamUser</value>				
 				<!-- 도메인 등록을 위와 같이 해서 아래에 붙여주세요. -->
+				<value>com.springproject.dunk.hy.domain.TeamMatchUserEval</value>
 			</list>
 		</property>
 
