@@ -4,19 +4,23 @@ import java.util.List;
 
 import com.springproject.dunk.mj.domain.Matching;
 import com.springproject.dunk.mj.domain.MatchingApply;
+import com.springproject.dunk.mj.domain.MatchingItem;
 
 public interface MatchingDao {
 	
-	public abstract List<Matching> matchingList(int startRow, int num, String selectedDate);
+	//selectedDate에 해당하는 게시글리스트 반환
+	public abstract List<MatchingItem> matchingItemList(int startRow, int num, String selectedDate);
 	
 	//selectedDate에 해당하는 게시글을 반환
 	public abstract int getMatchingCount(String selectedDate);
 	
 	//해당하는 no와 조회수
-	public abstract Matching getMatching(int no, boolean isCount);
+	public abstract MatchingItem getMatchingItem(int no, boolean isCount);
 	
-	public void insertMatching(Matching matching);
+	//매칭최초글쓰기
+	public void insertMatching(MatchingItem matchingItem);
 	
+	//매칭삭제
 	public void deleteMatching(int no);
 	
 	//Matching에 MatchingApply 신청하기
@@ -27,8 +31,11 @@ public interface MatchingDao {
 
 	//매칭에 지원시 포인트 불러오기
 	public abstract int getPoint(String id);
-	
-	// 유저 포인트 차감
-    public abstract void updateUserPoint(String userId, int pay);
-	
+
+	// 매칭 신청할때 해당 Matching의 pay 불러오기
+	public abstract int getMatchingPay(int no);
+
+	// 신청하기 누르면 Matching에 해당하는 Pay만큼 user의 point차감
+	public void updateUserPoint(String id, int updatedPoint);
+
 }

@@ -4,16 +4,17 @@ import java.util.Map;
 
 import com.springproject.dunk.mj.domain.Matching;
 import com.springproject.dunk.mj.domain.MatchingApply;
+import com.springproject.dunk.mj.domain.MatchingItem;
 
 public interface MatchingService {
 	
-	public abstract Map<String, Object> matchingList(int pageNum, String selectedDate);
+	public abstract Map<String, Object> matchingItemList(int pageNum, String selectedDate);
 	
 	//no에 해당하는 디테일, 조회수 
-	public abstract Matching getMatching(int no,boolean isCount);
+	public abstract MatchingItem getMatchingItem(int no,boolean isCount);
 	
 	//매칭최초글쓰기
-	public abstract void insertMatching(Matching matching);
+	public abstract void insertMatching(MatchingItem matchingItem);
 	
 	//삭제나 업데이트에 필요한 글 no체크 (나중에 pass추가...?유저아이디...?)
 	//public boolean isPassCheck(int no);
@@ -33,7 +34,10 @@ public interface MatchingService {
 	//매칭 지원시 포인트 불러오기
 	public abstract int getPoint(String id);
 	
-	//포인트 차감
-	public abstract void updateUserPoint(String userId, int pay);
+	// 매칭 신청할때 해당 Matching의 pay 불러오기
+	public abstract int getMatchingPay(int no);
+
+	// 신청하기 누르면 Matching에 해당하는 Pay만큼 user의 point차감
+	public void updateUserPoint(String id, int updatedPoint);
 
 }
