@@ -34,7 +34,7 @@
 					</c:if>
 					<c:if test="${t.process=='마감'}">
 						<div class="d-grid gap-2">
-						  <button class="btn btn-danger" type="button">마감</button>					  
+						  <button class="btn btn-secondary" type="button" onclick="location.href='teamMatchDetail?no=${t.no}'">마감</button>					  
 						</div>
 					</c:if>
 				</div>

@@ -238,6 +238,16 @@ public class UserServiceImpl implements UserService {
 	public User getUserByNick(String nick) {
 		return dao.getUserByNick(nick);
 	}
+
+	@Override
+	public void addMannerCheck(MannerCheck mc) {
+		dao.addMannerCheck(mc);		
+	}
+
+	@Override
+	public void updateMannerCheck(MannerCheck mc) {
+		dao.updateMannerCheck(mc);		
+	}
 	
 	
 }
