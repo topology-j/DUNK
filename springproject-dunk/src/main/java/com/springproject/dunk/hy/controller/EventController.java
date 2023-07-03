@@ -28,12 +28,12 @@ public class EventController {
 	private final static String DEFAULT_PATH = "/resources/eventimage/";
 
 	private EventService service;	
-	private MessageService mService;
+	private MessageService mService;	
 	
-	@Autowired	
-	public EventController(EventService service, MessageService mService) {		
+	@Autowired
+	public EventController(EventService service, MessageService mService) {	
 		this.service = service;
-		this.mService = mService;
+		this.mService = mService;		
 	}
 
 	@RequestMapping("/eventList")
@@ -48,22 +48,23 @@ public class EventController {
 				
 		return "event/eventList";
 	}
-	
+
 	@RequestMapping("/eventDetail")
 	public String eventDetail(int no, Model model,  
 			@RequestParam(value="pageNum", required=false, defaultValue="1") int pageNum, 
 			@RequestParam(value="type", required=false, defaultValue="null") String type, 
-			@RequestParam(value="keyword", required=false, defaultValue="null") String keyword) {
+			@RequestParam(value="keyword", required=false, defaultValue="null") String keyword, 
+			@RequestParam(value="isCommentCount", required=false, defaultValue="true") boolean isCommentCount) {
 		
-		Event event=service.getEvent(no, true);		
+		Event event=service.getEvent(no, true, isCommentCount);	
 		
-		List<EventComment> cList=service.commentList(no);
-		
+		List<EventComment> cList=service.commentList(no);				
+				
 		boolean searchOption=type.equals("null") || keyword.equals("null") ? false : true;
 				
 		model.addAttribute("e", event);	
 		model.addAttribute("pageNum", pageNum);		
-		model.addAttribute("cList", cList);
+		model.addAttribute("cList", cList);		
 		model.addAttribute("searchOption", searchOption);
 		
 		if(searchOption) {
@@ -119,7 +120,7 @@ public class EventController {
 			@RequestParam(value="type", required=false, defaultValue="null") String type, 
 			@RequestParam(value="keyword", required=false, defaultValue="null") String keyword) {
 		
-		Event e=service.getEvent(no, false);
+		Event e=service.getEvent(no, false, false);
 		
 		boolean searchOption=type.equals("null") || keyword.equals("null") ? false : true;
 				
@@ -183,7 +184,7 @@ public class EventController {
 		
 		service.recommend(no);
 		
-		Event e=service.getEvent(no, false);
+		Event e=service.getEvent(no, false, false);
 		
 		model.addAttribute("e", e);
 		model.addAttribute("pageNum", pageNum);
@@ -233,6 +234,91 @@ public class EventController {
 			reAttrs.addAttribute("type", type);
 			reAttrs.addAttribute("keyword", keyword);
 		}
+		
+		return "redirect:eventDetail";
+	}
+	
+	@RequestMapping("/addEventComment")
+	public String addEventComment(EventComment ec, int no, boolean isCommentCount, RedirectAttributes reAttrs, 
+			@RequestParam(value="pageNum", required=false, defaultValue="1") int pageNum, 
+			@RequestParam(value="type", required=false, defaultValue="null") String type, 
+			@RequestParam(value="keyword", required=false, defaultValue="null") String keyword) {
+		
+		service.addEventComment(ec);
+		
+		reAttrs.addAttribute("no", no);
+		reAttrs.addAttribute("pageNum", pageNum);
+		reAttrs.addAttribute("type", type);
+		reAttrs.addAttribute("keyword", keyword);
+		reAttrs.addAttribute("isCommentCount", isCommentCount);
+		
+		return "redirect:eventDetail";
+	}
+	
+	@RequestMapping("/updateEventComment")
+	public String updateEventComment(int no, boolean isCommentCount, Model model, 
+			@RequestParam(value="pageNum", required=false, defaultValue="1") int pageNum, 
+			@RequestParam(value="type", required=false, defaultValue="null") String type, 
+			@RequestParam(value="keyword", required=false, defaultValue="null") String keyword) {
+		
+		boolean searchOption=type.equals("null") || keyword.equals("null") ? false : true;
+		
+		EventComment ec=service.getEventComment(no);			
+		
+		model.addAttribute("ec", ec);		
+		model.addAttribute("isCommentCount", isCommentCount);
+		model.addAttribute("pageNum", pageNum);		
+		
+		if(searchOption) {
+			model.addAttribute("type", type);
+			model.addAttribute("keyword", keyword);			
+		}		
+		
+		return "event/updateEventCommentForm";
+	}
+	
+	@RequestMapping("/updateEventCommentProcess")
+	public String updateEventCommentProcess(EventComment ec, boolean isCommentCount, RedirectAttributes reAttrs,
+			@RequestParam(value="pageNum", required=false, defaultValue="1") int pageNum, 
+			@RequestParam(value="type", required=false, defaultValue="null") String type, 
+			@RequestParam(value="keyword", required=false, defaultValue="null") String keyword) {
+		
+		service.updateEventComment(ec);
+				
+		boolean searchOption=type.equals("null") || keyword.equals("null") ? false : true;
+		
+		reAttrs.addAttribute("no", ec.getEventNo());
+		reAttrs.addAttribute("isCommentCount", isCommentCount);
+		reAttrs.addAttribute("pageNum", pageNum);
+		reAttrs.addAttribute("searchOption", searchOption);
+		
+		if(searchOption) {
+			reAttrs.addAttribute("type", type);
+			reAttrs.addAttribute("keyword", keyword);
+		}		
+		
+		return "redirect:eventDetail";
+	}
+	
+	@RequestMapping("/deleteEventComment")
+	public String deleteEventComment(int no, int eventNo, boolean isCommentCount, RedirectAttributes reAttrs,
+			@RequestParam(value="pageNum", required=false, defaultValue="1") int pageNum, 
+			@RequestParam(value="type", required=false, defaultValue="null") String type, 
+			@RequestParam(value="keyword", required=false, defaultValue="null") String keyword) {
+		
+		service.deleteEventComment(no);
+		
+		boolean searchOption=type.equals("null") || keyword.equals("null") ? false : true;
+		
+		reAttrs.addAttribute("no", eventNo);
+		reAttrs.addAttribute("isCommentCount", isCommentCount);
+		reAttrs.addAttribute("pageNum", pageNum);
+		reAttrs.addAttribute("searchOption", searchOption);
+		
+		if(searchOption) {
+			reAttrs.addAttribute("type", type);
+			reAttrs.addAttribute("keyword", keyword);
+		}		
 		
 		return "redirect:eventDetail";
 	}

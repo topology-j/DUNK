@@ -87,10 +87,22 @@ public class EventDaoImpl implements EventDao {
 	public void addEventComment(EventComment ec) {
 		sqlSession.insert(NAME_SPACE+".addEventComment", ec);		
 	}
-	
+
+	@Override
+	public EventComment getEventComment(int no) {		
+		return sqlSession.selectOne(NAME_SPACE+".getEventComment", no);
+	}
+
 	@Override
 	public void updateEventComment(EventComment ec) {
-		sqlSession.update(NAME_SPACE+".EventComment", ec);
+		sqlSession.update(NAME_SPACE+".updateEventComment", ec);		
 	}
+
+	@Override
+	public void deleteEventComment(int no) {
+		sqlSession.delete(NAME_SPACE+".deleteEventComment", no);		
+	}
+
+	
 	
 }

@@ -76,6 +76,7 @@ public class UserController {
 		session.setAttribute("isLogin", true);
 		session.setAttribute("id", id);
 		session.setAttribute("nick", user.getNickname());
+		session.setAttribute("grade", user.getGrade());
 		
 		return "redirect:eventList";	
 		

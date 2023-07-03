@@ -68,9 +68,9 @@ public class EvenServiceImpl implements EventService {
 	}
 
 	@Override
-	public Event getEvent(int no, boolean isCount) {		
+	public Event getEvent(int no, boolean isCount, boolean isCommentCount) {		
 		
-		if(isCount) {
+		if(isCount && isCommentCount) {
 			dao.incrementReadCount(no);
 		}
 		
@@ -96,22 +96,31 @@ public class EvenServiceImpl implements EventService {
 	@Override
 	public void recommend(int no) {
 		dao.recommend(no);		
-	}	
+	}
 
 	@Override
 	public List<EventComment> commentList(int no) {		
 		return dao.commentList(no);
 	}
-	
+
 	@Override
 	public void addEventComment(EventComment ec) {
 		dao.addEventComment(ec);		
 	}
 
 	@Override
+	public EventComment getEventComment(int no) {		
+		return dao.getEventComment(no);
+	}
+
+	@Override
 	public void updateEventComment(EventComment ec) {
 		dao.updateEventComment(ec);		
 	}
-	
+
+	@Override
+	public void deleteEventComment(int no) {
+		dao.deleteEventComment(no);		
+	}		
 
 }
