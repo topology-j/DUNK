@@ -27,6 +27,10 @@ public interface EventDao {
 	
 	public void addEventComment(EventComment ec);
 	
+	public EventComment getEventComment(int no);
+	
 	public void updateEventComment(EventComment ec);
+	
+	public void deleteEventComment(int no);
 	
 }

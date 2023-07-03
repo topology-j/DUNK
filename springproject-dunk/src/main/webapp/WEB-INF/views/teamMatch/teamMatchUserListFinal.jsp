@@ -78,6 +78,11 @@
 						</div>
 					</div>
 				</div>
+				<div class="row mt-5 mb-3 text-center">
+					<div class="col">
+						<input type="button" class="btn btn-dark" value="리스트 보기" onclick="location.href='teamGameList?id=${sessionScope.id}'">
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
