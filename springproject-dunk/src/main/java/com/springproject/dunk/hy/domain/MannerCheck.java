@@ -9,6 +9,17 @@ public class MannerCheck {
 	private int preManner;
 	private int timeManner;
 	
+	public MannerCheck() {}	
+	
+	public MannerCheck(String userId, int evalNum, int skillEval, int mannerEval, int preManner, int timeManner) {	
+		this.userId = userId;
+		this.evalNum = evalNum;
+		this.skillEval = skillEval;
+		this.mannerEval = mannerEval;
+		this.preManner = preManner;
+		this.timeManner = timeManner;
+	}
+
 	public String getUserId() {
 		return userId;
 	}

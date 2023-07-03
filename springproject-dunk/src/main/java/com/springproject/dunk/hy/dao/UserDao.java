@@ -41,4 +41,9 @@ public interface UserDao {
 	public void deleteUser(String id);
 	
 	public User getUserByNick(String nick);
+	
+	public void addMannerCheck(MannerCheck mc);
+	
+	public void updateMannerCheck(MannerCheck mc);
+	
 }

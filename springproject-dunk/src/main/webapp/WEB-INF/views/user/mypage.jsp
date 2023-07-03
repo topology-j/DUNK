@@ -55,16 +55,16 @@
 				</div>
 				<div class="row mx-3 my-3">
 					<div class="col">
-						<div class="d-grid gap-2">
-							<button class="btn btn-primary text-start" type="button" onclick="location.href=''">나의<br>경기일정								
+						<div class="d-grid gap-2 my-2">
+							<button class="btn btn-primary text-start" type="button" onclick="location.href=''">나의 <br>개인 경기일정								
 							</button>
-						</div>
+						</div>						
 					</div>
 				</div>
 				<div class="row mx-3 my-3">
 					<div class="col">
 						<div class="d-grid gap-2">
-							<button class="btn btn-secondary text-start" type="button" onclick="location.href='generateTeamForm?id=${u.id}&nick=${u.nickname}'">나의<br>팀생성							
+							<button class="btn btn-secondary text-start" type="button" onclick="location.href='teamGameList?id=${u.id}'">나의<br>팀 경기일정							
 							</button>
 						</div>
 					</div>
@@ -91,15 +91,20 @@
 								<div class="col-6 text-end">
 									<span>${u.point}원</span>
 								</div>
-							</div>
+							</div>							
 							<div class="row my-3">
 								<div class="col">
-									<a href="myteamList?id=${u.id}" class="text-decoration-none link-dark">나의 팀</a>
+									<a href="" class="text-decoration-none link-dark">나의 장소</a>
 								</div>
 							</div>
 							<div class="row my-3">
 								<div class="col">
-									<a href="" class="text-decoration-none link-dark">나의 장소</a>
+									<a href="generateTeamForm?id=${u.id}&nick=${u.nickname}" class="text-decoration-none link-dark">팀 생성</a>
+								</div>
+							</div>
+							<div class="row my-3">
+								<div class="col">
+									<a href="myteamList?id=${u.id}" class="text-decoration-none link-dark">나의 팀</a>
 								</div>
 							</div>
 							<div class="row my-3">

@@ -20,10 +20,10 @@ public interface EventService {
 	
 	public void recommend(int no);
 	
-	public List<String> getImages(int no);
-	
 	public List<EventComment> commentList(int no);
 	
 	public void addEventComment(EventComment ec);
+	
+	public void updateEventComment(EventComment ec);
 	
 }
