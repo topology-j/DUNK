@@ -10,7 +10,7 @@ public interface EventService {
 
 	public Map<String, Object> eventList(int pageNum, String type, String keyword);
 	
-	public Event getEvent(int no, boolean isCount);	
+	public Event getEvent(int no, boolean isCount, boolean isCommentCount);	
 	
 	public void insertEvent(Event e);
 	
@@ -24,6 +24,10 @@ public interface EventService {
 	
 	public void addEventComment(EventComment ec);
 	
+	public EventComment getEventComment(int no);	
+	
 	public void updateEventComment(EventComment ec);
+	
+	public void deleteEventComment(int no);
 	
 }

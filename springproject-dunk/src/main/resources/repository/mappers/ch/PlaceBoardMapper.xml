@@ -34,20 +34,22 @@
 	</select>
 	
 
-	<!-- DB에 장소 예약 정보 추가 -->
-	<insert id="insertPlaceBook" parameterType="PlaceBook" useGeneratedKeys="true" keyProperty="no">
-    	INSERT INTO place_book (place_no, place_name, place_address1, place_address2, place_pay, user_id, user_nick, dates, player_num, time_book)
-    	
-    	VALUES (#{placeNo}, #{placeName}, #{placeAddress1}, #{placeAddress2}, #{placePay}, #{userId}, #{userNick}, #{dates}, #{playerNum}, #{timeBook})
-	</insert>
+
 	
-		 <!-- 장소상세보기 상세보기 -->
+	<!-- 장소상세보기 상세보기 -->
 	<select id="getPlaceDetail" resultType="PlaceBoard" resultMap="boardResultMap">
 		SELECT 
 			* 
 		FROM place
 		WHERE no = #{no}
 	</select>
+	
+	<!-- DB에 장소 예약 정보 추가 -->
+	<insert id="insertPlaceBook" parameterType="PlaceBook" useGeneratedKeys="true" keyProperty="no">
+    	INSERT INTO place_book (place_no, place_name, place_address1, place_address2, place_pay, user_id, user_nick, dates, player_num, time_book)
+    	
+    	VALUES (#{placeNo}, #{placeName}, #{placeAddress1}, #{placeAddress2}, #{placePay}, #{userId}, #{userNick}, #{dates}, #{playerNum}, #{timeBook})
+	</insert>
 	
 	<!-- 유저의 포인트 불러오기 -->
    <select id="getPoint" resultType="int">
