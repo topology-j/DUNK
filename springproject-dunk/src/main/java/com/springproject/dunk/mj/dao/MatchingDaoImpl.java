@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.springproject.dunk.mj.domain.Matching;
 import com.springproject.dunk.mj.domain.MatchingApply;
 import com.springproject.dunk.mj.domain.MatchingItem;
+import com.springproject.dunk.mj.domain.MyApply;
 
 @Repository
 public class MatchingDaoImpl implements MatchingDao {
@@ -61,8 +62,8 @@ public class MatchingDaoImpl implements MatchingDao {
 
 	//Matching 최초 글쓰기
 	@Override
-	public void insertMatching(MatchingItem matchingItem) {
-		sqlSession.insert(NAME_SPACE + ".insertMatching", matchingItem);
+	public void insertMatching(Matching matching) {
+		sqlSession.insert(NAME_SPACE + ".insertMatching", matching);
 		
 	}
 
@@ -86,6 +87,7 @@ public class MatchingDaoImpl implements MatchingDao {
 		return sqlSession.selectOne(NAME_SPACE + ".getMatchingApplyCount", matchingNo);
 	}
 
+	//결제
 	// 매칭에 지원시 포인트 불러오기
 	@Override
 	public int getPoint(String id) {
@@ -105,6 +107,20 @@ public class MatchingDaoImpl implements MatchingDao {
 		params.put("id", id);
 		params.put("updatedPoint", updatedPoint);
 		sqlSession.update(NAME_SPACE + ".updateUserPoint", params);
+	}
+
+
+	//마이페이지
+	//마이페이지 MyApply 조회내역
+	@Override
+	public List<MyApply> myApplyList(String userId) {
+		return sqlSession.selectList(NAME_SPACE + ".myApplyList", userId);
+	}
+
+	//마이페이지 MyApply 조회 상세내역
+	@Override
+	public MyApply getMyApply(int no) {
+		return sqlSession.selectOne(NAME_SPACE+".getMyApply", no);
 	}
 
 }
