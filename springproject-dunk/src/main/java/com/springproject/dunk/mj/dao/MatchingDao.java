@@ -5,6 +5,7 @@ import java.util.List;
 import com.springproject.dunk.mj.domain.Matching;
 import com.springproject.dunk.mj.domain.MatchingApply;
 import com.springproject.dunk.mj.domain.MatchingItem;
+import com.springproject.dunk.mj.domain.MyApply;
 
 public interface MatchingDao {
 	
@@ -18,7 +19,7 @@ public interface MatchingDao {
 	public abstract MatchingItem getMatchingItem(int no, boolean isCount);
 	
 	//매칭최초글쓰기
-	public void insertMatching(MatchingItem matchingItem);
+	public void insertMatching(Matching matching);
 	
 	//매칭삭제
 	public void deleteMatching(int no);
@@ -29,6 +30,7 @@ public interface MatchingDao {
 	//Matching에 해당하는 MatchingApply 수를 반환하는 메서드
 	public abstract int getMatchingApplyCount(int matchingNo);
 
+	//결제
 	//매칭에 지원시 포인트 불러오기
 	public abstract int getPoint(String id);
 
@@ -37,5 +39,12 @@ public interface MatchingDao {
 
 	// 신청하기 누르면 Matching에 해당하는 Pay만큼 user의 point차감
 	public void updateUserPoint(String id, int updatedPoint);
+	
+	//마이페이지
+	//마이페이지 MyApply 조회내역
+	public abstract List<MyApply> myApplyList(String userId);
+	
+	//마이페이지 MyApply 조회 상세내역
+	public abstract MyApply getMyApply(int no);
 
 }

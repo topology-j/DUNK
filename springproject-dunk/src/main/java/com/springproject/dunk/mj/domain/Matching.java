@@ -11,7 +11,7 @@ public class Matching {
 	private Date date;
 	private String time;
 	private int inwon;
-	private int gender;
+	private String gender;
 	private String level;
 	private int pay;
 	private int possibleImpossible;
@@ -21,7 +21,7 @@ public class Matching {
 	
 	public Matching() { }
 	public Matching(int no, int placeNo, String title, Date date, String time, int inwon,
-			int gender, String level, int pay, int possibleImpossible, String information, int readCount, String userId) 
+			String gender, String level, int pay, int possibleImpossible, String information, int readCount, String userId) 
 	{
 		this.no = no;
 		this.placeNo = placeNo;
@@ -79,10 +79,10 @@ public class Matching {
 		this.inwon = inwon;
 	}
 	
-	public int getGender() {
+	public String getGender() {
 		return gender;
 	}
-	public void setGender(int gender) {
+	public void setGender(String gender) {
 		this.gender = gender;
 	}
 	public String getLevel() {
