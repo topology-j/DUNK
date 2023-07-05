@@ -19,9 +19,10 @@
 	<select id="getEvent" resultMap="eventResultMap">
 		select * from event where no=#{no}
 	</select>
-
+	
 	<insert id="insertEvent" parameterType="Event">
 		insert into event (title, title_img, reg_date, content, content_img, read_count, recommend) values(#{title}, #{titleImg}, sysdate(), #{content}, #{contentImg}, 0, 0)
+
 	</insert>
 	
 	<update id="updateEvent" parameterType="Event">
@@ -47,7 +48,8 @@
 			<if test="type=='title'">
 				title like concat('%', #{keyword}, '%')
 			</if>
-		</where>	
+		</where>		
+	</select>	
 	
 	<select id="commentList" resultMap="eventCommentResultMap">
 		select * from event_comment where event_no=#{no} order by no desc
@@ -68,6 +70,7 @@
 	<delete id="deleteEventComment">
 		delete from event_comment where no=#{no}
 	</delete>
+
 
 	<resultMap id="eventResultMap" type="Event">
 		<id property="no" column="no" />

@@ -22,12 +22,14 @@ public class MatchingItem {
 	private String name;	
 	private String zipcode;
 	private String address1;
-	private String address2; 
+	private String address2;
+	
+	private int matchingApplyCount;
 	
 	public MatchingItem() { }
 	public MatchingItem(int no, int placeNo, String title, Date date, String time, int inwon,
 			int gender, String level, int pay, int possibleImpossible, String information, int readCount, String userId,
-			String name, String zipcode, String address1, String address2) 
+			String name, String zipcode, String address1, String address2, int matchingApplyCount) 
 	{
 		this.no = no;
 		this.placeNo = placeNo;
@@ -46,6 +48,7 @@ public class MatchingItem {
 		this.zipcode = zipcode;
 		this.address1 = address1;
 		this.address2 = address2;
+		this.matchingApplyCount = matchingApplyCount;
 	}
 	public int getNo() {
 		return no;
@@ -154,6 +157,14 @@ public class MatchingItem {
 	}
 	public void setAddress2(String address2) {
 		this.address2 = address2;
+	}
+	
+	public int getMatchingApplyCount() {
+		return matchingApplyCount;
+	}
+	public void setMatchingApplyCount(int matchingApplyCount) {
+		this.matchingApplyCount = matchingApplyCount;
+		
 	}
 	
 	

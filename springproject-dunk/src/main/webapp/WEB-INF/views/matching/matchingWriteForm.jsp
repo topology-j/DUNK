@@ -19,10 +19,6 @@
 			    <label for="title" class="form-label">매칭 제 목</label>
 			    <input type="text" class="form-control" name="title"  id="title" >
 	  		</div>
-	  		<!-- <div class="col-8 offset-md-2">
-			    <label for="date" class="form-label">매칭날짜</label>
-			    <input type="date" class="form-control" name="date"  id="date" >
-	  		</div> -->
 	  		<div class="col-4 offset-md-2">
 			    <label for="date" class="form-label">매칭날짜</label>
 			    <input type="date" class="form-control" name="date"  id="date" >
@@ -44,36 +40,49 @@
 			    	<option>21:00</option>
 			    </select>
 	  		</div>
-	  		<!-- <div class="col-8 offset-md-2">
-	  			<label class="form-check">성별</label>
-			    <div class="row">
-			        <input type="radio" class="form-check-input" name="gender" id="gender" value="0">
-			        <label class="form-check-label" for="male">남자</label>
+	  		
+	  		<div class="form-group">
+		  		<div class="col-8 offset-md-2">
+		  			<label class="form-label">성별</label>
+		  			<div class="form-row">
+					    <div class="col">
+					    	<div class="form-check">
+						        <input type="radio" class="form-check-input" name="gender" id="female" value="여자매치">
+						        <label class="form-check-label" for="female">여자매치</label>
+					        </div>
+					    </div>
+					    <div class="col">
+					    	<div class="form-check">
+						        <input type="radio" class="form-check-input" name="gender" id="male" value="남자매치">
+						        <label class="form-check-label" for="male">남자매치</label>
+					        </div>
+					    </div>
+					    <div class="col">
+					    	<div class="form-check">
+						        <input type="radio" class="form-check-input" name="gender" id="all" value="혼성/무관">
+						        <label class="form-check-label" for="all">혼성/무관</label>
+					        </div>
+					    </div>
+				    </div>
+		  		</div>
+	  		</div>
+	  		
+	  		<div class="col-8 offset-md-2">
+			    <label for="level" class="form-label">레벨</label>
+			    <div class="form-check">
+			        <input type="checkbox" class="form-check-input" name="level" id="level1" value="초보">
+			        <label class="form-check-label" for="level1">초보</label>
 			    </div>
-			    <div class="row">
-			        <input type="radio" class="form-check-input" name="gender" id="gender" value="1">
-			        <label class="form-check-label" for="female">여자</label>
+			    <div class="form-check">
+			        <input type="checkbox" class="form-check-input" name="level" id="level2" value="중급">
+			        <label class="form-check-label" for="level2">중급</label>
 			    </div>
-			    <div class="row">
-			        <input type="radio" class="form-check-input" name="gender" id="gender" value="2">
-			        <label class="form-check-label" for="mixed">혼성/무관</label>
+			    <div class="form-check">
+			        <input type="checkbox" class="form-check-input" name="level" id="level3" value="고급">
+			        <label class="form-check-label" for="level3">고급</label>
 			    </div>
 	  		</div>
-	  		<div class="col-8 offset-md-2">
-			    <p>레벨</p>
-			    <div class="form-check">
-			        <input type="checkbox" class="form-check-input" name="level" id="beginner" value="초보">
-			        <label class="form-check-label" for="beginner">초보</label>
-			    </div>
-			    <div class="form-check">
-			        <input type="checkbox" class="form-check-input" name="level" id="intermediate" value="중급">
-			        <label class="form-check-label" for="intermediate">중급</label>
-			    </div>
-			    <div class="form-check">
-			        <input type="checkbox" class="form-check-input" name="level" id="advanced" value="고급">
-			        <label class="form-check-label" for="advanced">고급</label>
-			    </div>
-	  		</div> -->
+	  		
 	  		<div class="col-8 offset-md-2">
 			    <label for="inwon" class="form-label">모집인원</label>
 			    <input class="number" name="inwon" id="inwon" >

@@ -13,7 +13,7 @@
 		</form>
 		<div class="row text-center">
 			<div class="col">
-				<h2 class=" fw-bold fs-3">${ matchingItem.title }</h2>
+				<h2 class="fw-bold fs-3">${ matchingItem.title }</h2>
 			</div>
 		</div>
 		<div class="row my-3">
@@ -21,7 +21,7 @@
 			<div class="col">
 				<!-- 매칭정보 col1-row1 -->
 				<div class="row">				
-						<h2>매치포인트</h2>		
+						<h>매치 포인트</h>		
 						<p>레벨</p>		
 						<p>성별</p>
 						<p>경기규칙</p>
@@ -135,7 +135,9 @@
 					    </div>
 					  </div>
 					</div>
-					</form><!-- 모달 끝  -->	
+						
+					</form><!-- 모달 끝  -->
+					
 			</div>
 		</div>
 	</div>

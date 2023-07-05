@@ -54,6 +54,17 @@ $(document).ready(function() {
         $("#placeCheckForm").attr("method", "post");
         $("#placeCheckForm").submit();
     });
+    
+    
+    
+    // 마이페이지에서 나의장소를 눌렀을때 장소상세보기로이동
+    $("#myPlaceDetailbtn").on("click", function() {
+        $("#userIdCheckForm").attr("enctype", "multipart/form-data");
+        $("#userIdCheckForm").attr("action", "placeDetail");
+        $("#userIdCheckForm").attr("method", "get");
+        $("#userIdCheckForm").submit();
+    });
+    
 
     // 삭제 버튼 눌렀을 때
     $("#placeDetaildeletebtn").on("click", function() {
@@ -147,112 +158,67 @@ $(document).ready(function() {
 	    alert("링크가 복사되었습니다. 필요하신 곳에 붙여넣기 하세요!");
 	 }
 	  
-	//detail화면 상세내용
- 	//1
-	$('#explanationBtn').click(function() {
-		
-		let result = document.getElementById('result');
-		let content= "#content";
-		//let contnent = "#{b1.content}";
-		//var content=$("#b1.content").val();
-		//$("#result").html('<p>Hello, world!33333333</p>');
-		//$("#result").append(content);
-		
-		//result.innerHTML = content;
-		
-		//let div = "<div class='row'>"
-		//				+ "<div class='col-8'>"
-		//				+ 		"<div>"
-		//				+			"<span>💙💙💙💙</span>"
-		//				+ 		"</div>"
-		//				+ "</div>"
-		//				+ "<div class='col-4'>"
-		//				+ 		"<div>"
-		//				+			"<span>💙💙💙💙</span>"
-		//				+		"</div>"
-		//				+ "</div>"
-		//			"</div>"
-			
-		$("#result").append(div);
-		$("#result").append(content);
-		console.log("Explanation button clicked!");
+	
+	$("#explanationBtn").on("click", function() {
+		$("#result").load("placeDescription");
 	});
 	
-	// 다시설명을 눌렀을때 > 설명이 나오는?
-    $("#explanationBtn").on("click", function() {
-        $("#placeCheckForm").attr("action", "placeDetail");
-        $("#placeCheckForm").attr("method", "get");
-        $("#placeCheckForm").submit();
-        console.log("Button clicked!");
-    });
+	$('#refundBtn').click(function() { 		
+		$("#result").load("refundPolicy");	
+	});
 	
 	
+	// 1. 다시설명을 눌렀을때 > 설명이 나오는?
+	/*
+	$("#explanationBtn").on("click", function() {	   
+		$("#result").empty();	   	
+		var content=$("#${b1.content}").val();
+		$("#result").append(content);	
+	});
+	*/
 	
 	//2
+	/*
 	$('#refundBtn').click(function() {
-	$("#result").empty();
-		
-		let div = "<div class='row'>"
-						+ "<div class='col-8'>"
-						+ 		"<div>"
-						+			"<span>💙💙💙💙 </span>"
-						+ 		"</div>"
-						+ "</div>"
-						+ "<div class='col-4'>"
-						+ 		"<div>"
-						+			"<span>💙💙💙💙 </span>"
-						+		"</div>"
-						+ "</div>"
-					"</div>"
-					
-		let refundrule = "<div>"
-			+		                           	"<ul>"
-			+		                           	"<li>💙7일 전 취소 시 100% 환불</li>"
-			+		                           	"<li>💙5일 전 취소 시 80% 환불</li>"
-			+		                           	"<li>💙3일 전 취소 시 50% 환불</li>"
-			+		                           	"<li>💙2일 전 ~ 예약 당일 환불 불가</li>"
-			+		                           	"<li>💙캐시는 규정에 따라 자동 환급되며 잔액 환불 희망 시 나의 충전 내역에서 신청바랍니다.</li>"
-			+		                           	"</ul>"
-			+		                           	"<ul>"
-			+		                           	"<li>💙천재지변</li>"
-			+		                           	"<li>💙당일 천재지변으로 인해 구장 이용이 불가한 경우 100% 환불</li>"
-			+		                           	"<li>💙적용기준: 호우경보, 대설경보, 태풍주의보, 태풍경보</li>"
-			+		                           	"<li>💙우천시 변경 기준</li>"
-			+		                           	"<li>💙시간 당 5mm 이상 시 날짜 변경 가능</li>"
-			+		                           	"<li>💙기준: 당일 이용 2시간 전 기상청 날씨누리 해당 주소지 기준</li>"
-			+		                           	"<li>💙단순 변심에 의한 날짜 변경은 불가</li>"
-			+		                           	"</ul>"
-			                "</div>"		
-			             
-		$("#result").append(div);
-		$("#result").append(refundrule);
-		
-	});
-	
-	//3
-	$("#inquiry").on("click", function() {
-	    // 여기서 ajax 처리 후에 
-	
-		// 태그와 jQuery를 이용해 출력
 		$("#result").empty();
+			
+			let div = "<div class='row'>"
+							+ "<div class='col-8'>"
+							+ 		"<div>"
+							+			"<span>💙💙💙💙 </span>"
+							+ 		"</div>"
+							+ "</div>"
+							+ "<div class='col-4'>"
+							+ 		"<div>"
+							+			"<span>💙💙💙💙 </span>"
+							+		"</div>"
+							+ "</div>"
+						"</div>"
+						
+			let refundrule = "<div>"
+				+		                           	"<ul>"
+				+		                           	"<li>💙7일 전 취소 시 100% 환불</li>"
+				+		                           	"<li>💙5일 전 취소 시 80% 환불</li>"
+				+		                           	"<li>💙3일 전 취소 시 50% 환불</li>"
+				+		                           	"<li>💙2일 전 ~ 예약 당일 환불 불가</li>"
+				+		                           	"<li>💙캐시는 규정에 따라 자동 환급되며 잔액 환불 희망 시 나의 충전 내역에서 신청바랍니다.</li>"
+				+		                           	"</ul>"
+				+		                           	"<ul>"
+				+		                           	"<li>💙천재지변</li>"
+				+		                           	"<li>💙당일 천재지변으로 인해 구장 이용이 불가한 경우 100% 환불</li>"
+				+		                           	"<li>💙적용기준: 호우경보, 대설경보, 태풍주의보, 태풍경보</li>"
+				+		                           	"<li>💙우천시 변경 기준</li>"
+				+		                           	"<li>💙시간 당 5mm 이상 시 날짜 변경 가능</li>"
+				+		                           	"<li>💙기준: 당일 이용 2시간 전 기상청 날씨누리 해당 주소지 기준</li>"
+				+		                           	"<li>💙단순 변심에 의한 날짜 변경은 불가</li>"
+				+		                           	"</ul>"
+				                "</div>"		
+				             
+			$("#result").append(div);
+			$("#result").append(refundrule);
 		
-		let div = "<div class='row'>"
-						+ "<div class='col-8'>"
-						+ 		"<div>"
-						+			"<span> 하하하  </span>"
-						+ 		"</div>"
-						+ "</div>"
-						+ "<div class='col-4'>"
-						+ 		"<div>"
-						+			"<span> 호호호  </span>"
-						+		"</div>"
-						+ "</div>"
-					"</div>"
-		
-		$("#result").append(div);
-	
 	});
-	
+	*/
 	
 	
 	

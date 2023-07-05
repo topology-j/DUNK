@@ -69,7 +69,7 @@
 							<c:if test="${not empty matchingItemList }">
 								<c:forEach var="m" items="${matchingItemList}">
 								
-									<ul class="list-group list-group-flush">
+									<ul class="list-group list-group-flush pb-3">
 										<a href="matchingDetail?no=${m.no}&pageNum=${currentPage}&selectedDate=${selectedDate}" class="text-decoration-none">
 											<li class="list-group-item">
 											
@@ -79,17 +79,36 @@
 													</div>
 													<div class="col-6">
 														<div class="row">
-															<h3>${m.title}</h3>
-														</div>	
-														<div class="row">
-															<p>${m.inwon}/${m.date}</p>
-															<p>${ m.name}</p>
+															<div class="col">
+																<div class="row">
+																	<h3>${m.title}</h3>
+																</div>	
+																<div class="row">
+																	<p>${m.date}</p>
+																	<p>${ m.name}</p>
+																</div>
+															</div>
+															<div class="col-4 d-flex align-items-center justify-content-center">
+																<h5>${m.matchingApplyCount}/${m.inwon}</h5>
+															</div>
 														</div>
 													</div>
 													<div class="col-4">
-														<div class="bg-danger text-center">
+														<c:if test="${m.inwon > m.matchingApplyCount and m.inwon - m.matchingApplyCount gt 1 }">
+														<div class="text-center rounded-pill p-2" style="background-color: #fa9300">
 															<p class="text-white">신청가능</p>
 														</div>
+														</c:if>
+														<c:if test="${m.inwon > m.matchingApplyCount and m.inwon - m.matchingApplyCount eq 1 }">
+															<div class="bg-danger text-center rounded-pill p-2">
+																<p class="text-white">마감임박</p>
+															</div>															
+														</c:if>
+														<c:if test="${m.inwon <= m.matchingApplyCount}">
+														<div class="text-center rounded-pill p-2" style="background-color: #B9B9B9">
+															<p class="text-white">모집마감</p>															
+														</div>
+														</c:if>
 													</div>
 												</div>	
 											</li>
@@ -111,8 +130,8 @@
 <c:if test="${not empty matchingItemList}">
     <div class="row">
         <div class="col">
-            <nav aria-label="Page navigation">
-                <ul class="pagination justify-content-center">
+            <nav aria-label="Page navigation" >
+                <ul class="pagination justify-content-center" style="color:#fa9300;">
                     <c:if test="${ startPage > pageGroup }">
                         <li class="page-item">
                             <a class="page-link"

@@ -75,7 +75,7 @@
 			<div class="col-9">				
 				<div class="row">
 					<div class="col-11 offset-1 border rounded-5 border-2 border-warning">
-						
+						<!-- 내용입력하면 됌 -->
 					</div>
 				</div>				
 			</div>

@@ -11,6 +11,7 @@ import com.springproject.dunk.mj.dao.MatchingDao;
 import com.springproject.dunk.mj.domain.Matching;
 import com.springproject.dunk.mj.domain.MatchingApply;
 import com.springproject.dunk.mj.domain.MatchingItem;
+import com.springproject.dunk.mj.domain.MyApply;
 
 @Service
 public class MatchingServiceImpl implements MatchingService {
@@ -74,8 +75,8 @@ public class MatchingServiceImpl implements MatchingService {
 
 	//매칭최초글쓰기
 	@Override
-	public void insertMatching(MatchingItem matchingItem) {
-		matchingDao.insertMatching(matchingItem);
+	public void insertMatching(Matching matching) {
+		matchingDao.insertMatching(matching);
 		
 	}
 
@@ -96,7 +97,8 @@ public class MatchingServiceImpl implements MatchingService {
 	// 매칭에 지원한 MatchingApply 수를 반환하는 메서드
 	@Override
 	public int getMatchingApplyCount(int matchingNo) {
-		return matchingDao.getMatchingApplyCount(matchingNo);
+		int count = matchingDao.getMatchingApplyCount(matchingNo);
+	    return count;
 	}
 
 	// 매칭 지원시 포인트 불러오기
@@ -115,6 +117,19 @@ public class MatchingServiceImpl implements MatchingService {
 	public void updateUserPoint(String id, int updatedPoint) {
 		matchingDao.updateUserPoint(id, updatedPoint);
 
+	}
+
+	//마이페이지
+	//마이페이지 MyApply 조회내역
+	@Override
+	public List<MyApply> myApplyList(String userId) {
+		return matchingDao.myApplyList(userId);
+	}
+
+	//마이페이지 MyApply 조회 상세내역
+	@Override
+	public MyApply getMyApply(int no) {
+		return matchingDao.getMyApply(no);
 	}
 
 }
