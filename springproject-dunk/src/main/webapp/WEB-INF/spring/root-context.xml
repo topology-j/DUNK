@@ -35,6 +35,8 @@
 				<value>com.springproject.dunk.mj.domain.MatchingItem</value>
 				<value>com.springproject.dunk.hy.domain.TeamMatchUserEval</value>
 				<value>com.springproject.dunk.mj.domain.MyApply</value>
+        <value>com.springproject.dunk.ms.domain.UserBookList</value>
+
 			</list>
 		</property>
 
