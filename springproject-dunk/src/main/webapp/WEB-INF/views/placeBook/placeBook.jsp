@@ -49,28 +49,6 @@
 				</div>
 			</div>
 			
-			
-<!-- 			<div class="text-center mx-auto" id="">			 -->
-<!-- 				<div class="">			 -->
-<%-- 					<h3 class="mt-5"><b id="placeName" name="placeName">${b1.name}</b></h3> --%>
-<!-- 					<h5 class="mt-3"> -->
-<!-- 						<b> -->
-<%-- 							<span id="placeAddress1" name="placeAddress1">(${b1.address1}</span>			 --%>
-<%-- 							<span id="placeAddress2" name="placeAddress2">${b1.address2})</span> --%>
-<!-- 						</b> -->
-<!-- 					</h5>	 -->
-<!-- 				</div>		 -->
-<%-- 				<div class="mt-3" id="dates" name="dates"><b>예약 날짜</b> : <%= selectedDate %></div> --%>
-<%-- 				<div class="mt-3" id="timeBook" name="timeBook"><b>예약 시간</b> : <%= selectedTime %></div> --%>
-<%-- 				<div class="mt-3" id="placePay" name="placePay"><b>총 금액</b> : ${b1.pay}원</div> --%>
-<%-- 				<div class="mt-3" id="currentPoint" ><b>보유 포인트</b> : ${point}원</div> --%>
-<%-- 				<div class="mt-3" id=""><b>예약 후 포인트</b> : ${point - b1.pay}원</div> --%>
-<!-- 				<div class="form-inline col-sm-12"> -->
-<%-- 					<label class="control-label col-sm-12 mt-3" id="userNick" name="userNick"><b>신청자</b>&nbsp;:&nbsp;${sessionScope.nick}</label> --%>
-<!-- 				</div> -->
-<!-- 			</div>	 -->
-			
-			
 		<!-- 모달 창 이동 버튼 -->
 		<div class="col-sm-12 text-center mx-auto">
 			<button id="payModalOpen" class="btn btn-primary mt-4 fw-bold">예약하기</button>
