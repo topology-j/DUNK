@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="row mt-5">
-	<div class="col-6 offset-3 border rounded-5 border-2 border-warning">
+	<div class="col-6 offset-3 border rounded-5 border-2" style="--bs-border-color: #fa9300">
 		<div class="row mx-3 my-3">
 			<div class="col">
 				<div class="row fw-bold fs-4">
@@ -16,7 +16,7 @@
 							<div class="bg-secondary bg-opacity-10 rounded-start rounded-end">
 								<div class="row mx-3 py-3">
 									<div class="col">										
-										<div class="row border-bottom my-2 px-5">
+										<div class="row border-bottom my-2 px-5" style="--bs-border-color: #E1E1E1">
 											<div class="col-6 fw-bold">
 												팀장
 											</div>
@@ -30,7 +30,7 @@
 												</c:if>
 											</div>											
 										</div>
-										<div class="row border-bottom my-2 px-5">
+										<div class="row border-bottom my-2 px-5" style="--bs-border-color: #E1E1E1">
 											<div class="col-6 fw-bold">
 												정원
 											</div>
@@ -38,7 +38,7 @@
 												${t.peopleNum}명
 											</div>
 										</div>	
-										<div class="row border-bottom my-2 px-5">
+										<div class="row border-bottom my-2 px-5" style="--bs-border-color: #E1E1E1">
 											<div class="col-6 fw-bold">
 												경기수
 											</div>
@@ -46,15 +46,15 @@
 												${t.matchNum}
 											</div>
 										</div>
-										<div class="row border-bottom my-2 px-5">
-											<div class="col-6 fw-bold">
+										<div class="row border-bottom my-2 px-5" style="--bs-border-color: #E1E1E1">
+											<div class="col-2 fw-bold">
 												팀소개
 											</div>
-											<div class="col-6 text-end">
+											<div class="col-10 text-end">
 												<pre>${t.explanation}</pre>
 											</div>
 										</div>			
-										<div class="row border-bottom my-2 px-5">
+										<div class="row border-bottom my-2 px-5" style="--bs-border-color: #E1E1E1">
 											<div class="col-6 fw-bold">
 												팀원 프로필
 											</div>
@@ -80,7 +80,7 @@
 										<c:if test="${sessionScope.id==t.leaderId}">	
 										<form action="addTeamUser" method="post">
 											<input type="hidden" name="no" value="${t.no}">
-											<div class="row border-bottom my-2 py-3 px-5">											
+											<div class="row border-bottom my-2 py-3 px-5" style="--bs-border-color: #E1E1E1">											
 												<div class="col-4 fw-bold">
 													팀원 추가
 												</div>

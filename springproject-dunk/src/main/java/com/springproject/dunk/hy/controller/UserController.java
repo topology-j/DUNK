@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.springproject.dunk.hy.domain.Message;
 import com.springproject.dunk.hy.domain.Profile;
 import com.springproject.dunk.hy.domain.Team;
+import com.springproject.dunk.hy.domain.TeamUser;
 import com.springproject.dunk.hy.domain.User;
 import com.springproject.dunk.hy.service.MessageService;
 import com.springproject.dunk.hy.service.TeamService;
@@ -78,7 +79,7 @@ public class UserController {
 		session.setAttribute("nick", user.getNickname());
 		session.setAttribute("grade", user.getGrade());
 		
-		return "redirect:eventList";	
+		return "redirect:matchingList";	
 		
 	}
 	
@@ -333,11 +334,27 @@ public class UserController {
 		
 		service.updateUser(u);
 		
-		Team t=tService.getTeamById(u.getId());
+		Team t=tService.getTeamById(u.getId());		
 		
-		tService.changeLeader(t.getNo(), u.getId(), u.getNickname());
+		if(t !=null) {
+			
+			tService.changeLeader(t.getNo(), u.getId(), u.getNickname());
+			
+			tService.updateTeamUser(t.getNo(), u.getId(), u.getNickname());
+			
+		}		
 		
-		tService.updateTeamUser(t.getNo(), u.getId(), u.getNickname());
+		List<TeamUser> tuList=tService.getTeamUserList(u.getId());
+		
+		if(tuList !=null) {
+			
+			for(int i=0; i<tuList.size(); i++) {
+				
+				tService.updateTeamUser(tuList.get(i).getTeamNo(), u.getId(), u.getNickname());
+				
+			}
+			
+		}
 		
 		return "redirect:mypage?id="+u.getId();
 	}	

@@ -4,7 +4,7 @@
 <div class="row mt-5">
 	<div class="col-10 offset-1">
 		<div class="row">
-			<div class="col-3 border rounded-5 border-2 border-warning">
+			<div class="col-3 border rounded-5 border-2" style="--bs-border-color: #fa9300">
 				<div class="row text-center my-5">
 					<div class="col">
 						<img src="resources/userimage/smile.png" style="width:200px;height:200px">
@@ -74,7 +74,7 @@
 			</div>
 			<div class="col-9">				
 				<div class="row">
-					<div class="col-11 offset-1 border rounded-5 border-2 border-warning">
+					<div class="col-11 offset-1 border rounded-5 border-2" style="--bs-border-color: #fa9300">
 						
 					</div>
 				</div>				

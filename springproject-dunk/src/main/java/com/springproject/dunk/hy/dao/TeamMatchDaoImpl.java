@@ -73,8 +73,8 @@ public class TeamMatchDaoImpl implements TeamMatchDao {
 	@Override
 	public List<TeamMatch> teamMatchList() {		
 		return sqlSession.selectList(NAME_SPACE+".teamMatchList");
-	}
-
+	}	
+	
 	@Override
 	public TeamMatch getTeamMatch(int no) {		
 		return sqlSession.selectOne(NAME_SPACE+".getTeamMatch", no);
@@ -196,6 +196,14 @@ public class TeamMatchDaoImpl implements TeamMatchDao {
 		
 		sqlSession.delete(NAME_SPACE+".deleteTeamMatchUserEval", params);		
 	}
+
+	@Override
+	public void deleteTeamMatch(int tmNo) {
+		sqlSession.delete(NAME_SPACE+".deleteTeamMatch", tmNo);		
+	}
+
+	
+	
 
 
 		

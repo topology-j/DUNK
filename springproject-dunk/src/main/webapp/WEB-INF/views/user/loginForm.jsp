@@ -24,7 +24,7 @@
 			<div class="row">
 				<div class="col">
 					<div class="d-grid gap-2">
-						<input type="submit" class="btn btn-warning my-2" value="로그인" id="btnLogin">
+						<input type="submit" class="btn my-2" value="로그인" id="btnLogin" style="--bs-btn-bg: #fa9300; --bs-btn-hover-bg: #fa8000;">						
 					</div>
 				</div>			
 			</div>

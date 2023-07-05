@@ -31,5 +31,6 @@ public interface TeamDao {
 	
 	public void updateTeamUser(int no, String id, String nick);	
 	
+	public List<TeamUser> getTeamUserList(String id);	
 	
 }

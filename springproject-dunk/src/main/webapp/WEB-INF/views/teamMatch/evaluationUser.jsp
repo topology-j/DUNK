@@ -4,7 +4,7 @@
 
 <div class="row my-5">
 	<div class="col-6 offset-2">
-		<div class="row border rounded-5 border-2 border-warning">
+		<div class="row border rounded-5 border-2" style="--bs-border-color: #fa9300">
 			<div class="col">
 				<div class="row mt-4 mb-5 px-3">
 					<div class="col">
@@ -17,7 +17,7 @@
 					<input type="hidden" name="bookNo" value="${bookNo}">
 					<input type="hidden" name="teamName" value="${teamName}">
 					<input type="hidden" name="partnerTeamName" value="${partnerTeamName}">				
-				<div class="row border-bottom mx-3 py-2">
+				<div class="row border-bottom mx-3 py-2" style="--bs-border-color: #E1E1E1">
 					<div class="col-6">
 						실력
 					</div>
@@ -30,7 +30,7 @@
 						<label class="btn btn-outline-danger" for="option3"><i class="bi bi-emoji-frown fs-5"></i></label>					
 					</div>
 				</div>
-				<div class="row border-bottom mx-3 py-2">
+				<div class="row border-bottom mx-3 py-2" style="--bs-border-color: #E1E1E1">
 					<div class="col-6">
 						매너
 					</div>
@@ -43,7 +43,7 @@
 						<label class="btn btn-outline-danger" for="option6"><i class="bi bi-emoji-frown fs-5"></i></label>					
 					</div>
 				</div>
-				<div class="row border-bottom mx-3 py-2">
+				<div class="row border-bottom mx-3 py-2" style="--bs-border-color: #E1E1E1">
 					<div class="col-6">
 						경기 준비
 					</div>
@@ -56,7 +56,7 @@
 						<label class="btn btn-outline-danger" for="option9"><i class="bi bi-emoji-frown fs-5"></i></label>					
 					</div>
 				</div>
-				<div class="row border-bottom mx-3 py-2">
+				<div class="row border-bottom mx-3 py-2" style="--bs-border-color: #E1E1E1">
 					<div class="col-6">
 						시간 준수
 					</div>
@@ -69,7 +69,7 @@
 						<label class="btn btn-outline-danger" for="option12"><i class="bi bi-emoji-frown fs-5"></i></label>					
 					</div>
 				</div>
-				<div class="row mt-5 mb-3 text-center">
+				<div class="row mt-5 mb-3 text-center" style="--bs-border-color: #E1E1E1">
 					<div class="col">
 						<input type="submit" class="btn btn-dark" value="평가완료">
 					</div>

@@ -5,7 +5,7 @@
 
 <div class="row my-5">
 	<div class="col-8 offset-2">
-		<div class="row border rounded-5 border-2 border-warning">
+		<div class="row border rounded-5 border-2" style="--bs-border-color: #fa9300">
 			<div class="col">
 				<c:if test="${empty uList}">
 					<div class="text-center my-5">팀 경기 일정이 없습니다.</div>
@@ -17,7 +17,7 @@
 						</div>
 					</div>
 					<c:forEach var="u" items="${uList}">
-						<div class="row border-bottom my-4 mx-3">
+						<div class="row border-bottom my-4 mx-3" style="--bs-border-color: #E1E1E1">
 							<div class="col-8">
 								<div class="row">
 									<div class="col">

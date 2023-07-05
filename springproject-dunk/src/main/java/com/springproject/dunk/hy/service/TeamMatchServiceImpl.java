@@ -14,7 +14,7 @@ import com.springproject.dunk.hy.domain.User;
 
 @Service
 public class TeamMatchServiceImpl implements TeamMatchService {
-
+	
 	private TeamMatchDao dao;
 	private UserDao uDao;
 
@@ -56,8 +56,8 @@ public class TeamMatchServiceImpl implements TeamMatchService {
 	}
 
 	@Override
-	public List<TeamMatch> teamMatchList() {		
-		return dao.teamMatchList();
+	public List<TeamMatch> teamMatchList() {					
+		return 	dao.teamMatchList();
 	}
 
 	@Override
@@ -166,7 +166,10 @@ public class TeamMatchServiceImpl implements TeamMatchService {
 		dao.deleteTeamMatchUserEval(bookNo, userId);
 	}
 
+	@Override
+	public void deleteTeamMatch(int tmNo) {
+		dao.deleteTeamMatch(tmNo);		
+	}
+
 		
-	
-	
 }

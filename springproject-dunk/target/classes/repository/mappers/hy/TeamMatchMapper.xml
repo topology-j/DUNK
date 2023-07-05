@@ -10,6 +10,10 @@
 			#{bookNo}, #{teamNo1}, #{date}, #{time}, #{gender}, #{level}, #{pay}, #{process}, 
 			#{information}, 0)
 	</insert>
+	
+	<delete id="deleteTeamMatch" parameterType="int">
+		delete from team_match where no=#{tmNo}
+	</delete>
 
 	<insert id="addTeamMatchUser" parameterType="hashmap">
 		insert into team_match_user (book_no, team_no, place_name, dates, time_book, team_name, user_id, user_nick, is_delete) 
@@ -26,8 +30,8 @@
 	</update>	
 	
 	<select id="teamMatchList" resultMap="teamMatchResultMap">
-		select * from team_match
-	</select>
+		select * from team_match order by no desc
+	</select>	
 	
 	<select id="getTeamMatch" resultMap="teamMatchResultMap">
 		select * from team_match where no=#{no}

@@ -86,5 +86,12 @@ public class TeamServiceImpl implements TeamService {
 		dao.updateTeamUser(no, id, nick);		
 	}
 
+	@Override
+	public List<TeamUser> getTeamUserList(String id) {		
+		return dao.getTeamUserList(id);
+	}
+
+	
+
 	
 }

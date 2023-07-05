@@ -11,6 +11,8 @@ public interface TeamMatchService {
 
 	public void addTeamMatch(TeamMatch tm);
 	
+	public void deleteTeamMatch(int tmNo);
+	
 	public void addTeamMatchUser(int bookNo, int teamNo, String placeName, Timestamp dates, String timeBook, String teamName, String[] uList);
 	
 	public void addTeamMatchUserNick(int bookNo, int teamNo, String[] uList);

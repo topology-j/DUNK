@@ -33,8 +33,6 @@ import com.springproject.dunk.hy.service.TeamRecruitmentService;
 import com.springproject.dunk.hy.service.TeamService;
 import com.springproject.dunk.hy.service.UserService;
 
-import sun.security.krb5.internal.TGSRep;
-
 @Controller
 public class TeamController {
 
@@ -71,9 +69,9 @@ public class TeamController {
 
 		if (team.getName() != null) {
 			service.addTeam(team);
-		}
-
-		List<Team> tList = service.teamList(id);
+		}		
+		
+		List<Team> tList = service.teamList(id);		
 		model.addAttribute("tList", tList);
 
 		return "team/myteamList";
@@ -305,7 +303,7 @@ public class TeamController {
 
 		List<PlaceBook> pList = pService.placeBookList(id);
 		List<Team> tList = service.teamList(id);
-		
+				
 		TeamMatch tm=tmService.getTeamMatchById(id);
 		
 		if(tm !=null) {
@@ -395,7 +393,7 @@ public class TeamController {
 	@RequestMapping("/teamMatchList")
 	public String teamMatchList(Model model) {
 
-		List<TeamMatch> tList = tmService.teamMatchList();
+		List<TeamMatch> tList= tmService.teamMatchList();
 
 		model.addAttribute("tList", tList);
 
@@ -425,6 +423,14 @@ public class TeamController {
 		model.addAttribute("tuList", tuList);
 
 		return "teamMatch/teamMatchDetail";
+	}
+	
+	@RequestMapping("/deleteTeamMatch")
+	public String deleteTeamMatch(int tmNo) {
+		
+		tmService.deleteTeamMatch(tmNo);
+		
+		return "redirect:teamMatchList";
 	}
 
 	@RequestMapping("/writeMessageFormtm")

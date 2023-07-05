@@ -4,7 +4,7 @@
 
 <div class="row my-5">
 	<div class="col-8 offset-2">
-		<div class="row border rounded-5 border-2 border-warning">
+		<div class="row border rounded-5 border-2" style="--bs-border-color: #fa9300">
 			<div class="col">
 				<div class="row my-3">
 					<div class="col-6 mx-3">
@@ -16,7 +16,7 @@
 									</div>
 								</div>
 								<c:forEach var="u" items="${uList1}">
-									<div class="row my-3 border-bottom py-2 px-2">
+									<div class="row my-3 border-bottom py-2 px-2" style="--bs-border-color: #E1E1E1">
 										<div class="col-9">
 											${u.userNick}
 										</div>										
@@ -51,7 +51,7 @@
 									</div>
 								</div>
 									<c:forEach var="u" items="${uList2}">
-									<div class="row my-3 border-bottom py-2 px-2">
+									<div class="row my-3 border-bottom py-2 px-2" style="--bs-border-color: #E1E1E1">
 										<div class="col-8">
 											${u.userNick}
 										</div>

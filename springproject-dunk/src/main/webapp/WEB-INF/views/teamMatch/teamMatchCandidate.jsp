@@ -5,7 +5,7 @@
 
 
 <div class="row mt-5">
-	<div class="col-8 offset-2 border rounded-5 border-2 border-warning">
+	<div class="col-8 offset-2 border rounded-5 border-2" style="--bs-border-color: #fa9300">
 		<c:if test="${empty pList}">
 			<div class="row my-5">
 				<div class="col">
@@ -25,7 +25,7 @@
 				<div class="row my-3">
 					<div class="col">
 						<c:forEach var="p" items="${pList}">
-							<div class="row border-bottom my-3">
+							<div class="row border-bottom my-3 py-2" style="--bs-border-color: #E1E1E1">
 								<div class="col-2">
 									<input type="radio" class="btn-check" name="bookNo" id="bookNo${p.no}" autocomplete="off" value="${p.no}">
 									<label class="btn btn-dark" for="bookNo${p.no}" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">선택</label>									
@@ -61,7 +61,7 @@
 						</c:if>
 						<c:if test="${not empty tList}">
 							<c:forEach var="t" items="${tList}">
-								<div class="row border-bottom my-3">
+								<div class="row border-bottom my-3 py-2" style="--bs-border-color: #E1E1E1">
 									<div class="col-3">
 										<input type="radio" class="btn-check" name="teamNo" id="teamNo${t.no}" autocomplete="off" value="${t.no}">
 										<label class="btn btn-success" for="teamNo${t.no}" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">선택</label>									
