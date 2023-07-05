@@ -3,7 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <script src="resources/js/formcheck-ms.js"></script>
+<link rel="stylesheet" href="resources/css/place.css">   
 <script src=
 "https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <meta charset="UTF-8">
@@ -35,7 +37,7 @@
   		<div class="col-4 ">
 		    <label for="zipcode" class="form-label">우편번호</label>
 		    <input type="text" class="form-control" name="zipcode"  id="zipcode" >
-		    <input type="button" class="btn btn-warning" id="btnZipcode"value="우편번호 찾기">
+		    <input type="button" class="btn btn-warning" id="btnZipcode"value="우편번호 찾기"  style="padding: 10px; margin: 10px;" >
   		</div>
   		<div class="col-8 offset-md-2">
 		    <label for="address1" class="form-label">주소</label>
@@ -49,14 +51,22 @@
 		    <label for="area" class="form-label">지역</label>
 		    <select name="area" id="area" >
 			    <option value="">선택</option>
+		      	<option value="Gangseo">강서구</option>
+			    <option value="Gangnam">강남구</option>
+			    <option value="Gwanak">관악구</option>
+			    <option value="Gwangjin">광진구</option>
+			    <option value="Nowon">노원구</option>
+			    <option value="Dobong">도봉구</option>
 			    <option value="Dongdaemun">동대문구</option>
+			    <option value="Mapo">마포구</option>
 			    <option value="Yangcheon">양천구</option>
+			    <option value="Jungnang">중랑구</option>
 			</select>
   		</div>
   		<!--  이미지 양식 -->
 		<div class="col-8 offset-md-2">
 			<div>
-		    	<img id="preview" src="" alt="미리보기" style="max-width: 100px; margin-top: 10px;">
+		    	<img id="preview" src="" alt="미리보기" style="max-width: 500px; margin-top: 10px;">
 		    </div><br>
 		    <label for="image1" class="form-label">image1</label>
 		    <input type="file" class="form-control" name="images"  id="image1" onchange="previewImage(this)">

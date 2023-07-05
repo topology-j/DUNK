@@ -8,6 +8,7 @@ import com.google.gson.JsonParser;
 import com.springproject.dunk.ms.dao.PlaceDao;
 import com.springproject.dunk.ms.domain.Board;
 import com.springproject.dunk.ms.domain.Reply;
+import com.springproject.dunk.hy.domain.User;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -54,36 +55,37 @@ public class PlaceServiceImpl implements PlaceService {
 			if(listCount>0) {
 				List<Board> placeList = dao.placeList(startRow, PAGE_SIZE, keyword, area, orderBy);
 	
-			int pageCount = 
-					listCount / PAGE_SIZE + (listCount % PAGE_SIZE == 0 ? 0 : 1);
-			
-			int startPage = (currentPage / PAGE_GROUP) * PAGE_GROUP + 1
-					- (currentPage % PAGE_GROUP == 0 ? PAGE_GROUP : 0);
-			
-			int endPage = startPage + PAGE_GROUP -1;
+				int pageCount = 
+						listCount / PAGE_SIZE + (listCount % PAGE_SIZE == 0 ? 0 : 1);
 				
-			if(endPage > pageCount) {
-				endPage = pageCount;
-			}
-			
-			Map<String, Object> modelMap = new HashMap<String, Object>();
-			modelMap.put("placeList", placeList);
-			modelMap.put("pageCount", pageCount);
-			modelMap.put("startPage", startPage);
-			modelMap.put("endPage", endPage);
-			modelMap.put("currentPage", currentPage);
-			modelMap.put("listCount", listCount);
-			modelMap.put("pageGroup", PAGE_GROUP);
-			modelMap.put("searchOption", searchOption);
-			
-			if(searchOption) { /*검색 요청이면 type과 keyword를 모델에 저장한다.*/				
-				modelMap.put("keyword", keyword);				
-			}
-			
-			modelMap.put("area",  area);
-			modelMap.put("orderBy", orderBy);
-			return modelMap;			
-	
+				int startPage = (currentPage / PAGE_GROUP) * PAGE_GROUP + 1
+						- (currentPage % PAGE_GROUP == 0 ? PAGE_GROUP : 0);
+				
+				int endPage = startPage + PAGE_GROUP -1;
+					
+				if(endPage > pageCount) {
+					endPage = pageCount;
+				}
+				
+				Map<String, Object> modelMap = new HashMap<String, Object>();
+				modelMap.put("placeList", placeList);
+				modelMap.put("pageCount", pageCount);
+				modelMap.put("startPage", startPage);
+				modelMap.put("endPage", endPage);
+				modelMap.put("currentPage", currentPage);
+				modelMap.put("listCount", listCount);
+				modelMap.put("pageGroup", PAGE_GROUP);
+				modelMap.put("searchOption", searchOption);
+				
+				if(searchOption) { /*검색 요청이면 type과 keyword를 모델에 저장한다.*/				
+					modelMap.put("keyword", keyword);				
+				}
+				
+				modelMap.put("area",  area);
+				modelMap.put("orderBy", orderBy);
+
+				return modelMap;			
+		
 		} else {
 			
 			return null;
