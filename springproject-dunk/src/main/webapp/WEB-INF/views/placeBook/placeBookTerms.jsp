@@ -18,7 +18,7 @@
 				<!-- 개인 정보 
 				약관 -->
 				<div class="mt-3">				
-				<textarea id="" disabled="" cols="50" rows="10">대관 서비스 개인정보 제3자 제공 방침
+				<textarea style="resize:none" cols="50" rows="10">대관 서비스 개인정보 제3자 제공 방침
 
 1. 수집 항목 : 실명, 휴대전화번호, 이메일, 주소, 생년월일, ID 등
 2. 수집 목적 : 시설 대관 관리
@@ -36,7 +36,7 @@
 				
 				<!-- 시설 이용 약관 -->
 				<div class="mt-3">				
-				<textarea id="" disabled="" cols="50" rows="10">
+				<textarea style="resize:none" cols="50" rows="10">
 시설 이용 약관
  
 1. 건물 내부 및 근처에서 절대 금연입니다.
