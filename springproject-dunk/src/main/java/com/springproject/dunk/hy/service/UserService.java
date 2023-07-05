@@ -45,4 +45,8 @@ public interface UserService {
 	public List<String> getManner(String id);
 	
 	public User getUserByNick(String nick);
+	
+	public void addMannerCheck(MannerCheck mc);
+	
+	public void updateMannerCheck(MannerCheck mc);
 }

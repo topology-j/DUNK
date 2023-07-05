@@ -3,6 +3,7 @@ package com.springproject.dunk.mj.controller;
 import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +20,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.springproject.dunk.mj.domain.Matching;
 import com.springproject.dunk.mj.domain.MatchingApply;
+import com.springproject.dunk.mj.domain.MatchingItem;
+import com.springproject.dunk.mj.domain.MyApply;
 import com.springproject.dunk.mj.service.MatchingService;
 
 @Controller
@@ -35,7 +38,7 @@ public class MatchingController {
 	
 	//매칭리스트
 	@RequestMapping(value = "/matchingList", method = RequestMethod.GET)
-	public String matchingList(Model model,
+	public String matchingList(Model model, 
        @RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
        @RequestParam(value = "selectedDate", required = false) String selectedDate)
 	{
@@ -49,10 +52,13 @@ public class MatchingController {
 	        selectedDate = todayDate;
 	    }
 	    
-	    Map<String, Object> modelMap = matchingService.matchingList(pageNum, selectedDate);
-	    
-	    model.addAllAttributes(modelMap);
-	    return "matching/matchingList";
+		Map<String, Object> modelMap = matchingService.matchingItemList(pageNum, selectedDate);
+
+		model.addAllAttributes(modelMap);
+
+		model.addAttribute("selectedDate", selectedDate);
+
+		return "matching/matchingList";
 	}
 
 
@@ -61,27 +67,26 @@ public class MatchingController {
 	//매칭디테일
 	@RequestMapping("/matchingDetail")
 	public String matchingDetail(Model model, int no, HttpSession session,
-			@RequestParam(value = "pageNum", required = false, defaultValue = "1")int pageNum) 
+			@RequestParam(value = "pageNum", required = false, defaultValue = "1")int pageNum, String  selectedDate) 
 	throws Exception
 	{
-		
-		// 회원의 기본 정보는 세션에 있으니까.. - 뷰에서 세션에 있는 걸 찍으면 되지만
-		// 포인트는 어떻게? 없으니가.. 뷰로 가기전에 가져자야지? 
-		// 여기서 세션에 있는 아이디를 가져와서  - 아이디에 해당하는 포인트를 조회하고 - 이걸 모델로 뷰로 보내 출력하면 되지 않을까?
+		//세션에있는 아이디 조회
 		String id = (String) session.getAttribute("id");
-		// 포인트 조회 메서드 - > Service - dao - mapper
-		//int point = matchingService.getPoint(id);
 		
+		//회원가입이 아니어도 디테일 볼수있게 if 처리
 		if(id != null) {
 			int point = matchingService.getPoint(id);
 			model.addAttribute("point", point);
 		}
-		// 모델에 담기
-		//model.addAttribute("point", point);
 		
-		Matching matching = matchingService.getMatching(no, true);
-		model.addAttribute("matching", matching);
+		//매칭에 지원한 MatchingApply 수
+		int matchingApplyCount = matchingService.getMatchingApplyCount(no);
+	    model.addAttribute("matchingApplyCount", matchingApplyCount);
+	    
+		MatchingItem matchingItem = matchingService.getMatchingItem(no, true);
+		model.addAttribute("matchingItem", matchingItem);
 		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("selectedDate", selectedDate);
 		
 		return "matching/matchingDetail";
 	}
@@ -110,23 +115,59 @@ public class MatchingController {
 	
 	//매칭신청 matchingApply
 	@RequestMapping(value="/matchingApply", method=RequestMethod.POST)
-	public String insertMatchingApply(HttpServletRequest request,
+	public String insertMatchingApply(HttpServletRequest request, HttpSession session,
 			MatchingApply matchingApply)throws IOException
-	{
-		
+	{	
 		//세션에서 아이디 가져옴
-		//String userId = "";
+		String id = (String) session.getAttribute("id");
 		
-		//아이디에 해당하는 예치금 읽어와서 참가비보다 적으면 알림 진행종료
+		//사용자 포인트 내역 가져오기
+		int point = matchingService.getPoint(id);
+		
+		// Matching 객체에서 매칭 참가비 가져오기
+		int matchingPay = matchingService.getMatchingPay(matchingApply.getMatchingNo());
+		
+		// 사용자의 포인트에서 매칭 참가비 차감
+		int updatedPoint = point - matchingPay;
 
-		//예치금이 참가비보다 많으면 팀매치지원 테이블에 추가
-		
-		//마이페이지 캘린더에서 예약내역이 보이게 한다.
-		
+		// 유저 포인트 업데이트
+		matchingService.updateUserPoint(id, updatedPoint);
+
+		// 매칭 신청 처리
 		matchingService.insertMatchingApply(matchingApply);
-		
-		
+
 		return "redirect:/matchingList";
+	}
+	
+	//마이페이지
+	//마이페이지 MyApply 조회내역
+	@RequestMapping(value = "/myCalender", method=RequestMethod.GET)
+	public String myApplyList(Model model, HttpSession session)
+	{
+		//세션에있는 아이디 조회
+		String id = (String) session.getAttribute("id");
+		
+		if(id == null || id.trim().equals("")) {
+	        return "redirect:/login"; // 로그인 페이지로 이동하도록 처리
+	    }
+		
+		List<MyApply> myApplyList = matchingService.myApplyList(id);
+		model.addAttribute("myApplyList", myApplyList);
+		
+		return "user/myCalender";
+	}
+	
+	//마이페이지 MyApply 조회 상세내역
+	@RequestMapping(value = "/myApplyDetail", method=RequestMethod.GET)
+	public String myApplyDetail(Model model, int no, HttpSession session)throws Exception
+	{
+		//세션에있는 아이디 조회
+		String id = (String) session.getAttribute("id");
+		
+		MyApply myApply = matchingService.getMyApply(no);
+		model.addAttribute("myApply", myApply);
+		
+		return "user/myApplyDetail";
 	}
 
 }

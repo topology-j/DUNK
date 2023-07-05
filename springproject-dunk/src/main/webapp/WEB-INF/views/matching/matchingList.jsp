@@ -5,7 +5,6 @@
 <script src="resources/js/weekC5.js" ></script>
 <script src="resources/js/formcheck-mj.js"></script>
 <form id="matchingForm" >
-	<input type="hidden" name="pageNum" value="${currentPage}">
 	<input type="hidden" name="selectedDate" id="selectedDate">
 </form>
 
@@ -67,11 +66,11 @@
 				<div class="col">
 					<div class="row m-3">
 					<h2>총 : ${listCount}매치</h2>
-							<c:if test="${not empty matchingList }">
-								<c:forEach var="m" items="${matchingList}">
+							<c:if test="${not empty matchingItemList }">
+								<c:forEach var="m" items="${matchingItemList}">
 								
-									<ul class="list-group list-group-flush">
-										<a href="matchingDetail?no=${m.no}&pageNum=${currentPage}" class="text-decoration-none">
+									<ul class="list-group list-group-flush pb-3">
+										<a href="matchingDetail?no=${m.no}&pageNum=${currentPage}&selectedDate=${selectedDate}" class="text-decoration-none">
 											<li class="list-group-item">
 											
 												<div class="row align-items-center">
@@ -80,16 +79,36 @@
 													</div>
 													<div class="col-6">
 														<div class="row">
-															<h3>${m.title}</h3>
-														</div>	
-														<div class="row">
-															<p>${m.inwon}/${m.date}</p>
+															<div class="col">
+																<div class="row">
+																	<h3>${m.title}</h3>
+																</div>	
+																<div class="row">
+																	<p>${m.date}</p>
+																	<p>${ m.name}</p>
+																</div>
+															</div>
+															<div class="col-4 d-flex align-items-center justify-content-center">
+																<h5>${m.matchingApplyCount}/${m.inwon}</h5>
+															</div>
 														</div>
 													</div>
 													<div class="col-4">
-														<div class="bg-danger text-center">
+														<c:if test="${m.inwon > m.matchingApplyCount and m.inwon - m.matchingApplyCount gt 1 }">
+														<div class="text-center rounded-pill p-2" style="background-color: #fa9300">
 															<p class="text-white">신청가능</p>
 														</div>
+														</c:if>
+														<c:if test="${m.inwon > m.matchingApplyCount and m.inwon - m.matchingApplyCount eq 1 }">
+															<div class="bg-danger text-center rounded-pill p-2">
+																<p class="text-white">마감임박</p>
+															</div>															
+														</c:if>
+														<c:if test="${m.inwon <= m.matchingApplyCount}">
+														<div class="text-center rounded-pill p-2" style="background-color: #B9B9B9">
+															<p class="text-white">모집마감</p>															
+														</div>
+														</c:if>
 													</div>
 												</div>	
 											</li>
@@ -98,46 +117,50 @@
 								</c:forEach>
 								</c:if>
 									
-							<c:if test="${empty matchingList }">
+							<c:if test="${empty matchingItemList }">
 								<div>
-									<p class="text-center">매칭이 존재하지 않습니다!</p>
+									<p class="text-center">해당 날짜의 매칭이 존재하지 않습니다!</p>
 								</div>
 							</c:if>
 					</div>
 				</div>
 			</div>
 			<!-- 페이지네이션 -->
-			<c:if test="${not empty matchingList}">
-				<div class="row">
-					<div class="col">
-						<nav aria-label="Page navigation">
-							<ul class="pagination justify-content-center">
-								<c:if test="${ startPage > pageGroup }">
-									<li class="page-item">
-									<a class="page-link" href="matchingList?pageNum=${ startPage - pageGroup }">Pre</a>
-									</li>
-								</c:if>
-								<c:forEach var="i" begin="${startPage}" end="${endPage}">
-									<c:if test="${i == currentPage }">
-										<li class="page-item active" aria-current="page">
-											<span class="page-link">${i}</span>
-										</li>
-									</c:if>
-									<c:if test="${i != currentPage }">
-										<li class="page-item">
-										<a class="page-link" href="matchingList?pageNum=${ i }">${i}</a>
-										</li>
-									</c:if>
-								</c:forEach>
-								<c:if test="${ endPage < pageCount }">
-									<li class="page-item">
-										<a class="page-link" href="matchingList?pageNum=${ startPage+ pageGroup }">Next</a>
-									</li>
-								</c:if>
-							</ul>
-						</nav>
-					</div>
-				</div>
-			</c:if>
+			
+<c:if test="${not empty matchingItemList}">
+    <div class="row">
+        <div class="col">
+            <nav aria-label="Page navigation" >
+                <ul class="pagination justify-content-center" style="color:#fa9300;">
+                    <c:if test="${ startPage > pageGroup }">
+                        <li class="page-item">
+                            <a class="page-link"
+                               href="?pageNum=${ startPage - pageGroup }&selectedDate=${selectedDate}">Pre</a>
+                        </li>
+                    </c:if>
+                    <c:forEach var="i" begin="${startPage}" end="${endPage}">
+                        <c:if test="${i == currentPage }">
+                            <li class="page-item active" aria-current="page">
+                                <span class="page-link">${i}</span>
+                            </li>
+                        </c:if>
+                        <c:if test="${i != currentPage }">
+                            <li class="page-item">
+                                <a class="page-link" href="?pageNum=${ i }&selectedDate=${selectedDate}">${i}</a>
+                            </li>
+                        </c:if>
+                    </c:forEach>
+                    <c:if test="${ endPage < pageCount }">
+                        <li class="page-item">
+                            <a class="page-link"
+                               href="?pageNum=${ startPage+ pageGroup }&selectedDate=${selectedDate}">Next</a>
+                        </li>
+                    </c:if>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</c:if> 
+
 		</div>
 	</div>

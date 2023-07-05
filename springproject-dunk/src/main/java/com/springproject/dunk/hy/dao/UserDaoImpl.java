@@ -117,5 +117,15 @@ public class UserDaoImpl implements UserDao {
 	public User getUserByNick(String nick) {		
 		return sqlSession.selectOne(NAME_SPACE+".getUserByNick", nick);
 	}
+
+	@Override
+	public void addMannerCheck(MannerCheck mc) {
+		sqlSession.insert(NAME_SPACE+".addMannerCheck", mc);		
+	}
+
+	@Override
+	public void updateMannerCheck(MannerCheck mc) {
+		sqlSession.update(NAME_SPACE+".updateMannerCheck", mc);		
+	}
 	
 }

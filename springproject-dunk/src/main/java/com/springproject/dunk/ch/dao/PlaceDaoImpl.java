@@ -51,4 +51,26 @@ public class PlaceDaoImpl implements PlaceDao {
 	public void incrementReadCount(int no) {
 		sqlSession.update(NAME_SPACE + ".incrementReadCount", no);
 	}
+
+	
+		//유저 포인트 불러오기
+	   @Override
+	   public int getPoint(String id) {
+	      return sqlSession.selectOne(NAME_SPACE +".getPoint", id);
+	   }
+
+	   //placePay 불러오기 
+	   @Override
+	   public int getPlacePay(int no) {
+	      return sqlSession.selectOne(NAME_SPACE +".getPlacePay", no);
+	   }
+
+	   //예약 시 userPoint-placePay 값 가져오기
+	   @Override
+	   public void updateUserPoint(String id, int updatedPoint) {
+	       Map<String, Object> params = new HashMap<>();
+	       params.put("id", id);
+	       params.put("updatedPoint", updatedPoint);
+	       sqlSession.update(NAME_SPACE + ".updateUserPoint", params);
+	   }
 }

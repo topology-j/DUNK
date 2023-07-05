@@ -32,7 +32,7 @@
 											</div>
 										</div>									
 										<c:forEach var="u" items="${uList}">
-											<c:if test="${u.userId !=sessionScope.id}">
+											<c:if test="${u.userId !=t.leaderId}">
 												<div class="row border-bottom my-2 px-5">
 													<div class="col-6 fw-bold">
 														팀원

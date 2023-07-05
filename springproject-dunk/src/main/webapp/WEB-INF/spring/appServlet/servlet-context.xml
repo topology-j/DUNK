@@ -37,4 +37,18 @@
 	<view-controller path="/refundPolicy" view-name="forward:/WEB-INF/views/place/refundPolicy.jsp" />	
 	<!-- 장소 설명 -->	
 	<view-controller path="/placeDescription" view-name="forward:/WEB-INF/views/place/placeDescription.jsp" />
+
+	<view-controller path="/placeWriteForm" view-name="place/placeWriteForm" />
+	
+	<beans:bean id="loginCheckInterceptor" 	class="com.springproject.dunk.hy.interceptor.LoginCheckInterceptor" />
+	<interceptors>
+		<interceptor>					
+			<mapping path="/add*" />
+			<mapping path="/write*" />
+			<mapping path="/update*" />	
+			<mapping path="/delete*" />			
+			<beans:ref bean="loginCheckInterceptor" />			
+		</interceptor>			
+	</interceptors>	
+
 </beans:beans>

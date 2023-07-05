@@ -84,6 +84,16 @@
 	<select id="getUserByNick" resultMap="userResultMap">
 		select * from user where nickname=#{nick}
 	</select>
+	
+	<insert id="addMannerCheck" parameterType="MannerCheck">
+		insert into manner_check (user_id, eval_num, skill_eval, manner_eval, pre_manner, time_manner) 
+			values(#{userId}, 1, #{skillEval}, #{mannerEval}, #{preManner}, #{timeManner})
+	</insert>	
+	
+	<update id="updateMannerCheck" parameterType="MannerCheck">
+		update manner_check set skill_eval=skill_eval+#{skillEval}, manner_eval=manner_eval+#{mannerEval}, 
+			pre_manner=pre_manner+#{preManner}, time_manner=time_manner+#{timeManner}, eval_num=eval_num+1 where user_id=#{userId}
+	</update>
 		
 	<resultMap id="userResultMap" type="User">
 		<id property="id" column="id" />

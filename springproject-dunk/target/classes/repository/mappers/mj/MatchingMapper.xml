@@ -4,22 +4,41 @@
 
 <mapper namespace="com.springproject.dunk.mapper.mj.MatchingMapper" >
 	
-	<!-- 유저의 포인트 불러오기 -->
+	<!-- 결제부분 -->
+	<!-- 매칭 신청할때 유저의 포인트 불러오기 -->
 	<select id="getPoint" resultType="int">
 		SELECT 
 			point 
 		FROM user
-		WHERE id = #{id};
+		WHERE id = #{id}
 	</select>
 	
+	<!-- 매칭 신청할때 해당 Matching의 pay 불러오기 -->
+	<select id="getMatchingPay" resultType="int">
+		SELECT
+			pay
+        FROM matching
+		WHERE no = #{no}
+	</select>
 	
+	<!-- 매칭신청하며 포인트 차감!!!-->
+	<update id="updateUserPoint" parameterType="java.util.Map">
+		UPDATE user
+		SET point=#{updatedPoint}
+		WHERE id= #{id}
+	</update>
+	
+	<!-- 매칭 -->
 	<!-- selectedDate에 해당하는 매칭리스트 반환 -->
-	<select id="matchingList" resultType="Matching" resultMap="matchingResultMap">
+	<select id="matchingItemList" resultType="MatchingItem" resultMap="matchingItemResultMap">
 	
 		SELECT
-		*
-		FROM matching
-		WHERE date = #{selectedDate}
+			m.*, 
+			p.*, 
+			(SELECT count(*) FROM matching_apply WHERE matching_no=m.no) matching_apply_count
+		FROM matching m, place p
+		WHERE m.place_no=p.no		
+		AND date = #{selectedDate}
 		ORDER BY time
 		LIMIT #{startRow}, #{num}
 	
@@ -28,18 +47,22 @@
 	<!-- selectedDate에 해당하는 게시글 수 반환 -->
 	<select id="getMatchingCount" resultType="int">
 		SELECT
-		COUNT(no)
-		FROM matching
-		WHERE date = #{selectedDate};		
+		COUNT(m.no)
+		FROM matching m, place p
+		WHERE m.place_no=p.no
+		AND date = #{selectedDate}		
 	</select>
 	
 	<!-- 매칭 디테일로들어가게 하나 받아오기 -->
-	<select id="getMatching" resultType="Matching" resultMap="matchingResultMap">
+	<select id="getMatchingItem" resultType="MatchingItem" resultMap="matchingItemResultMap">
 	
 		SELECT
-		*
-		FROM matching
-		WHERE no = #{no}
+			m.*, 
+			p.*, 
+			(SELECT count(*) FROM matching_apply WHERE matching_no=m.no) matching_apply_count
+		FROM matching m, place p
+		WHERE m.place_no=p.no		
+		AND m.no = #{no}
 	
 	</select>
 	
@@ -52,8 +75,8 @@
 	
 	<!-- 매칭모집 글쓰기 -->
 	<insert id="insertMatching" parameterType="Matching" useGeneratedKeys="true" keyProperty="no">
-	    INSERT INTO matching(place_no, title, date, time, inwon, gender, level, pay, information, read_count, user_id)
-	    VALUES(#{placeNo}, #{title}, #{date}, #{time}, #{inwon}, #{gender}, #{level}, #{pay}, #{information}, #{readCount}, #{userId})
+	    INSERT INTO matching(place_no, title, date, time, gender, level, inwon, pay, information, read_count, user_id)
+	    VALUES(#{placeNo}, #{title}, #{date}, #{time}, #{gender}, #{level}, #{inwon}, #{pay}, #{information}, #{readCount}, #{userId})
 	</insert>
 
 	
@@ -68,6 +91,89 @@
 		INSERT INTO matching_apply(matching_no, user_id, team_individual, team_no)
 	    VALUES(#{matchingNo}, #{userId}, #{teamIndividual}, #{teamNo})
 	</insert>
+	
+	<!-- Matching에 해당하는 MatchingApply 수 반환 -->
+	<select id="getMatchingApplyCount" resultType="int">
+		SELECT COUNT(*)
+		FROM matching m, matching_apply ma
+		WHERE m.no=ma.matching_no
+		AND m.no = #{matchingNo}
+		<!-- GROUP BY matching_no = #{matchingNo} -->
+	</select>
+	
+	<!-- 마이페이지 -->
+	<!-- 마이페이지 MyApply 조회내역-->
+	<select id="myApplyList" resultType="MyApply" resultMap="myApplyResultMap">
+		SELECT
+			ma.no no,
+			m.title,
+            p.name, 
+            p.address1,
+            ma.user_id,
+            ma.team_individual,
+            ma.team_no,
+            m.pay,
+            m.date
+		FROM matching m, place p, matching_apply ma
+		WHERE m.place_no=p.no
+        AND m.no=ma.matching_no
+        AND ma.user_id=#{id}
+	</select>
+	
+	<!-- 마이페이지 MyApply 조회 상세 내역-->
+	<select id="getMyApply" resultType="MyApply" resultMap="myApplyResultMap">
+		SELECT
+			ma.no no,
+			m.title,
+            p.name, 
+            p.address1,
+            ma.user_id,
+            ma.team_individual,
+            ma.team_no,
+            m.pay,
+            m.date
+		FROM matching m, place p, matching_apply ma
+		WHERE m.place_no=p.no
+        AND m.no=ma.matching_no
+        AND ma.no=#{no}
+	</select>
+	
+	<!-- 매칭, 장소, 예약 조인 -->
+	<resultMap type="MyApply" id="myApplyResultMap">
+		<id property="no" column="no" />
+		<result property="title" column="title" />
+		<result property="name" column="name" />
+		<result property="address1" column="address1" />
+		<result property="userId" column="user_id" />
+		<result property="teamIndividual" column="team_individual"/>
+		<result property="teamNo" column="team_no"/>
+		<result property="pay" column="pay" />
+		<result property="date" column="date" />
+		<result property="time" column="time" />
+		
+	</resultMap>
+	
+	<!-- 매칭 모집 테이블과 place 조인 -->
+	<resultMap type="MatchingItem" id="matchingItemResultMap">
+		<id property="no" column="no" />
+		<result property="placeNo" column="place_no" />
+		<result property="title" column="title" />
+		<result property="date" column="date" />
+		<result property="time" column="time" />
+		<result property="inwon" column="inwon" />
+		<result property="gender" column="gender" />
+		<result property="level" column="level" />
+		<result property="pay" column="pay" />
+		<result property="possibleImpossible" column="possible_impossible" />
+		<result property="information" column="information" />
+		<result property="readCount" column="read_Count" />
+		<result property="userId" column="user_id" />
+		<result property="name" column="name" />
+		<result property="zipcode" column="zipcode" />
+		<result property="address1" column="address1" />
+		<result property="address2" column="address2" />
+		<result property="matchingApplyCount" column="matching_apply_count" />
+	</resultMap>
 	
 	<!-- 매칭 모집 테이블 -->
 	<resultMap type="Matching" id="matchingResultMap">

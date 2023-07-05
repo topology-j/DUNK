@@ -44,20 +44,7 @@ public class EventDaoImpl implements EventDao {
 	@Override
 	public void insertEvent(Event e) {
 		
-		sqlSession.insert(NAME_SPACE+".insertEvent", e);
-		
-		Event event=getEvent(e.getNo());
-		
-		Map<String, Object> params=new HashMap<>();
-		
-		params.put("no", event.getNo());
-				
-		for(int i=0; i<e.getImgFileNames().size(); i++) {
-			
-			params.put("img", e.getImgFileNames().get(i));
-			
-			sqlSession.insert(NAME_SPACE+".insertEventImg", params);
-		}		
+		sqlSession.insert(NAME_SPACE+".insertEvent", e);		
 	}
 	
 	@Override
@@ -92,11 +79,6 @@ public class EventDaoImpl implements EventDao {
 	}
 
 	@Override
-	public List<String> getImages(int no) {		
-		return sqlSession.selectList(NAME_SPACE+".getImages", no);
-	}
-
-	@Override
 	public List<EventComment> commentList(int no) {		
 		return sqlSession.selectList(NAME_SPACE+".commentList", no);
 	}
@@ -105,6 +87,22 @@ public class EventDaoImpl implements EventDao {
 	public void addEventComment(EventComment ec) {
 		sqlSession.insert(NAME_SPACE+".addEventComment", ec);		
 	}
+
+	@Override
+	public EventComment getEventComment(int no) {		
+		return sqlSession.selectOne(NAME_SPACE+".getEventComment", no);
+	}
+
+	@Override
+	public void updateEventComment(EventComment ec) {
+		sqlSession.update(NAME_SPACE+".updateEventComment", ec);		
+	}
+
+	@Override
+	public void deleteEventComment(int no) {
+		sqlSession.delete(NAME_SPACE+".deleteEventComment", no);		
+	}
+
 	
 	
 }

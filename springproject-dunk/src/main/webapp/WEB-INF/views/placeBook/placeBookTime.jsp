@@ -15,7 +15,6 @@
     }
 
 </style>
-<script src="resources/js/placeBookingCal.js"></script>
 <script type="text/javascript">
 var buttons = document.getElementsByClassName("timeBtnClass");
 for (var i = 0; i < buttons.length; i++) {
@@ -29,8 +28,7 @@ for (var i = 0; i < buttons.length; i++) {
   });
 }
 </script>
-
-<script src="resources/js/formcheck-ch.js"></script> 
+<script src="resources/js/placeBookingCal.js"></script>
 <title>달력</title>
 </head>
 	<form name="placeCheckForm" id="placeCheckForm">
@@ -41,12 +39,9 @@ for (var i = 0; i < buttons.length; i++) {
 <body>
 	<form id="placeBookTime" name="placeBookTime" action="placeBookTimeProcess">
 	</form>
-	
-	<h2 class="text-center mx-auto mt-5"><b>시간 선택</b></h2>
-	
-	<div class="text-center mx-auto mt-5"><b>(날짜를 선택하시면 예약 가능 시간이 출력됩니다.)</b></div>
-	
-	<table class="Calendar mt-3">
+	<h2 class="text-center mx-auto mt-5"><b>${b1.name} 예약 시간</b></h2>
+
+	<table class="Calendar mt-5">
 		<thead>
 			<tr>
 				<td onClick="prevCalendar();" style="cursor:pointer;">&#60;</td>
@@ -69,38 +64,11 @@ for (var i = 0; i < buttons.length; i++) {
 		<tbody>		
 		</tbody>
 	</table>
-		<!-- 선택된 날짜 -->
-		
-		<!-- 캘린더 날짜 클릭하면 시간 나옴 -->
-		
-		<!-- 달력에  -->
-		<div id="selectedDate" class="text-center mt-3"><span id="formattedDate"></span></div>
-	
-<!-- 		<div id="timeList" class="d-flex justify-content-center mt-4"> -->
-<%-- 			<c:forEach var="time" items="${placeBookingList}" varStatus="status" begin="0" end="4" >					 --%>
-<%-- 					<c:if test='${ time == "10:00~12:00"}'>  --%>
-<!-- 						<button id="timeBtn1"  class= "timeBtnClass" value="10:00~12:00">10:00~12:00</button>&nbsp;&nbsp; -->
-<%-- 					</c:if> --%>
-<%-- 					<c:if test='${ time == "12:00~14:00"}'>  --%>
-<!-- 						<button id="timeBtn2"  class= "timeBtnClass" value="12:00~14:00">12:00~14:00</button>&nbsp;&nbsp; -->
-<%-- 					</c:if> --%>
-<%-- 					<c:if test='${ time == "14:00~16:00"}'>  --%>
-<!-- 						<button id="timeBtn3"  class= "timeBtnClass" value="14:00~16:00">14:00~16:00</button>&nbsp;&nbsp; -->
-<%-- 					</c:if> --%>
-<%-- 					<c:if test='${ time == "16:00~18:00"}'>  --%>
-<!-- 						<button id="timeBtn4"  class= "timeBtnClass" value="16:00~18:00">16:00~18:00</button>&nbsp;&nbsp; -->
-<%-- 					</c:if> --%>
-<%-- 					<c:if test='${ time == "18:00~20:00"}'>  --%>
-<!-- 						<button id="timeBtn5"  class= "timeBtnClass" value="18:00~20:00">18:00~20:00</button>&nbsp;&nbsp; -->
-<%-- 					</c:if> --%>
-<%-- 					<c:if test='${ time == "20:00~22:00"}'>  --%>
-<!-- 						<button id="timeBtn6"  class= "timeBtnClass" value="20:00~22:00">20:00~22:00</button>&nbsp;&nbsp; -->
-<%-- 					</c:if> --%>
-<%-- 				</c:forEach>		 --%>
-<!-- 		</div> -->
 
-		
-		<!-- 캘린더 날짜 클릭하면 시간 나옴 -->
+		<!-- 달력 날짜 선택 시 선택한 날짜 출력  -->
+		<div id="selectedDate" class="text-center mt-3"><span id="formattedDate"></span></div>
+
+		<!-- 예약 시간 출력 -->
 		<div id="timeList" class="d-flex justify-content-center mt-4">
 			<button id="timeBtn1"  class= "btn btn-outline-dark timeBtnClass"  value="10:00~12:00">10:00~12:00</button>&nbsp;&nbsp;
 			<button id="timeBtn2"  class= "btn btn-outline-dark timeBtnClass"  value="12:00~14:00">12:00~14:00</button>&nbsp;&nbsp;
@@ -110,10 +78,8 @@ for (var i = 0; i < buttons.length; i++) {
 			<button id="timeBtn6"  class= "btn btn-outline-dark timeBtnClass"  value="20:00~22:00">20:00~22:00</button>&nbsp;&nbsp;
 		</div>
 
-	<br><br>
-	<div class="d-flex justify-content-center">
-	<input type="button" class="btn btn-primary" id="placeBookBtn" style="display: none" value="장소 예약"/>&nbsp;&nbsp;
-	<button type="button" class="btn btn-primary" onclick="location.href='basic'">basic</button>
+	<div class="d-flex justify-content-center mt-5">
+		<input type="button" class="btn btn-primary fw-bold" id="placeBookBtn" value="장소 예약"/>&nbsp;&nbsp;	
 	</div>
 </body>
 </html>

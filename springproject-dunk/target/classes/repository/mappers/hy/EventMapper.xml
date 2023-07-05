@@ -20,8 +20,9 @@
 		select * from event where no=#{no}
 	</select>
 	
-	<insert id="insertEvent" parameterType="Event" useGeneratedKeys="true" keyProperty="no">
-		insert into event (title, reg_date, content, read_count, recommend) values(#{title}, sysdate(), #{content}, 0, 0)
+	<insert id="insertEvent" parameterType="Event">
+		insert into event (title, title_img, reg_date, content, content_img, read_count, recommend) values(#{title}, #{titleImg}, sysdate(), #{content}, #{contentImg}, 0, 0)
+
 	</insert>
 	
 	<update id="updateEvent" parameterType="Event">
@@ -48,29 +49,36 @@
 				title like concat('%', #{keyword}, '%')
 			</if>
 		</where>		
-	</select>
-	
-	<insert id="insertEventImg" parameterType="hashmap">
-		insert into event_img (event_no, img) values (#{no}, #{img})
-	</insert>
-	
-	<select id="getImages" resultType="String">
-		select img from event_img where event_no=#{no}
-	</select>
+	</select>	
 	
 	<select id="commentList" resultMap="eventCommentResultMap">
-		select * from event_comment where event_no=#{no}
+		select * from event_comment where event_no=#{no} order by no desc
 	</select>
-	
+
 	<insert id="addEventComment" parameterType="EventComment">
 		insert into event_comment (event_no, user_id, user_nick, reg_date, content) values(#{eventNo}, #{userId}, #{userNick}, sysdate(), #{content})
 	</insert>
+	
+	<select id="getEventComment" resultMap="eventCommentResultMap">
+		select * from event_comment where no=#{no}
+	</select>
+	
+	<update id="updateEventComment" parameterType="EventComment">
+		update event_comment set content=#{content}, reg_date=sysdate() where no=#{no}
+	</update>
+	
+	<delete id="deleteEventComment">
+		delete from event_comment where no=#{no}
+	</delete>
+
 
 	<resultMap id="eventResultMap" type="Event">
 		<id property="no" column="no" />
 		<result property="title" column="title" />
+		<result property="titleImg" column="title_img" />
 		<result property="regDate" column="reg_date" />
 		<result property="content" column="content" />
+		<result property="contentImg" column="content_img" />
 		<result property="readCount" column="read_count" />
 		<result property="recommend" column="recommend" />
 	</resultMap>

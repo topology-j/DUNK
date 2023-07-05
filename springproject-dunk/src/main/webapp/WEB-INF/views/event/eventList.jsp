@@ -25,57 +25,53 @@
 <div class="row my-3">
 	<div class="col-2">		
 	</div>
-	<div class="col-8 text-end">	
-		<a href="eventWriteForm" class="btn btn-outline-secondary">글쓰기</a>	
+	<div class="col-8 text-end">
+		<c:if test="${sessionScope.id=='admin'}">	
+			<a href="eventWriteForm" class="btn btn-outline-success">글쓰기</a>	
+		</c:if>
 	</div>
 	<div class="col-2">		
 	</div>
 </div>
 </c:if>
+<div class="row text-center">
+	<div class="col">
+		<c:if test="${not searchOption and empty eList}">
+			<p>게시글이 존재하지 않습니다.</p>
+		</c:if>
+		<c:if test="${searchOption and empty eList}">
+			<p>"${keyword}"가 포함된 게시글이 존재하지 않습니다.</p>
+		</c:if>
+	</div>
+</div>		
 
-<div class="row mt-5">
-	<div class="col-2">
-	</div>
-	<div class="col-8">
-		<table class="table">
-			<tr class="text-center">
-				<th>No</th>
-				<th>제목</th>
-				<th>작성일</th>
-				<th>조회수</th>
-			</tr>
-			
-			<c:if test="${not searchOption and empty eList}">
-				<p>게시글이 존재하지 않습니다.</p>
-			</c:if>
-			
-			<c:if test="${searchOption and empty eList}">
-				<p>"${keyword}"가 포함된 게시글이 존재하지 않습니다.</p>
-			</c:if>
-			
-			<c:if test="${not empty eList}">
-				<c:forEach var="e" items="${eList}">
-					<tr>
-						<td>${e.no}</td>
-						<c:if test="${not searchOption}">
-						<td><a href="eventDetail?no=${e.no}&pageNum=${pageNum}" class="text-decoration-none link-dark">${e.title}</a></td>
-						</c:if>
-						<c:if test="${searchOption}">
-						<td><a href="eventDetail?no=${e.no}&pageNum=${pageNum}&type=${type}&keyword=${keyword}" class="text-decoration-none link-dark">${e.title}</a></td>
-						</c:if>
-						<td>${e.regDate}</td>
-						<td>${e.readCount}</td>
-						</tr>
-				</c:forEach>
-			</c:if>		
-		</table>
-	</div>
-	<div class="col-2">
-	</div>
-</div>
+<div class="row mt-5">			
+	<c:if test="${not empty eList}">
+		<c:forEach var="e" items="${eList}">
+			<div class="col-4">
+				<div class="row mx-3 my-3">
+					<div class="col">
+						<div class="card" style="width: 18rem;">
+							<img src="resources/eventimage/${e.titleImg}" class="card-img-top">
+							<div class="card-body">
+							    <h5 class="card-title my-3">${e.title}</h5>
+							    <c:if test="${not searchOption}">				   
+							    	<a href="eventDetail?no=${e.no}&pageNum=${pageNum}" class="btn btn-dark">이벤트 자세히 보기</a>
+							    </c:if>
+							    <c:if test="${searchOption}">
+							    	<a href="eventDetail?no=${e.no}&pageNum=${pageNum}&type=${type}&keyword=${keyword}" class="btn btn-dark">이벤트 자세히 보기</a>
+							    </c:if>
+						  </div>
+						</div>
+					</div>
+				</div>
+			</div>		
+		</c:forEach>
+	</c:if>	
+</div>	
 
 <c:if test="${not searchOption}">
-<div class="row">
+<div class="row my-5">
 	<div class="col">
 		<nav>
 		  <ul class="pagination  justify-content-center">
@@ -94,9 +90,11 @@
 				    <li class="page-item"><a class="page-link" href="eventList?pageNum=${i}">${i}</a></li>
 			    </c:if>
 		    </c:forEach>
-		    <li class="page-item">
-		      <a class="page-link" href="eventList?pageNum=${endPage+1}">Next</a>
-		    </li>
+		    <c:if test="${endPage<pageCount}">
+			    <li class="page-item">
+			      <a class="page-link" href="eventList?pageNum=${endPage+1}">Next</a>
+			    </li>
+		    </c:if>			   
 		  </ul>
 		</nav>
 	</div>
@@ -105,7 +103,7 @@
 
 
 <c:if test="${searchOption}">
-<div class="row">
+<div class="row my-5">
 	<div class="col">
 		<nav>
 		  <ul class="pagination  justify-content-center">

@@ -113,6 +113,7 @@ VALUES (24, '관악구민종합체육센터', '서울 관악구 낙성대로3길
 INSERT INTO place_book (place_no, place_name, place_address1, place_address2, place_pay, user_id, user_nick, dates, player_num, time_book)
 VALUES (24, '관악구민종합체육센터', '서울 관악구 낙성대로3길 37', '관악구민종합체육센터', NULL, 'nnnn',  NULL,	'2023-07-04', NULL, '20:00~22:00');
 
+
 COMMIT;
 
 SELECT * FROM place_book; 

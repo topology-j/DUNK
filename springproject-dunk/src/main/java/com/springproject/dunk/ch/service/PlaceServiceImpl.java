@@ -39,4 +39,24 @@ public class PlaceServiceImpl implements PlaceService {
 			}
 			return dao.getPlaceDetail(no);
 	}
+
+		//유저 포인트 불러오기
+	   public int getPoint(String id) {
+	      return dao.getPoint(id);
+	   }
+
+
+	   //placePay 불러오기
+	   @Override
+	   public int getPlacePay(int no) {
+	      return dao.getPlacePay(no);
+	   }
+
+	   //예약 시 userPoint-placePay 값 가져오기
+	   @Override
+	   public void updateUserPoint(String id, int updatedPoint) {
+	      dao.updateUserPoint(id, updatedPoint);
+	      
+	   }
+	
 }

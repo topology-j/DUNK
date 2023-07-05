@@ -20,4 +20,13 @@ public interface PlaceDao {
 
   	//장소 조회수 증가 
   	public abstract void incrementReadCount(int no);
+
+  	//유저 포인트 불러오기
+    public abstract int getPoint(String id);
+    
+    //placePay 불러오기
+    public abstract int getPlacePay(int no);
+
+    //예약 시 userPoint-placePay 값 가져오기
+    public void updateUserPoint(String id, int updatedPoint);
 }

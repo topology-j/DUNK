@@ -21,12 +21,16 @@ public interface EventDao {
 	
 	public void recommend(int no);	
 	
-	public int getEventCount(String type, String keyword);
-	
-	public List<String> getImages(int no);
+	public int getEventCount(String type, String keyword);	
 	
 	public List<EventComment> commentList(int no);
 	
 	public void addEventComment(EventComment ec);
+	
+	public EventComment getEventComment(int no);
+	
+	public void updateEventComment(EventComment ec);
+	
+	public void deleteEventComment(int no);
 	
 }

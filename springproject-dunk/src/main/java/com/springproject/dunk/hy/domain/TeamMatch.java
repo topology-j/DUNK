@@ -9,7 +9,8 @@ public class TeamMatch {
 	private String writerId;
 	private String writerNick;
 	private int bookNo;
-	private int teamNo;
+	private int teamNo1;
+	private int teamNo2;
 	private Timestamp date;
 	private String time;
 	private String gender;
@@ -21,14 +22,16 @@ public class TeamMatch {
 	
 	public TeamMatch() {}
 
-	public TeamMatch(int no, String title, String writerId, String writerNick, int bookNo, int teamNo, Timestamp date,
-			String time, String gender, String level, String pay, String process, String information, int readCount) {	
+	public TeamMatch(int no, String title, String writerId, String writerNick, int bookNo, int teamNo1, int teamNo2,
+			Timestamp date, String time, String gender, String level, String pay, String process, String information,
+			int readCount) {		
 		this.no = no;
 		this.title = title;
 		this.writerId = writerId;
 		this.writerNick = writerNick;
 		this.bookNo = bookNo;
-		this.teamNo = teamNo;
+		this.teamNo1 = teamNo1;
+		this.teamNo2 = teamNo2;
 		this.date = date;
 		this.time = time;
 		this.gender = gender;
@@ -79,12 +82,20 @@ public class TeamMatch {
 		this.bookNo = bookNo;
 	}
 
-	public int getTeamNo() {
-		return teamNo;
+	public int getTeamNo1() {
+		return teamNo1;
 	}
 
-	public void setTeamNo(int teamNo) {
-		this.teamNo = teamNo;
+	public void setTeamNo1(int teamNo1) {
+		this.teamNo1 = teamNo1;
+	}
+
+	public int getTeamNo2() {
+		return teamNo2;
+	}
+
+	public void setTeamNo2(int teamNo2) {
+		this.teamNo2 = teamNo2;
 	}
 
 	public Timestamp getDate() {
@@ -149,6 +160,6 @@ public class TeamMatch {
 
 	public void setReadCount(int readCount) {
 		this.readCount = readCount;
-	}
+	}	
 		
 }

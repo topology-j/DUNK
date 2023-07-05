@@ -7,13 +7,16 @@
 	</form>
 	
 
+			
+	<h2 class="text-center mx-auto mt-5"><b>${b1.name} 예약 약관 동의</b></h2>
 	
-		<h2 class="text-center mx-auto mt-5"><b>경기장 예약 약관 동의</b></h2>
 	<div class="text-center mx-auto" id="">
 	
 		<div class="" id="">
 			<div id="">
 				<h5 class="mt-5"><b>개인정보 제 3자 제공 방침 및 시설 이용 약관</b></h5>
+				<!-- 개인 정보 
+				약관 -->
 				<div class="mt-3">				
 				<textarea id="" disabled="" cols="50" rows="10">대관 서비스 개인정보 제3자 제공 방침
 
@@ -31,6 +34,7 @@
 					<div class="text-holder" style="display: inline-block;">위의 개인정보 취급방침에 동의합니다.</div>
 				</div>
 				
+				<!-- 시설 이용 약관 -->
 				<div class="mt-3">				
 				<textarea id="" disabled="" cols="50" rows="10">
 시설 이용 약관
@@ -58,8 +62,8 @@
 					
 					<div class="text-holder" style="display: inline-block;">위의 시설 이용 약관에 동의합니다.</div>
 				</div>
-				<!-- 여기까지 수정 ok  -->
-
+				
+				<!-- 전체 동의 버튼  -->
 				<div class="check-box-holder agree-All">
 					<br> <label for="resvAll"><input type="checkbox" id="" name="resvAll"
 						onclick="$(this).is(':checked')?$('input:checkbox[name=agreeResv],input:checkbox[name=agreeFac]').prop('checked',true):
@@ -77,14 +81,11 @@
 				</div>
 			
 			<div class="col-sm-12 mt-5" id="">
-				<input type="button" class="btn btn-primary" id="placeBookTimeBtn" value="날짜 선택"/>&nbsp;&nbsp;
+				<input type="button" class="btn btn-primary fw-bold" id="placeBookTimeBtn" value="날짜 선택"/>&nbsp;&nbsp;
 			</div>
+			
 			</div>
-			<!-- "location.href='placeBookTerms?no=${b1.no}&pageNum=${pageNum}'" -->
-			<!--<button ID="goBack" type="button" class="btn-white" onclick="RESV.view.overlay.genResvStep1();">
-        <span class="glyphicon glyphicon-menu-left" aria-hidden="true">
-        </span>뒤로
-      </button>-->
+			
 		</div>
 
 	</div>
