@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.springproject.dunk.ms.domain.Board;
 import com.springproject.dunk.ms.domain.Reply;
+import com.springproject.dunk.hy.domain.User;
 
 public interface PlaceDao {
 	//장소리스트 불러오기

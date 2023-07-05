@@ -54,15 +54,15 @@
 				    	<img data-bs-toggle="dropdown" aria-expanded="false" src="resources/main_img/basketballicon.png" width="25px;">
 				    </a>
 				    <ul class="dropdown-menu">
-			    	  <li><a class="dropdown-item" href="#">매치</a></li>
+			    	  <li><a class="dropdown-item" href="matchingList">매치</a></li>
 			    	  <li><a class="dropdown-item" href="teamMatchList">팀 매치</a></li>
 			    	  <li><a class="dropdown-item" href="teamRecruitmentList">팀 모집</a></li>
 				      <li><a class="dropdown-item" href="placeList">장소</a></li>
 				      <li><a class="dropdown-item" href="eventList">이벤트</a></li>				      
-				      <li><a class="dropdown-item" href="#">공지사항</a></li>				      
+				      <li><a class="dropdown-item" href="#">공지사항</a></li>
 				    </ul>
 				  </li>
-				  <li class="nav-item me-2" style="border: 1px solid #fa9300; border-radius: 40px;">
+				  <li class="nav-item me-2" style="border: 2px solid #fa9300; border-radius: 40px;">
 				    <a class="nav-link" href="matchingList" style="color:#fa9300;">매치</a>
 				  </li>
 				   <li class="nav-item me-2" style="border: 1px solid #fa9300; border-radius: 40px;">
@@ -70,7 +70,7 @@
 				  </li>
 				  <li class="nav-item me-2" style="border: 1px solid #fa9300; border-radius: 40px;">
 				    <a class="nav-link" href="placeList" style="color:#fa9300;">장소</a>
-				  </li>				 
+				  </li>
 				</ul>
 			</div>
 </div>

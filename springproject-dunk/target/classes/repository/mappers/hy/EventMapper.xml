@@ -22,6 +22,7 @@
 	
 	<insert id="insertEvent" parameterType="Event">
 		insert into event (title, title_img, reg_date, content, content_img, read_count, recommend) values(#{title}, #{titleImg}, sysdate(), #{content}, #{contentImg}, 0, 0)
+
 	</insert>
 	
 	<update id="updateEvent" parameterType="Event">
@@ -69,6 +70,7 @@
 	<delete id="deleteEventComment">
 		delete from event_comment where no=#{no}
 	</delete>
+
 
 	<resultMap id="eventResultMap" type="Event">
 		<id property="no" column="no" />

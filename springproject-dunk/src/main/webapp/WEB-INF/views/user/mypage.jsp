@@ -104,7 +104,17 @@
 							</div>
 							<div class="row my-3">
 								<div class="col">
+
+									<c:if test="${grade eq '100'}">
+										<a href="userPlace?userId=${u.id}" class="text-decoration-none link-dark">나의 장소</a>
+									</c:if>
+									<!-- 관리자라면 모든예약을 봐야지 -->
+									<c:if test="${grade eq '200'}">
+										<a href="userPlaceList" class="text-decoration-none link-dark">모든 장소 예약</a>
+									</c:if>
+
 									<a href="myteamList?id=${u.id}" class="text-decoration-none link-dark">나의 팀</a>
+
 								</div>
 							</div>
 							<div class="row my-3">

@@ -15,12 +15,13 @@ public interface PlaceService {
     public abstract void insertPlaceBook(PlaceBook placeBook);
 
     public PlaceBoard getPlaceDetail(int no, boolean isCount);
-
+    //유저 포인트 불러오기
 	public abstract int getPoint(String id);
 
-	//매칭 신청할때 해당 Matching의 pay 불러오기
+	//placePay 불러오기
     public abstract int getPlacePay(int no);
 	
+    //예약 시 userPoint-placePay 값 가져오기
 	public void updateUserPoint(String id, int updatedPoint);
 
 	

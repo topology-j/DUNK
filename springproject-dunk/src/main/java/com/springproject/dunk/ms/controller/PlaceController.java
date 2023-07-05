@@ -23,8 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.springproject.dunk.ms.domain.Board;
 import com.springproject.dunk.ms.domain.Reply;
 import com.springproject.dunk.ms.service.PlaceService;
-
-
+import com.springproject.dunk.hy.service.*;
 
 @Controller("pController")
 public class PlaceController {
@@ -47,6 +46,8 @@ public class PlaceController {
 		
 		Map<String, Object> modelMap = service.placeList(pageNum, keyword, area, orderBy);
 		model.addAllAttributes(modelMap);
+		
+		
 	
 		return "place/placeList";
 	}
@@ -135,7 +136,8 @@ public class PlaceController {
 
 	//updateForm에서 수정입력하고 > redirect:list요청
 	@RequestMapping(value="placeUpdateProcess", method=RequestMethod.POST)
-	public String placeUpdateProcess(HttpServletRequest request, HttpServletResponse response, PrintWriter out, Board board, int no, RedirectAttributes reAttrs, 
+	public String placeUpdateProcess(HttpServletRequest request, HttpServletResponse response, PrintWriter out, RedirectAttributes reAttrs, 
+													Board board, int no, String image1, String image2, String image3, String image4, 
 												@RequestParam(value="pageNum", required=false, defaultValue="1")int pageNum,
 												@RequestParam(value="keyword", required=false, defaultValue="null") String keyword,
 												@RequestParam(value="area", required=false, defaultValue="All") String area,
@@ -147,6 +149,20 @@ public class PlaceController {
 		if(searchOption) {
 			reAttrs.addAttribute("keyword", keyword);
 		
+		}
+
+		// 원래 이미지가 있다면 객체에 담기
+		if(image1 !=null) {
+			board.setImage1(image1);
+		}
+		if(image2 !=null) {
+			board.setImage2(image1);
+		}
+		if(image3 !=null) {
+			board.setImage3(image1);
+		}
+		if(image4 !=null) {
+			board.setImage4(image1);
 		}
 		
 		//for(MultipartFile multipartFile : multipartFiles) {
@@ -252,7 +268,7 @@ public class PlaceController {
 		return "kakao";
     	}
 	
-		
+	
 		
 		
 }

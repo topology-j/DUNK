@@ -3,6 +3,7 @@ package com.springproject.dunk.mj.controller;
 import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.springproject.dunk.mj.domain.Matching;
 import com.springproject.dunk.mj.domain.MatchingApply;
 import com.springproject.dunk.mj.domain.MatchingItem;
+import com.springproject.dunk.mj.domain.MyApply;
 import com.springproject.dunk.mj.service.MatchingService;
 
 @Controller
@@ -36,7 +38,7 @@ public class MatchingController {
 	
 	//매칭리스트
 	@RequestMapping(value = "/matchingList", method = RequestMethod.GET)
-	public String matchingList(Model model,
+	public String matchingList(Model model, 
        @RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
        @RequestParam(value = "selectedDate", required = false) String selectedDate)
 	{
@@ -50,13 +52,13 @@ public class MatchingController {
 	        selectedDate = todayDate;
 	    }
 	    
-	    Map<String, Object> modelMap = matchingService.matchingItemList(pageNum, selectedDate);
-	    
-	    model.addAllAttributes(modelMap);
-	    
-	    model.addAttribute("selectedDate", selectedDate);
-	    
-	    return "matching/matchingList";
+		Map<String, Object> modelMap = matchingService.matchingItemList(pageNum, selectedDate);
+
+		model.addAllAttributes(modelMap);
+
+		model.addAttribute("selectedDate", selectedDate);
+
+		return "matching/matchingList";
 	}
 
 
@@ -92,10 +94,10 @@ public class MatchingController {
 	//매칭최초 글쓰기
 	@RequestMapping(value = "/matchingWriteProcess", method =RequestMethod.POST)
 	public String insertMatching(HttpServletRequest request,
-			MatchingItem matchingItem)throws IOException
+			Matching matching)throws IOException
 	
 	{	
-		matchingService.insertMatching(matchingItem);
+		matchingService.insertMatching(matching);
 		return "redirect:matchingList";
 		
 	}
@@ -134,10 +136,38 @@ public class MatchingController {
 		// 매칭 신청 처리
 		matchingService.insertMatchingApply(matchingApply);
 
-		// 매칭신청 성공시 알림
-		request.setAttribute("msg", "매칭 신청이 처리되었습니다.");
-
 		return "redirect:/matchingList";
+	}
+	
+	//마이페이지
+	//마이페이지 MyApply 조회내역
+	@RequestMapping(value = "/myCalender", method=RequestMethod.GET)
+	public String myApplyList(Model model, HttpSession session)
+	{
+		//세션에있는 아이디 조회
+		String id = (String) session.getAttribute("id");
+		
+		if(id == null || id.trim().equals("")) {
+	        return "redirect:/login"; // 로그인 페이지로 이동하도록 처리
+	    }
+		
+		List<MyApply> myApplyList = matchingService.myApplyList(id);
+		model.addAttribute("myApplyList", myApplyList);
+		
+		return "user/myCalender";
+	}
+	
+	//마이페이지 MyApply 조회 상세내역
+	@RequestMapping(value = "/myApplyDetail", method=RequestMethod.GET)
+	public String myApplyDetail(Model model, int no, HttpSession session)throws Exception
+	{
+		//세션에있는 아이디 조회
+		String id = (String) session.getAttribute("id");
+		
+		MyApply myApply = matchingService.getMyApply(no);
+		model.addAttribute("myApply", myApply);
+		
+		return "user/myApplyDetail";
 	}
 
 }

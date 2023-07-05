@@ -34,6 +34,9 @@
 				<!-- 도메인 등록을 위와 같이 해서 아래에 붙여주세요. -->
 				<value>com.springproject.dunk.mj.domain.MatchingItem</value>
 				<value>com.springproject.dunk.hy.domain.TeamMatchUserEval</value>
+				<value>com.springproject.dunk.mj.domain.MyApply</value>
+        <value>com.springproject.dunk.ms.domain.UserBookList</value>
+
 			</list>
 		</property>
 

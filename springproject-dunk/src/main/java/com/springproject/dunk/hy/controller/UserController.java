@@ -47,7 +47,7 @@ public class UserController {
 
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String login(String id, String pass, PrintWriter out, HttpServletResponse response, 
-			HttpSession session, Model model) {
+			HttpSession session, Model model,  @RequestParam(value = "grade", required = false) Integer grade) {
 		
 		int result=service.login(id, pass);
 		
@@ -73,9 +73,9 @@ public class UserController {
 		User user=service.getUser(id);
 		
 		model.addAttribute("user", user);
-		
 		session.setAttribute("isLogin", true);
 		session.setAttribute("id", id);
+		session.setAttribute("grade", user.getGrade());
 		session.setAttribute("nick", user.getNickname());
 		session.setAttribute("grade", user.getGrade());
 		
