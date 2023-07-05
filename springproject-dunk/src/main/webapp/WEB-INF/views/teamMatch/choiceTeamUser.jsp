@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="row mt-5">
-	<div class="col-6 offset-3 border rounded-5 border-2 border-warning">
+	<div class="col-6 offset-3 border rounded-5 border-2" style="--bs-border-color: #fa9300">
 		<div class="row mx-3 my-3">
 			<div class="col">
 				<div class="row fw-bold fs-4">
@@ -19,7 +19,7 @@
 									<input type="hidden" name="teamNo" value="${teamNo}">									
 								<div class="row mx-3 py-3">
 									<div class="col">										
-										<div class="row border-bottom my-2 px-5">
+										<div class="row border-bottom my-2 px-5" style="--bs-border-color: #E1E1E1">
 											<div class="col-6 fw-bold">
 												팀장
 											</div>
@@ -33,7 +33,7 @@
 										</div>									
 										<c:forEach var="u" items="${uList}">
 											<c:if test="${u.userId !=t.leaderId}">
-												<div class="row border-bottom my-2 px-5">
+												<div class="row border-bottom my-2 px-5" style="--bs-border-color: #E1E1E1">
 													<div class="col-6 fw-bold">
 														팀원
 													</div>

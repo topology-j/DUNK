@@ -5,7 +5,7 @@
 <div class="row mt-5">
 	<div class="col-10 offset-2">
 		<div class="row">
-			<div class="col-4 border rounded-5 border-2 border-warning">
+			<div class="col-4 border rounded-5 border-2" style="--bs-border-color: #fa9300">
 				<div class="row mx-3 my-3">
 					<div class="col-6">
 						<div class="row my-5">
@@ -72,7 +72,7 @@
 			</div>
 			<div class="col-6">				
 				<div class="row">
-					<div class="col-11 offset-1 border rounded-5 border-2 border-warning">
+					<div class="col-11 offset-1 border rounded-5 border-2" style="--bs-border-color: #fa9300">
 						<div class="mx-3 mt-4 mb-3">
 							<div class="row my-3">
 								<div class="col">

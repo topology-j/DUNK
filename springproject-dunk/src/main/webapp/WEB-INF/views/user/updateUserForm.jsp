@@ -6,7 +6,7 @@
 <div class="row">
 	<div class="col">
 		<div class="row mt-5">
-			<div class="col  border rounded-5 border-2 border-warning">
+			<div class="col  border rounded-5 border-2" style="--bs-border-color: #fa9300">
 				<div class="row my-5">
 					<div class="col">
 						<p class="fw-bold fs-4 text-center">회원 정보 수정</p>

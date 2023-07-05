@@ -57,23 +57,19 @@
 			    	  <li><a class="dropdown-item" href="matchingList">매치</a></li>
 			    	  <li><a class="dropdown-item" href="teamMatchList">팀 매치</a></li>
 			    	  <li><a class="dropdown-item" href="teamRecruitmentList">팀 모집</a></li>
-				      <li><a class="dropdown-item" href="placeList">장소예약</a></li>
-				      <li><a class="dropdown-item" href="eventList">이벤트</a></li>
-				      <li><a class="dropdown-item" href="#">뉴스</a></li>
-				      <li><a class="dropdown-item" href="#">공지</a></li>
-				      
-				      <li><hr class="dropdown-divider"></li>
-				      <li><a class="dropdown-item" href="#">Separated link</a></li>
+				      <li><a class="dropdown-item" href="placeList">장소</a></li>
+				      <li><a class="dropdown-item" href="eventList">이벤트</a></li>				      
+				      <li><a class="dropdown-item" href="#">공지사항</a></li>
 				    </ul>
 				  </li>
 				  <li class="nav-item me-2" style="border: 2px solid #fa9300; border-radius: 40px;">
 				    <a class="nav-link" href="matchingList" style="color:#fa9300;">매치</a>
 				  </li>
-				  <li class="nav-item me-2" style="border: 2px solid #fa9300; border-radius: 40px;">
-				    <a class="nav-link" href="placeList" style="color:#fa9300;">장소</a>
+				   <li class="nav-item me-2" style="border: 1px solid #fa9300; border-radius: 40px;">
+				    <a class="nav-link" href="teamMatchList" style="color:#fa9300;">팀매치</a>
 				  </li>
-				  <li class="nav-item me-2" style="border: 2px solid #fa9300; border-radius: 40px;">
-				    <a class="nav-link" href="#" style="color:#fa9300;">토너먼트</a>
+				  <li class="nav-item me-2" style="border: 1px solid #fa9300; border-radius: 40px;">
+				    <a class="nav-link" href="placeList" style="color:#fa9300;">장소</a>
 				  </li>
 				</ul>
 			</div>

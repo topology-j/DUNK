@@ -29,5 +29,7 @@ public interface TeamService {
 	
 	public void updateTeamUser(int no, String id, String nick);	
 	
+	public List<TeamUser> getTeamUserList(String id);
+	
 	
 }

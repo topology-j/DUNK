@@ -6,7 +6,7 @@
 <div class="row mt-5">
 	<div class="col-10 offset-2">
 		<div class="row">
-			<div class="col-4 border rounded-5 border-2 border-warning">
+			<div class="col-4 border rounded-5 border-2" style="--bs-border-color: #fa9300">
 				<div class="row mx-3 my-3">
 					<div class="col-6">
 						<div class="row my-5">
@@ -39,9 +39,9 @@
 			</div>
 			<div class="col-6">				
 				<div class="row">
-					<div class="col-11 offset-1 border rounded-5 border-2 border-warning">
+					<div class="col-11 offset-1 border rounded-5 border-2" style="--bs-border-color: #fa9300">
 						<div class="mx-3 my-3">
-							<div class="row my-4 border-bottom">
+							<div class="row my-4 border-bottom" style="--bs-border-color: #E1E1E1">
 								<div class="col-6">
 									생년월일
 								</div>
@@ -49,7 +49,7 @@
 									${p.birth}
 								</div>
 							</div>
-							<div class="row my-4 border-bottom">
+							<div class="row my-4 border-bottom" style="--bs-border-color: #E1E1E1">
 								<div class="col-6">
 									성별
 								</div>
@@ -57,7 +57,7 @@
 									${p.gender}
 								</div>
 							</div>
-							<div class="row my-4 border-bottom">
+							<div class="row my-4 border-bottom" style="--bs-border-color: #E1E1E1">
 								<div class="col-6">
 									포지션
 								</div>
@@ -65,7 +65,7 @@
 									${p.position}
 								</div>
 							</div>
-							<div class="row my-4 border-bottom">
+							<div class="row my-4 border-bottom" style="--bs-border-color: #E1E1E1">
 								<div class="col-6">
 									선호지역
 								</div>
@@ -73,7 +73,7 @@
 									${p.preferredArea}
 								</div>
 							</div>
-							<div class="row my-4 border-bottom">
+							<div class="row my-4 border-bottom" style="--bs-border-color: #E1E1E1">
 								<div class="col-6">
 									연령대
 								</div>
@@ -81,7 +81,7 @@
 									${p.agegroup}대
 								</div>
 							</div>
-							<div class="row my-4 border-bottom">
+							<div class="row my-4 border-bottom" style="--bs-border-color: #E1E1E1">
 								<div class="col-6">
 									경기
 								</div>

@@ -4,7 +4,7 @@
 <script src="resources/js/team.js"></script>
 
 <div class="row my-5">
-	<div class="col-6 offset-3 border rounded-5 border-2 border-warning">		
+	<div class="col-6 offset-3 border rounded-5 border-2" style="--bs-border-color: #fa9300">		
 		<div class="row my-5 text-center">
 			<div class="col">
 				<div class="fw-bold fs-4">나의 팀 만들기</div>

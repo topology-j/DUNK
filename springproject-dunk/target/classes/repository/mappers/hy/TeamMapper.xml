@@ -53,6 +53,10 @@
 	<update id="updateTeamUser" parameterType="hashmap">
 		update team_user set user_nick=#{nick} where team_no=#{no} and user_id=#{id}
 	</update>
+	
+	<select id="getTeamUserList" resultMap="teamUserResultMap">
+		select * from team_user where user_id=#{id}
+	</select>
 
 	<resultMap id="teamResultMap" type="Team">
 		<id property="no" column="no" />

@@ -110,6 +110,11 @@ public class TeamDaoImpl implements TeamDao {
 		
 		sqlSession.update(NAME_SPACE+".updateTeamUser", params);		
 	}
+
+	@Override
+	public List<TeamUser> getTeamUserList(String id) {		
+		return sqlSession.selectList(NAME_SPACE+".getTeamUserList", id);
+	}
 	
 	
 	

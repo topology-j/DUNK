@@ -6,7 +6,7 @@
 <div class="row my-5">
 	<div class="col-8 offset-2">
 		<div class="row">
-			<div class="col-6 border rounded-5 border-2 border-warning mx-3 px-3">
+			<div class="col-6 border rounded-5 border-2 mx-3 px-3" style="--bs-border-color: #fa9300">
 				<div class="row mt-3">
 					<div class="col">
 						<div class="row my-2 fs-5 fw-bold">
@@ -16,7 +16,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="row my-3 border-bottom pb-3">
+				<div class="row my-3 border-bottom pb-3" style="--bs-border-color: #E1E1E1">
 					<div class="col-6">
 						${tm.level}
 					</div>
@@ -24,8 +24,8 @@
 						${tm.gender}
 					</div>
 				</div>
-				<div class="row my-3 border-bottom pb-3">
-					<div class="col">
+				<div class="row my-3 border-bottom pb-3" style="--bs-border-color: #E1E1E1">
+					<div class="col-6">
 						<c:if test="${u.profileImg==0}">
 							<img src="resources/userimage/pureimg.jpg" class="rounded-circle" style="width:50px; height:50px">
 						</c:if>
@@ -33,12 +33,17 @@
 							<img src="resources/userimage/${p.img}" class="rounded-circle" style="width:50px; height:50px">
 						</c:if>
 						${tm.writerNick}&nbsp;&nbsp;
-						<c:if test="${sessionScope.isLogin}">
-							<input type="button" class="btn btn-dark" value="쪽지" onclick="location.href='writeMessageFormtm?sendId=${sessionScope.id}&sendNick=${sessionScope.nick}&receiveId=${tm.writerId}&receiveNick=${tm.writerNick}&no=${tm.no}'" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+						<c:if test="${sessionScope.isLogin && sessionScope.id !=tm.writerId}">
+							<input type="button" class="btn btn-dark" value="쪽지" onclick="location.href='writeMessageFormtm?sendId=${sessionScope.id}&sendNick=${sessionScope.nick}&receiveId=${tm.writerId}&receiveNick=${tm.writerNick}&no=${tm.no}&pageNum=${pageNum}'" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+						</c:if>
+					</div>
+					<div class="col-6">
+						<c:if test="${sessionScope.id==tm.writerId}">							
+							<button class="btn btn-danger" type="button" onclick="location.href='deleteTeamMatch?tmNo=${tm.no}&pageNum=${pageNum}'" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">게시글 삭제</button>	  
 						</c:if>
 					</div>					
 				</div>
-				<div class="row my-3 border-bottom">
+				<div class="row my-3 border-bottom" style="--bs-border-color: #E1E1E1">
 					<div class="col-6 fw-bold">
 						${t.name}
 					</div>
@@ -61,7 +66,7 @@
 			</div>
 			<div class="col-5">
 				<div class="row">
-					<div class="col border rounded-5 border-2 border-warning mx-3 px-3">				
+					<div class="col border rounded-5 border-2 mx-3 px-3" style="--bs-border-color: #fa9300">				
 						<div class="row mt-3 fs-5 fw-bold">
 							<div class="col">
 								<fmt:formatDate value="${tm.date}" pattern="yyyy-MM-dd" />&nbsp;&nbsp;&nbsp;&nbsp;
@@ -73,12 +78,12 @@
 								<div class="fs-4">${pb.placeName}</div>						
 							</div>
 						</div>
-						<div class="row my-2 border-bottom">
+						<div class="row my-2 border-bottom" style="--bs-border-color: #E1E1E1">
 							<div class="col">										
 								<div>${pb.placeAddress1}</div>
 							</div>
 						</div>
-						<div class="row my-3 border-bottom py-3 fw-bold">
+						<div class="row my-3 border-bottom py-3 fw-bold" style="--bs-border-color: #E1E1E1">
 							<div class="col">
 								${tm.pay}원
 							</div>

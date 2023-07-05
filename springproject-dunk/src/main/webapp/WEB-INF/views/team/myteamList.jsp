@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="row mt-5">
-	<div class="col-6 offset-3 border rounded-5 border-2 border-warning">
+	<div class="col-6 offset-3 border rounded-5 border-2" style="--bs-border-color: #fa9300">
 		<div class="row mx-3 my-3">
 			<div class="col">
 				<div class="row fw-bold fs-4">
@@ -18,7 +18,7 @@
 							<div class="bg-secondary bg-opacity-10 rounded-start rounded-end">
 								<div class="row mx-3 py-3">
 									<div class="col">
-										<div class="row fw-bold border-bottom my-2 px-5">
+										<div class="row fw-bold border-bottom my-2 px-5 py-2" style="--bs-border-color: #E1E1E1">
 											<div class="col-6">
 												${t.name}
 											</div>
@@ -27,7 +27,7 @@
 												<input type="button" class="btn btn-danger" value="탈퇴" onclick="location.href='leaveTeam?no=${t.no}&id=${sessionScope.id}'" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">												
 											</div>
 										</div>
-										<div class="row border-bottom my-2 px-5">
+										<div class="row border-bottom my-2 px-5 py-2" style="--bs-border-color: #E1E1E1">
 											<div class="col-6">
 												팀장
 											</div>
