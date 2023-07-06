@@ -103,7 +103,9 @@ label {
      		</form>
         </div>
         <div class="col-3">
+        	<c:if test="${grade eq '200'}">	
 	          	  <button type="button" class="btn btn-outline-warning"  onclick="location.href='placeWriteForm'">장소등록</button>
+			</c:if>
 		</div>    
 	</div>
   
@@ -122,10 +124,10 @@ label {
 										<img src="${pageContext.request.contextPath}/resources/placeimg/${p.image1}" class="d-block w-100" >
 									</div>
 									<div class="carousel-item">
-										<img src="${pageContext.request.contextPath}/resources/placeimg/${p.image1}"  class="d-block w-100" >
+										<img src="${pageContext.request.contextPath}/resources/placeimg/${p.image2}"  class="d-block w-100" >
 									</div>
 									<div class="carousel-item">
-										<img src="${pageContext.request.contextPath}/resources/placeimg/${p.image1}"  class="d-block w-100">
+										<img src="${pageContext.request.contextPath}/resources/placeimg/${p.image3}"  class="d-block w-100">
 									</div>
 								</div>
 							</div>

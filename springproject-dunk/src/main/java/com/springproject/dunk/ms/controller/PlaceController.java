@@ -81,10 +81,10 @@ public class PlaceController {
 		return "place/placeDetail";
 	}
 	
-	//장소입력폼 (name, zipcode, address1, address2, area, image)
+	// 장소 입력 폼 (name, zipcode, address1, address2, area, image)
 	@RequestMapping(value="/placeWriteProcess", method=RequestMethod.POST)
 	public String placeInsert(HttpServletRequest request, String name, String zipcode, String address1, String address2, String area, 
-			@RequestParam(value="images", required=false) List <MultipartFile> images) throws IOException {
+			@RequestParam(value="images", required=false) List<MultipartFile> images) throws IOException {
 
 		Board board = new Board();
 		board.setName(name);
@@ -92,48 +92,46 @@ public class PlaceController {
 		board.setAddress1(address1);
 		board.setAddress2(address2);
 		board.setArea(area);	
-		
-		//for(MultipartFile multipartFile : multipartFiles) {
-		for(int i=0; i < images.size(); i++) {
-		
-			MultipartFile multipartFile =images.get(i);
 			
-			if(!multipartFile.isEmpty()) { // 업로드된 파일 데이터가 존재하면
+		for (int i = 0; i < images.size(); i++) {
+			MultipartFile multipartFile = images.get(i);
+			
+			if (!multipartFile.isEmpty()) { // 업로드된 파일 데이터가 존재하면
+				System.out.println("originName: " + multipartFile.getOriginalFilename());
+				System.out.println("name: " + multipartFile.getName());
 				
-				System.out.println("originName : " + multipartFile.getOriginalFilename());
-				System.out.println("name : " + multipartFile.getName());
+				String filePath = request.getServletContext().getRealPath(DEFAULT_PATH);
 				
-				String filePath = 
-						request.getServletContext().getRealPath(DEFAULT_PATH);
-		
-				UUID uid = UUID.randomUUID();
-				String saveName = uid.toString() + "_" + multipartFile.getOriginalFilename();
+				String originalFilename = multipartFile.getOriginalFilename();
+				String saveName = originalFilename;
 				File file = new File(filePath, saveName);
-				System.out.println("placeInsert - newName : " + file.getName());
-				System.out.println("절대경로" + file.getAbsolutePath());
+				
+				System.out.println("placeInsert - newName: " + file.getName());
+				System.out.println("절대경로: " + file.getAbsolutePath());
+				
 				multipartFile.transferTo(file);
 				
-				if(i == 0) {
+				if (i == 0) {
 					board.setImage1(saveName);
-				}
-				else if(i == 1) {
+				} else if (i == 1) {
 					board.setImage2(saveName);
-				}
-				else if(i == 2) {
+				} else if (i == 2) {
 					board.setImage3(saveName);
-				}
-				else if(i == 3) {
+				} else if (i == 3) {
 					board.setImage4(saveName);
 				}
 			}
 		}
 		
-	service.placeInsert(board);
-	System.out.println("insert No : " + board.getNo());
-	
-	return "redirect:placeList";
-}
+		service.placeInsert(board);
+		System.out.println("insert No: " + board.getNo());
+		
+		return "redirect:placeList";
+	}
 
+	
+	
+	
 	//updateForm에서 수정입력하고 > redirect:list요청
 	@RequestMapping(value="placeUpdateProcess", method=RequestMethod.POST)
 	public String placeUpdateProcess(HttpServletRequest request, HttpServletResponse response, PrintWriter out, RedirectAttributes reAttrs, 

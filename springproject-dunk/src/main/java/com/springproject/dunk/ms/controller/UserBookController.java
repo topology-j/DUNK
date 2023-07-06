@@ -34,8 +34,9 @@ public class UserBookController {
 	
 	//농구장예약리스트를 모두불러오기
 	@RequestMapping(value="/userPlaceList", method=RequestMethod.GET)
-	public String getUserPlaceList(Model model, 
-			@RequestParam(value="pageNum", required=false, defaultValue="1") int pageNum) throws Exception {	
+	public String getUserPlaceList(Model model, @RequestParam(value="pageNum", required=false, defaultValue="1")
+																		int pageNum) throws Exception {	
+		
 		Map<String, Object> modelMap = ubservice.getUserPlaceList(pageNum);
 		model.addAllAttributes(modelMap);
 		return "place/userPlaceList";

@@ -22,7 +22,6 @@
 	
 	<insert id="insertEvent" parameterType="Event">
 		insert into event (title, title_img, reg_date, content, content_img, read_count, recommend) values(#{title}, #{titleImg}, sysdate(), #{content}, #{contentImg}, 0, 0)
-
 	</insert>
 	
 	<update id="updateEvent" parameterType="Event">
@@ -54,7 +53,7 @@
 	<select id="commentList" resultMap="eventCommentResultMap">
 		select * from event_comment where event_no=#{no} order by no desc
 	</select>
-
+	
 	<insert id="addEventComment" parameterType="EventComment">
 		insert into event_comment (event_no, user_id, user_nick, reg_date, content) values(#{eventNo}, #{userId}, #{userNick}, sysdate(), #{content})
 	</insert>
@@ -70,7 +69,6 @@
 	<delete id="deleteEventComment">
 		delete from event_comment where no=#{no}
 	</delete>
-
 
 	<resultMap id="eventResultMap" type="Event">
 		<id property="no" column="no" />
