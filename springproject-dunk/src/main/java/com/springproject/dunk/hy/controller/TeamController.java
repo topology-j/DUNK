@@ -304,14 +304,18 @@ public class TeamController {
 		List<PlaceBook> pList = pService.placeBookList(id);
 		List<Team> tList = service.teamList(id);
 				
-		TeamMatch tm=tmService.getTeamMatchById(id);
+		List<TeamMatch> tmList=tmService.getTeamMatchById(id);
 		
-		if(tm !=null) {
+		if(tmList !=null) {
 			
 			for(int i=0; i<pList.size(); i++) {
 				
-				if(pList.get(i).getNo()==tm.getBookNo()) {
-					pList.remove(i);
+				for(int j=0; j<tmList.size(); j++) {
+					
+					if(pList.get(i).getNo()==tmList.get(j).getBookNo()) {
+						pList.remove(i);
+					}
+					
 				}
 				
 			}

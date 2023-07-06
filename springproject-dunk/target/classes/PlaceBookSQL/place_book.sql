@@ -25,20 +25,6 @@ INSERT INTO place_book (place_no, place_name, place_address1, place_address2, pl
 INSERT INTO place_book (place_no, place_name, place_address1, place_address2, place_pay, user_id, user_nick, dates, player_num, time_book)
 VALUES (24, '관악구민종합체육센터', '서울 관악구 낙성대로3길 37', '관악구민종합체육센터', null, "globalit",  "이제숨좀",	'2023-07-07', NULL, '18:00~20:00');
 
-INSERT INTO place_book (place_no, place_name, place_address1, place_address2, place_pay, user_id, user_nick, dates, player_num, time_book)
-VALUES (24, '관악구민종합체육센터', '서울 관악구 낙성대로3길 37', '관악구민종합체육센터', NULL,  'bbbb', NULL,	'2023-06-28', NULL, '12:00~14:00');
-
-INSERT INTO place_book (place_no, place_name, place_address1, place_address2, place_pay, user_id, user_nick, dates, player_num, time_book)
-VALUES (24, '관악구민종합체육센터', '서울 관악구 낙성대로3길 37', '관악구민종합체육센터', NULL, 'cccc',  NULL,	'2023-06-28', NULL, '14:00~16:00');
-
-INSERT INTO place_book (place_no, place_name, place_address1, place_address2, place_pay, user_id, user_nick, dates, player_num, time_book)
-VALUES (24, '관악구민종합체육센터', '서울 관악구 낙성대로3길 37', '관악구민종합체육센터', NULL, 'dddd', NULL,	'2023-06-28', NULL, '18:00~20:00');
-
-INSERT INTO place_book (place_no, place_name, place_address1, place_address2, place_pay, user_id, user_nick, dates, player_num, time_book)
-VALUES (24, '관악구민종합체육센터', '서울 관악구 낙성대로3길 37', '관악구민종합체육센터', NULL, "yellowbear",  "흰둥이",	'2023-07-08', NULL, '14:00~16:00');
-
-INSERT INTO place_book (place_no, place_name, place_address1, place_address2, place_pay, user_id, user_nick, dates, player_num, time_book)
-VALUES (24, '관악구민종합체육센터', '서울 관악구 낙성대로3길 37', '관악구민종합체육센터', NULL, "socute",  "유체리", '2023-07-08', NULL, '16:00~18:00');
 
 INSERT INTO place_book (place_no, place_name, place_address1, place_address2, place_pay, user_id, user_nick, dates, player_num, time_book)
 VALUES (24, '관악구민종합체육센터', '서울 관악구 낙성대로3길 37', '관악구민종합체육센터', NULL,  'gggg',  NULL,	'2023-06-29', NULL, '18:00~20:00');
@@ -50,10 +36,10 @@ INSERT INTO place_book (place_no, place_name, place_address1, place_address2, pl
 VALUES (24, '관악구민종합체육센터', '서울 관악구 낙성대로3길 37', '관악구민종합체육센터', NULL, 'hhhh', NULL,	'2023-06-30', NULL, '12:00~14:00');
 
 INSERT INTO place_book (place_no, place_name, place_address1, place_address2, place_pay, user_id, user_nick, dates, player_num, time_book)
-VALUES (24, '관악구민종합체육센터', '서울 관악구 낙성대로3길 37', '관악구민종합체육센터', NULL, 'iiii', NULL,	'2023-06-30', NULL, '14:00~16:00');
+VALUES (24, '관악구민종합체육센터', '서울 관악구 낙성대로3길 37', '관악구민종합체육센터', NULL, "yellowbear",  "흰둥이",	'2023-07-08', NULL, '14:00~16:00');
 
 INSERT INTO place_book (place_no, place_name, place_address1, place_address2, place_pay, user_id, user_nick, dates, player_num, time_book)
-VALUES (24, '관악구민종합체육센터', '서울 관악구 낙성대로3길 37', '관악구민종합체육센터', NULL, 'jjjj',  NULL,	'2023-06-30', NULL, '16:00~18:00');
+VALUES (24, '관악구민종합체육센터', '서울 관악구 낙성대로3길 37', '관악구민종합체육센터', NULL, "socute",  "유체리", '2023-07-08', NULL, '16:00~18:00');
 
 INSERT INTO place_book (place_no, place_name, place_address1, place_address2, place_pay, user_id, user_nick, dates, player_num, time_book)
 VALUES (24, '관악구민종합체육센터', '서울 관악구 낙성대로3길 37', '관악구민종합체육센터', NULL, 'kkkk', NULL,	'2023-06-30', NULL, '18:00~20:00');
@@ -84,6 +70,21 @@ VALUES (24, '관악구민종합체육센터', '서울 관악구 낙성대로3길
 
 INSERT INTO place_book (place_no, place_name, place_address1, place_address2, place_pay, user_id, user_nick, dates, player_num, time_book)
 VALUES (24, '관악구민종합체육센터', '서울 관악구 낙성대로3길 37', '관악구민종합체육센터', NULL, 'nnnn', NULL,	'2023-07-02', NULL, '12:00~14:00');
+
+INSERT INTO place_book (place_no, place_name, place_address1, place_address2, place_pay, user_id, user_nick, dates, player_num, time_book)
+VALUES (24, '관악구민종합체육센터', '서울 관악구 낙성대로3길 37', '관악구민종합체육센터', NULL, 'nnnn', NULL,	'2023-07-02', NULL, '14:00~16:00');
+
+INSERT INTO place_book (place_no, place_name, place_address1, place_address2, place_pay, user_id, user_nick, dates, player_num, time_book)
+VALUES (24, '관악구민종합체육센터', '서울 관악구 낙성대로3길 37', '관악구민종합체육센터', NULL,  'nnnn',  NULL,	'2023-07-02', NULL, '16:00~18:00');
+
+INSERT INTO place_book (place_no, place_name, place_address1, place_address2, place_pay, user_id, user_nick, dates, player_num, time_book)
+VALUES (24, '관악구민종합체육센터', '서울 관악구 낙성대로3길 37', '관악구민종합체육센터', NULL, 'nnnn',  NULL,	'2023-07-02', NULL, '18:00~20:00');
+
+INSERT INTO place_book (place_no, place_name, place_address1, place_address2, place_pay, user_id, user_nick, dates, player_num, time_book)
+VALUES (24, '관악구민종합체육센터', '서울 관악구 낙성대로3길 37', '관악구민종합체육센터', NULL, 'nnnn', NULL,	'2023-07-03', NULL, '16:00~18:00');
+
+INSERT INTO place_book (place_no, place_name, place_address1, place_address2, place_pay, user_id, user_nick, dates, player_num, time_book)
+VALUES (24, '관악구민종합체육센터', '서울 관악구 낙성대로3길 37', '관악구민종합체육센터', NULL, 'nnnn', NULL,	'2023-07-03', NULL, '18:00~20:00');
 
 INSERT INTO place_book (place_no, place_name, place_address1, place_address2, place_pay, user_id, user_nick, dates, player_num, time_book)
 VALUES (24, '관악구민종합체육센터', '서울 관악구 낙성대로3길 37', '관악구민종합체육센터', NULL, NULL,  NULL,	'2023-07-14', NULL, '16:00~18:00');
@@ -122,7 +123,7 @@ INSERT INTO place_book (place_no, place_name, place_address1, place_address2, pl
 VALUES (23, '삼성리틀썬더스 목동점', '서울특별시 양천구 중앙로 312', NULL, 40000, NULL,  NULL, '2023-07-12', NULL, '12:00~14:00');
 
 INSERT INTO place_book (place_no, place_name, place_address1, place_address2, place_pay, user_id, user_nick, dates, player_num, time_book)
-VALUES (24, '관악구민종합체육센터', '서울 관악구 낙성대로3길 37', '관악구민종합체육센터', NULL, 'nnnn', NULL,	'2023-07-03', NULL, '20:00~22:00');
+VALUES (23, '삼성리틀썬더스 목동점', '서울특별시 양천구 중앙로 312', NULL, 40000, NULL,  NULL, '2023-07-12', NULL, '20:00~22:00');
 
 INSERT INTO place_book (place_no, place_name, place_address1, place_address2, place_pay, user_id, user_nick, dates, player_num, time_book)
 VALUES (23, '삼성리틀썬더스 목동점', '서울특별시 양천구 중앙로 312', NULL, 40000, NULL,  NULL, '2023-07-13', NULL, '12:00~14:00');

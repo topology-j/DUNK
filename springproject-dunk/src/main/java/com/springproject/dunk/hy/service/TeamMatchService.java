@@ -29,7 +29,7 @@ public interface TeamMatchService {
 	
 	public List<TeamMatchUser> teamMatchUserList(String id);
 	
-	public TeamMatch getTeamMatchById(String id);
+	public List<TeamMatch> getTeamMatchById(String id);
 	
 	public void addTeamNo2(int bookNo, int teamNo);
 	

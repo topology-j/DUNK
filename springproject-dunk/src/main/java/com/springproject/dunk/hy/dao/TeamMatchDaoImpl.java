@@ -102,8 +102,8 @@ public class TeamMatchDaoImpl implements TeamMatchDao {
 	}
 
 	@Override
-	public TeamMatch getTeamMatchById(String id) {		
-		return sqlSession.selectOne(NAME_SPACE+".getTeamMatchById", id);
+	public List<TeamMatch> getTeamMatchById(String id) {		
+		return sqlSession.selectList(NAME_SPACE+".getTeamMatchById", id);
 	}
 
 	@Override
