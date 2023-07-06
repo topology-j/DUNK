@@ -7,12 +7,14 @@
 	<!-- 검색,로그인버튼부분 -->
 	<div class="row">
 				<div class="col">
-					<ul class="nav justify-content-end">							  
+					<ul class="nav justify-content-end">
+							<c:if test="${sessionScope.isLogin}">							  
 							  <li class="nav-item" >
 							    	<a class="nav-link" href="myCalender">
 							    		<i class="bi bi-calendar" style="color:#fa9300;"></i>
 							    	</a>
 							  </li>
+							  </c:if>
 							   <c:if test="${not sessionScope.isLogin}">
 								  <li class="nav-item">
 								    	<a class="nav-link" href="loginForm" style="color:#fa9300;">로그인</a>
