@@ -2,8 +2,22 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
+
 <script src="resources/js/weekC5.js" ></script>
 <script src="resources/js/formcheck-mj.js"></script>
+<script>
+    // Get the message from the query parameter in the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const message = urlParams.get('message');
+
+    // Display the message if it is not null or empty
+    if (message) {
+        alert(message);
+    }
+</script>
+
 <form id="matchingForm" >
 	<input type="hidden" name="selectedDate" id="selectedDate">
 </form>
@@ -46,12 +60,14 @@
 				<p class="fs-3 fw-bold">매칭리스트</p>
 			</div>
 		</div>
-		<!-- 매칭글쓰기 -->
+		<!-- 매칭글쓰기 sessionScope.isLogin일때 보이게 -->
+		<c:if test="${sessionScope.isLogin}">
 			<div class="row">
 				<div class="col text-center">
 					<a href="matchingWriteForm" class="btn" style="border-color: #fa9300">NEW 매칭글쓰기</a>
 				</div>
 			</div>
+		</c:if>
 			
 			<!-- 달력선택부분 -->
 				
@@ -105,10 +121,19 @@
 															</div>															
 														</c:if>
 														<c:if test="${m.inwon <= m.matchingApplyCount}">
-														<div class="text-center rounded-pill p-2" style="background-color: #B9B9B9">
-															<p class="text-white">모집마감</p>															
-														</div>
+															<div class="text-center rounded-pill p-2" style="background-color: #B9B9B9">
+																<p class="text-white">모집마감</p>															
+															</div>
 														</c:if>
+														
+														<c:if test="${matchingItem.matchingEndTime lt oneHourLaterDate}">
+														  <div class="text-center rounded-pill p-2" style="background-color: #B9B9B9">
+														    <p class="text-white">모집마감</p>
+														  </div>
+														</c:if>
+
+
+
 													</div>
 												</div>	
 											</li>

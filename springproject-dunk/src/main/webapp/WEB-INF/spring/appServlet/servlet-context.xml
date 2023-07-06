@@ -48,7 +48,7 @@
 			<mapping path="/update*" />	
 			<mapping path="/delete*" />	
 			<mapping path="/placeBookTerms" />		
-			<beans:ref bean="loginCheckInterceptor" />						
+			<beans:ref bean="loginCheckInterceptor" />
 		</interceptor>			
 	</interceptors>	
 	

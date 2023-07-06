@@ -92,7 +92,7 @@ public class MatchingController {
 	}
 	
 	//매칭최초 글쓰기
-	@RequestMapping(value = "/matchingWriteProcess", method =RequestMethod.POST)
+	@RequestMapping(value = "/writeMatchingProcess", method =RequestMethod.POST)
 	public String insertMatching(HttpServletRequest request,
 			Matching matching)throws IOException
 	
@@ -104,18 +104,19 @@ public class MatchingController {
 	
 	//매칭 글 삭제
 	@RequestMapping(value ="/matchingDelete", method =RequestMethod.POST)
-	public String deleteMatching(HttpServletResponse response, int no, RedirectAttributes reAttrs,
+	public String deleteMatching(HttpServletResponse response, int no, RedirectAttributes reAttrs, HttpSession session, RedirectAttributes redirectAttributes,
 			@RequestParam(value="pageNum", required=false, defaultValue="1")int pageNum)throws Exception
 	{
 		
 		matchingService.deleteMatching(no);
 		reAttrs.addAttribute("pageNum", pageNum);
+		//}
 		return "redirect:/matchingList";
 	}
 	
 	//매칭신청 matchingApply
 	@RequestMapping(value="/matchingApply", method=RequestMethod.POST)
-	public String insertMatchingApply(HttpServletRequest request, HttpSession session,
+	public String insertMatchingApply(HttpServletRequest request, HttpSession session, RedirectAttributes redirectAttributes,
 			MatchingApply matchingApply)throws IOException
 	{	
 		//세션에서 아이디 가져옴
@@ -127,6 +128,11 @@ public class MatchingController {
 		// Matching 객체에서 매칭 참가비 가져오기
 		int matchingPay = matchingService.getMatchingPay(matchingApply.getMatchingNo());
 		
+		//결제시 포인트가 부족할때
+		if (point < matchingPay) {
+			redirectAttributes.addAttribute("message", "포인트가 부족하여 매칭 신청할 수 없습니다.");
+	        return "redirect:/matchingList";
+	    }
 		// 사용자의 포인트에서 매칭 참가비 차감
 		int updatedPoint = point - matchingPay;
 
@@ -135,6 +141,9 @@ public class MatchingController {
 
 		// 매칭 신청 처리
 		matchingService.insertMatchingApply(matchingApply);
+		
+		redirectAttributes.addAttribute("message", "매치신청이 완료되었습니다!");
+
 
 		return "redirect:/matchingList";
 	}
@@ -168,6 +177,32 @@ public class MatchingController {
 		model.addAttribute("myApply", myApply);
 		
 		return "user/myApplyDetail";
+	}
+	
+	//마이페이지에서 내가쓴  MatchingList 보기
+	@RequestMapping(value = "/myMatchingList", method=RequestMethod.GET)
+	public String myMatchingList(Model model, HttpSession session)
+	{
+		// 세션에있는 아이디 조회
+		String id = (String) session.getAttribute("id");
+		
+		List<MatchingItem> myMatchingList = matchingService.myMatchingList(id);
+		model.addAttribute("myMatchingList", myMatchingList);
+		
+		return "user/myMatchingList";
+	}
+	
+	//마이페이지에서 내가쓴  MatchingList Detail보기
+	@RequestMapping(value = "/myMatchingListDetail", method=RequestMethod.GET)
+	public String myMatchingListDetail(Model model, int no, HttpSession session)throws Exception
+	{
+		// 세션에있는 아이디 조회
+		String id = (String) session.getAttribute("id");
+		
+		MatchingItem matchingItem = matchingService.getMyMatching(no);
+		model.addAttribute("matchingItem", matchingItem);
+		
+		return "user/myMatchingListDetail";
 	}
 
 }

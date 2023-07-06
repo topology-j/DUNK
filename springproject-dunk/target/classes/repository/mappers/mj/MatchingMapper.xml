@@ -75,8 +75,8 @@
 	
 	<!-- 매칭모집 글쓰기 -->
 	<insert id="insertMatching" parameterType="Matching" useGeneratedKeys="true" keyProperty="no">
-	    INSERT INTO matching(place_no, title, date, time, gender, level, inwon, pay, information, read_count, user_id)
-	    VALUES(#{placeNo}, #{title}, #{date}, #{time}, #{gender}, #{level}, #{inwon}, #{pay}, #{information}, #{readCount}, #{userId})
+	    INSERT INTO matching(place_no, title, date, time, gender, level, inwon, pay, laws, information, read_count, user_id)
+	    VALUES(#{placeNo}, #{title}, #{date}, #{time}, #{gender}, #{level}, #{inwon}, #{pay}, #{laws}, #{information}, #{readCount}, #{userId})
 	</insert>
 
 	
@@ -138,6 +138,39 @@
         AND ma.no=#{no}
 	</select>
 	
+	<!-- 마이페이지에서 내가쓴  MatchingList 보기-->
+	<select id="myMatchingList" resultType="MatchingItem" resultMap="matchingItemResultMap">
+		SELECT
+			m.no no,
+			p.name,
+			m.date,
+			m.title,
+			p.address1,
+			m.time,
+			m.pay,
+			(SELECT count(*) FROM matching_apply WHERE matching_no=m.no) matching_apply_count
+		FROM matching m, place p
+		WHERE m.place_no=p.no
+		AND m.user_id =#{id}
+		ORDER BY m.no DESC
+	</select>
+	
+	<!-- 마이페이지에서 내가쓴  MatchingList  Detail보기 -->
+	<select id="getMyMatching" resultType="MatchingItem" resultMap="matchingItemResultMap">
+		SELECT
+			m.no no,
+			p.name,
+			m.date,
+			m.title,
+			p.address1,
+			m.time,
+			m.pay,
+			(SELECT count(*) FROM matching_apply WHERE matching_no=m.no) matching_apply_count
+		FROM matching m, place p
+		WHERE m.place_no=p.no
+		AND m.no=#{no}
+	</select>
+	
 	<!-- 매칭, 장소, 예약 조인 -->
 	<resultMap type="MyApply" id="myApplyResultMap">
 		<id property="no" column="no" />
@@ -164,7 +197,7 @@
 		<result property="gender" column="gender" />
 		<result property="level" column="level" />
 		<result property="pay" column="pay" />
-		<result property="possibleImpossible" column="possible_impossible" />
+		<result property="laws" column="laws" />
 		<result property="information" column="information" />
 		<result property="readCount" column="read_Count" />
 		<result property="userId" column="user_id" />
@@ -186,7 +219,7 @@
 		<result property="gender" column="gender" />
 		<result property="level" column="level" />
 		<result property="pay" column="pay" />
-		<result property="possibleImpossible" column="possible_impossible" />
+		<result property="laws" column="laws" />
 		<result property="information" column="information" />
 		<result property="readCount" column="read_Count" />
 		<result property="userId" column="user_id" />

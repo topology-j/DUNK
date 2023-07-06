@@ -132,4 +132,17 @@ public class MatchingServiceImpl implements MatchingService {
 		return matchingDao.getMyApply(no);
 	}
 
+	//마이페이지에서 내가쓴  MatchingList 보기
+	@Override
+	public List<MatchingItem> myMatchingList(String userId) {
+		return matchingDao.myMatchingList(userId);
+	}
+
+	//마이페이지에서 내가쓴  MatchingListDetail 보기
+	@Override
+	public MatchingItem getMyMatching(int no) {
+		return matchingDao.getMyMatching(no);
+	}
+
+	
 }
