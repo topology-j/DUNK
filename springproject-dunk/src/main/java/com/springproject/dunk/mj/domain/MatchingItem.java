@@ -11,10 +11,10 @@ public class MatchingItem {
 	private Date date;
 	private String time;
 	private int inwon;
-	private int gender;
+	private String gender;
 	private String level;
 	private int pay;
-	private int possibleImpossible;
+	private int laws;
 	private String information;
 	private int readCount;
 	private String userId;
@@ -28,7 +28,7 @@ public class MatchingItem {
 	
 	public MatchingItem() { }
 	public MatchingItem(int no, int placeNo, String title, Date date, String time, int inwon,
-			int gender, String level, int pay, int possibleImpossible, String information, int readCount, String userId,
+			String gender, String level, int pay, int laws, String information, int readCount, String userId,
 			String name, String zipcode, String address1, String address2, int matchingApplyCount) 
 	{
 		this.no = no;
@@ -40,7 +40,7 @@ public class MatchingItem {
 		this.gender = gender;
 		this.level = level;
 		this.pay = pay;
-		this.possibleImpossible = possibleImpossible;
+		this.laws = laws;
 		this.information = information;
 		this.readCount = readCount;
 		this.userId = userId;
@@ -92,10 +92,10 @@ public class MatchingItem {
 		this.inwon = inwon;
 	}
 	
-	public int getGender() {
+	public String getGender() {
 		return gender;
 	}
-	public void setGender(int gender) {
+	public void setGender(String gender) {
 		this.gender = gender;
 	}
 	public String getLevel() {
@@ -110,11 +110,11 @@ public class MatchingItem {
 	public void setPay(int pay) {
 		this.pay = pay;
 	}
-	public int getPossibleImpossible() {
-		return possibleImpossible;
+	public int getLaws() {
+		return laws;
 	}
-	public void setPossibleImpossible(int possibleImpossible) {
-		this.possibleImpossible = possibleImpossible;
+	public void setLaws(int laws) {
+		this.laws = laws;
 	}
 	public String getInformation() {
 		return information;

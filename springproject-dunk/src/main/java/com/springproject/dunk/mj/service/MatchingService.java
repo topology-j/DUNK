@@ -24,9 +24,10 @@ public interface MatchingService {
 	//매칭 글 수정
 	//public abstract void updateMatching(Matching matching);
 	
+	//삭제
 	//매칭 글 삭제
 	public abstract void deleteMatching(int no);
-	
+		
 	//매칭에 지원 MatchingApply
 	public abstract void insertMatchingApply(MatchingApply matchingApply);
 	
@@ -49,5 +50,11 @@ public interface MatchingService {
 	
 	//마이페이지 MyApply 조회 상세내역
 	public abstract MyApply getMyApply(int no);
+	
+	//마이페이지에서 내가쓴  MatchingList 보기
+	public abstract List<MatchingItem> myMatchingList(String userId);
+	
+	//마이페이지에서 내가쓴  MatchingListDetail 보기
+	public abstract MatchingItem getMyMatching(int no);
 
 }

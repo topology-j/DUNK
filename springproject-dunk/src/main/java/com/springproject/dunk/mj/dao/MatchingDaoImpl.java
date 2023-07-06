@@ -123,4 +123,19 @@ public class MatchingDaoImpl implements MatchingDao {
 		return sqlSession.selectOne(NAME_SPACE+".getMyApply", no);
 	}
 
+	//마이페이지에서 내가쓴  MatchingList 보기
+	@Override
+	public List<MatchingItem> myMatchingList(String userId) {
+	
+		return sqlSession.selectList(NAME_SPACE + ".myMatchingList", userId);
+	}
+
+	//마이페이지에서 내가쓴  MatchingListDetail 보기
+	@Override
+	public MatchingItem getMyMatching(int no) {
+		return sqlSession.selectOne(NAME_SPACE+".getMyMatching", no);
+	}
+
+	
+
 }

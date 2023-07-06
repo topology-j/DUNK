@@ -21,13 +21,22 @@
 			<div class="col">
 				<!-- 매칭정보 col1-row1 -->
 				<div class="row">				
-						<h>매치 포인트</h>		
-						<p>레벨</p>		
-						<p>성별</p>
-						<p>경기규칙</p>
+						<h3 class="text-center">👉매치 포인트</h3>		
+						<p>레벨 : ${matchingItem.level}</p>		
+						<p>성별 : ${matchingItem.gender}</p>
+						
+						<c:if test="${matchingItem.laws == 0}">
+						  <p>경기규칙 : 3x3</p>
+						</c:if>
+						<c:if test="${matchingItem.laws == 1}">
+						  <p>경기규칙 : 5X5</p>
+						</c:if>
+						<c:if test="${matchingItem.laws == 2}">
+						  <p>경기규칙 : 자유매칭</p>
+						</c:if>
+
 						<p>지원인원 : ${matchingApplyCount }명</p>
 						<p>모집인원 : ${matchingItem.inwon}</p>
-						<p>준비물ex)</p>
 						<hr>
 						<pre>${ matchingItem.information }</pre>
 					</div>	
@@ -76,8 +85,41 @@
 				<p>주소${ matchingItem.name}</p>
 				<div><img src="resources/main_img/readCount.svg">${ matchingItem.readCount }</div><hr>
 				<div>${ matchingItem.pay}원/*몇시간</div><hr>
-				<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-				${matchingApplyCount == matching.inwon ? "disabled" : ""}>신청하기</button>
+				<!-- 로그인일시 신청버튼보이게. -->
+				<c:if test="${sessionScope.isLogin}">
+					<div class="col text-center" data-bs-target="#exampleModal">
+						<button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal"
+						${matchingItem.inwon > matchingItem.matchingApplyCount ? '' : 'disabled'}>
+							
+						    <c:if test="${matchingItem.inwon > matchingItem.matchingApplyCount}">
+								<div class="text-center rounded-pill p-2" style="background-color: #fa9300">
+									<p class="text-white">신청가능</p>
+								</div>
+							</c:if>
+					        <c:if test="${matchingItem.inwon - m.matchingApplyCount eq 1}">
+								<div class="bg-danger text-center rounded-pill p-2">
+									<p class="text-white">마감임박</p>
+								</div>
+							</c:if>
+						    
+						    <c:if test="${matchingItem.inwon <= matchingItem.matchingApplyCount}">
+								<div class="text-center rounded-pill p-2" style="background-color: #B9B9B9">
+									<p class="text-white">모집마감</p>
+								</div>
+							</c:if>
+						</button>
+					</div>
+				</c:if>
+				
+				<!-- 로그인이 아닐시 보이는 안내멘트 -->
+				<c:if test="${ not sessionScope.isLogin}">
+					<div class="text-center">
+						<a href="loginForm">
+							<i class="bi bi-dribbble"></i>로그인하고 매칭신청하기
+						</a>
+					</div>
+				</c:if>
+
 				
 				<!-- 매치신청하기 모달 -->
 				<form action="matchingApply" method="post">
@@ -144,8 +186,8 @@
 	<!-- 카카오지도생성 -->
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=12b3e50d52ec3f5f679638a93c481864&libraries=services"></script>
 		<script>
-			var mapContainer = document.getElementById('map517'), // 지도를 표시할 div 
-			mapOption = {
+			var mapContainer = document.getElementById('map517'); // 지도를 표시할 div 
+			var mapOption = {
 				center : new kakao.maps.LatLng(0, 0), // 지도의 중심좌표
 				level : 3// 지도의 확대 레벨
 			};
@@ -185,11 +227,13 @@
 								}
 							});
 		</script>
+	
 		<!-- 수정,삭제는 로그인 구현시 if처리 -->
 			<div class="row my-3">
 				<div class="col text-center">
-					<input type="button" class="btn btn-warning" id="detailUpdate" value="수정하기">&nbsp;&nbsp;
-					<input type="button" class="btn btn-danger" id="mDelete" value="삭제하기">&nbsp;&nbsp;
+					<c:if test="${sessionScope.isLogin and sessionScope.id eq matchingItem.userId}">
+						<input type="button" class="btn btn-danger" id="mDelete" value="삭제하기">&nbsp;&nbsp;
+					</c:if>
 					<input class="btn btn-primary" type="button" value="목록보기" onclick="location.href='matchingList?pageNum=${pageNum}&selectedDate=${selectedDate}'"/>
 				</div>
 			</div>

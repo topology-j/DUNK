@@ -14,14 +14,14 @@ public class Matching {
 	private String gender;
 	private String level;
 	private int pay;
-	private int possibleImpossible;
+	private int laws;
 	private String information;
 	private int readCount;
 	private String userId;
 	
 	public Matching() { }
 	public Matching(int no, int placeNo, String title, Date date, String time, int inwon,
-			String gender, String level, int pay, int possibleImpossible, String information, int readCount, String userId) 
+			String gender, String level, int pay, int laws, String information, int readCount, String userId) 
 	{
 		this.no = no;
 		this.placeNo = placeNo;
@@ -32,7 +32,7 @@ public class Matching {
 		this.gender = gender;
 		this.level = level;
 		this.pay = pay;
-		this.possibleImpossible = possibleImpossible;
+		this.laws = laws;
 		this.information = information;
 		this.readCount = readCount;
 		this.userId = userId;
@@ -97,11 +97,11 @@ public class Matching {
 	public void setPay(int pay) {
 		this.pay = pay;
 	}
-	public int getPossibleImpossible() {
-		return possibleImpossible;
+	public int getLaws() {
+		return laws;
 	}
-	public void setPossibleImpossible(int possibleImpossible) {
-		this.possibleImpossible = possibleImpossible;
+	public void setLaws(int laws) {
+		this.laws = laws;
 	}
 	public String getInformation() {
 		return information;

@@ -40,7 +40,7 @@
 			<mapping path="/add*" />
 			<mapping path="/write*" />
 			<mapping path="/update*" />	
-			<mapping path="/delete*" />			
+			<mapping path="/delete*,/*Delete" />			
 			<beans:ref bean="loginCheckInterceptor" />			
 		</interceptor>			
 	</interceptors>	

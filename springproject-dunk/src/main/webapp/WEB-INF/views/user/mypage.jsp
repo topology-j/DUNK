@@ -56,7 +56,7 @@
 				<div class="row mx-3 my-3">
 					<div class="col">
 						<div class="d-grid gap-2 my-2">
-							<button class="btn btn-primary text-start" type="button" onclick="location.href=''">나의 <br>개인 경기일정								
+							<button class="btn btn-primary text-start" type="button" onclick="location.href='myMatchingList?id=${u.id}'">나의 <br>개인 경기일정								
 							</button>
 						</div>						
 					</div>

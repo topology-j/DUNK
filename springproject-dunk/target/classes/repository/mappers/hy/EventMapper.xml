@@ -53,7 +53,7 @@
 	<select id="commentList" resultMap="eventCommentResultMap">
 		select * from event_comment where event_no=#{no} order by no desc
 	</select>
-
+	
 	<insert id="addEventComment" parameterType="EventComment">
 		insert into event_comment (event_no, user_id, user_nick, reg_date, content) values(#{eventNo}, #{userId}, #{userNick}, sysdate(), #{content})
 	</insert>

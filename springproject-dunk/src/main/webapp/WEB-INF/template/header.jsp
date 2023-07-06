@@ -14,11 +14,13 @@
 							      <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
 							    </form>
 							  </li>
-							  <li class="nav-item" >
-							    	<a class="nav-link" href="myCalender">
-							    		<i class="bi bi-calendar" style="color:#fa9300;"></i>
-							    	</a>
-							  </li>
+							  <c:if test="${sessionScope.isLogin}">
+								  <li class="nav-item">
+								    	<a class="nav-link" href="myCalender">
+								    		<i class="bi bi-calendar" style="color:#fa9300;"></i>
+								    	</a>
+								  </li>
+							  </c:if>
 							   <c:if test="${not sessionScope.isLogin}">
 								  <li class="nav-item">
 								    	<a class="nav-link" href="loginForm" style="color:#fa9300;">로그인</a>
