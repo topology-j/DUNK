@@ -231,6 +231,7 @@
 	</div>
 
 	<div id="result"><p></p></div>
+	
 	<!-- url복사 -->
 	<script>
 	  function copyUrl() {
