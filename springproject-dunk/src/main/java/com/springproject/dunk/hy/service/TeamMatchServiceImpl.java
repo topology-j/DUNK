@@ -81,7 +81,7 @@ public class TeamMatchServiceImpl implements TeamMatchService {
 	}
 
 	@Override
-	public TeamMatch getTeamMatchById(String id) {		
+	public List<TeamMatch> getTeamMatchById(String id) {		
 		return dao.getTeamMatchById(id);
 	}
 

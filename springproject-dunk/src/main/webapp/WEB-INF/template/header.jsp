@@ -7,13 +7,7 @@
 	<!-- 검색,로그인버튼부분 -->
 	<div class="row">
 				<div class="col">
-					<ul class="nav justify-content-end">
-							  <li class="nav-item">
-							  	<form class="d-flex" role="search">
-							      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-							      <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
-							    </form>
-							  </li>
+					<ul class="nav justify-content-end">							  
 							  <li class="nav-item" >
 							    	<a class="nav-link" href="myCalender">
 							    		<i class="bi bi-calendar" style="color:#fa9300;"></i>

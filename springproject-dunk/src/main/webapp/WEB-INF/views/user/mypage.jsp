@@ -91,30 +91,30 @@
 								<div class="col-6 text-end">
 									<span>${u.point}원</span>
 								</div>
-							</div>							
+							</div>	
+							<c:if test="${grade eq '100'}">										
 							<div class="row my-3">
-								<div class="col">
-									<a href="" class="text-decoration-none link-dark">나의 장소</a>
+								<div class="col">									
+									<a href="userPlace?userId=${u.id}" class="text-decoration-none link-dark">나의 장소</a>									
 								</div>
 							</div>
+							</c:if>
+							<c:if test="${grade eq '200'}">
+							<div class="row my-3">
+								<div class="col">
+									<!-- 관리자라면 모든예약을 봐야지 -->									
+									<a href="userPlaceList" class="text-decoration-none link-dark">모든 장소 예약</a>									
+								</div>
+							</div>
+							</c:if>
 							<div class="row my-3">
 								<div class="col">
 									<a href="generateTeamForm?id=${u.id}&nick=${u.nickname}" class="text-decoration-none link-dark">팀 생성</a>
 								</div>
-							</div>
+							</div>							
 							<div class="row my-3">
 								<div class="col">
-
-									<c:if test="${grade eq '100'}">
-										<a href="userPlace?userId=${u.id}" class="text-decoration-none link-dark">나의 장소</a>
-									</c:if>
-									<!-- 관리자라면 모든예약을 봐야지 -->
-									<c:if test="${grade eq '200'}">
-										<a href="userPlaceList" class="text-decoration-none link-dark">모든 장소 예약</a>
-									</c:if>
-
 									<a href="myteamList?id=${u.id}" class="text-decoration-none link-dark">나의 팀</a>
-
 								</div>
 							</div>
 							<div class="row my-3">
