@@ -134,10 +134,10 @@ label {
 						</a>
 						<div class="card-body"><!-- card body 시작 -->
 							<ul class="list-group list-group-flush">
-							    <li class="list-group-item">${p.name}</li>
-							    <li class="list-group-item">${p.area}</li>
-							    <li class="list-group-item">${p.availNum}</li>
-							    <li class="list-group-item">${p.readCount}</li>
+							    <li class="list-group-item">이름 : ${p.name}</li>
+							    <li class="list-group-item">지역 : ${p.area}</li>
+							    <li class="list-group-item">가격 : ${p.pay}</li>
+							    <li class="list-group-item">조회수 : ${p.readCount}</li>
 							</ul>		
 						</div><!-- end card-body -->
 					</div>
