@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+	<script src="resources/js/teamrecruitformcheck.js"></script>
 <style type="text/css">
 tr th.bg-orange {
     background-color: #fa9300;
