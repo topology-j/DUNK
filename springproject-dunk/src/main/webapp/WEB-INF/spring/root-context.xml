@@ -3,13 +3,15 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:c="http://www.springframework.org/schema/c"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
-	
+
 	<import resource="classpath:datasource/dbcpdatasource.xml" />
-	
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+
+	<bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="mapperLocations" value="classpath:repository/mappers/**/*Mapper.xml" />
-    		
+		<property name="mapperLocations"
+			value="classpath:repository/mappers/**/*Mapper.xml" />
+
 		<property name="typeAliases">
 			<list>
 				<value>com.springproject.dunk.hy.domain.Event</value>
@@ -18,10 +20,11 @@
 				<value>com.springproject.dunk.ms.domain.Reply</value>
 				<value>com.springproject.dunk.mj.domain.Matching</value>
 				<value>com.springproject.dunk.mj.domain.MatchingApply</value>
-				<value>com.springproject.dunk.ch.domain.PlaceBoard</value>	
-				<value>com.springproject.dunk.ch.domain.PlaceBook</value>	
+				<value>com.springproject.dunk.ch.domain.PlaceBoard</value>
+				<value>com.springproject.dunk.ch.domain.PlaceBook</value>
+				<value>com.springproject.dunk.st.domain.NoticeBoard</value>
 				<!-- 도메인 등록을 위와 같이 해서 아래에 붙여주세요. -->
-								
+
 				<value>com.springproject.dunk.hy.domain.EventComment</value>
 				<value>com.springproject.dunk.hy.domain.MannerCheck</value>
 				<value>com.springproject.dunk.hy.domain.Message</value>
@@ -30,20 +33,23 @@
 				<value>com.springproject.dunk.hy.domain.TeamMatch</value>
 				<value>com.springproject.dunk.hy.domain.TeamMatchUser</value>
 				<value>com.springproject.dunk.hy.domain.TeamRecruitment</value>
-				<value>com.springproject.dunk.hy.domain.TeamUser</value>				
+				<value>com.springproject.dunk.hy.domain.TeamUser</value>
 				<!-- 도메인 등록을 위와 같이 해서 아래에 붙여주세요. -->
 				<value>com.springproject.dunk.mj.domain.MatchingItem</value>
 				<value>com.springproject.dunk.hy.domain.TeamMatchUserEval</value>
 				<value>com.springproject.dunk.mj.domain.MyApply</value>
-        <value>com.springproject.dunk.ms.domain.UserBookList</value>
+				<value>com.springproject.dunk.ms.domain.UserBookList</value>
 
 			</list>
 		</property>
 
 	</bean>
-	
-	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate" c:sqlSessionFactory-ref="sqlSessionFactory"/>
-		
-	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
-		
+
+	<bean id="sqlSessionTemplate"
+		class="org.mybatis.spring.SqlSessionTemplate"
+		c:sqlSessionFactory-ref="sqlSessionFactory" />
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+
 </beans>
