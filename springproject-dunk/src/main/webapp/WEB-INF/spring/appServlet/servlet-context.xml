@@ -39,7 +39,8 @@
 	<view-controller path="/placeDescription" view-name="forward:/WEB-INF/views/place/placeDescription.jsp" />
 
 	<view-controller path="/placeWriteForm" view-name="place/placeWriteForm" />
-	
+	<!-- 공지사항 -->
+	<view-controller path="/noticeBoardList" view-name="notice/noticeBoardList"/>
 	<beans:bean id="loginCheckInterceptor" 	class="com.springproject.dunk.hy.interceptor.LoginCheckInterceptor" />
 	<interceptors>
 		<interceptor>					

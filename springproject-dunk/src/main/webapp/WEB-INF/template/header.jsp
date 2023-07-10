@@ -55,7 +55,7 @@
 			    	  <li><a class="dropdown-item" href="teamRecruitmentList">팀 모집</a></li>
 				      <li><a class="dropdown-item" href="placeList">장소</a></li>
 				      <li><a class="dropdown-item" href="eventList">이벤트</a></li>				      
-				      <li><a class="dropdown-item" href="#">공지사항</a></li>
+				      <li><a class="dropdown-item" href="noticeBoardList">공지사항</a></li>
 				    </ul>
 				  </li>
 				  <li class="nav-item me-2" style="border: 2px solid #fa9300; border-radius: 40px;">
