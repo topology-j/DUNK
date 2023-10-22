@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="springstudy.teamproject.mapper.ms.BoardMapper" >
+
+	<!-- 장소리스트 불러오기 -->
+	<select id="placeList" resultMap="boardResultMap">
+	    SELECT *
+	    FROM place
+    <where>
+    	<if test="area != 'All'">
+    		area = #{area}
+    	</if>
+    	<if test="keyword != 'null'">
+    		name LIKE CONCAT('%', #{keyword}, '%')
+    	</if>      
+    </where>
+    ORDER BY
+    <choose>    
+    <when test="orderBy == 'popularity'">
+        read_count DESC
+    </when>
+    <when test="orderBy == 'highPay'">
+        pay DESC
+    </when>
+    <when test="orderBy == 'rowPay'">
+        pay ASC
+    </when>
+    <otherwise>
+        no DESC
+    </otherwise>
+    </choose>
+	    LIMIT #{startRow}, #{num}
+	</select>
+
+	    
+	<!--페이징처리에 필요한 구문 -->
+	<select id="getListPlaceCount" resultType="int">
+		SELECT 
+		COUNT(no) 
+		FROM place
+		 <where>
+    	<if test="area != 'All'">
+    		area = #{area}
+    	</if>
+    	<if test="keyword != 'null'">
+    		name LIKE CONCAT('%', #{keyword}, '%')
+    	</if>      
+    </where>
+    ORDER BY
+    <choose>    
+    <when test="orderBy == 'popularity'">
+        read_count DESC
+    </when>
+    <when test="orderBy == 'highPay'">
+        pay DESC
+    </when>
+    <when test="orderBy == 'rowPay'">
+        pay ASC
+    </when>
+    <otherwise>
+        no DESC
+    </otherwise>
+    </choose>
+	</select>
+
+
+
+
+	 
+	 <!-- 장소상세보기 상세보기 -->
+	<select id="getPlaceDetail" resultType="Board" resultMap="boardResultMap">
+		SELECT 
+			* 
+		FROM place
+		WHERE no = #{no}
+	</select>
+	 
+	<!-- 장소입력하기 -->
+	<insert id="placeInsert" parameterType="Board" useGeneratedKeys="true" keyProperty="no">
+	 INSERT INTO place (name, zipcode, address1, address2, area, image1, image2, image3, image4)
+	 	VALUES(#{name}, #{zipcode}, #{address1},#{address2}, #{area}, #{image1}, #{image2}, #{image3}, #{image4})
+	</insert>
+	 
+	 
+	<!-- 장소수정하기 -->
+	<update id="placeUpdateProcess" parameterType="Board">
+		 UPDATE place
+		 SET 
+		name=#{name},
+		zipcode=#{zipcode},
+		address1=#{address1},
+		address2=#{address2},
+		area=#{area},
+		image1=#{image1},
+		image2=#{image2},
+		image3=#{image3},
+		image4=#{image4}
+		WHERE no = #{no}
+	</update>
+	 
+	<!-- 장소삭제하기 -->
+	<delete id="placeDelete" >
+		DELETE FROM place
+		WHERE no=#{no}
+	</delete>
+	<!-- 조회수 증가 -->
+	<update id="incrementReadCount">
+		UPDATE place
+		SET read_count = read_count + 1
+		WHERE no = #{no}
+	</update>
+	
+	<update id="placeRecommendUpdate">
+		UPDATE place
+		SET
+		recommend=recommend + 1
+		WHERE no = #{no}
+	</update>
+
+	 
+	<select id="getPlaceRecommend" resultType="Board">
+		SELECT recommend, thank
+		FROM place
+		WHERE no = #{no}
+	</select>
+		
+	<resultMap id="boardResultMap" type="Board">
+		<id property="no" column="no" />
+		<result property="name" column="name" />
+		<result property="zipcode" column="zipcode" />
+		<result property="address1" column="address1" />
+		<result property="address2" column="address2" />
+		<result property="area" column="area" />
+		<result property="phone" column="phone" />
+		<result property="pay" column="pay" />
+		<result property="startTime" column="start_time" />
+		<result property="endTime" column="end_time" />
+		<result property="availNum" column="avail_num" />
+		<result property="content" column="content" />
+		<result property="park" column="park" />
+		<result property="readCount" column="read_count" />
+		<result property="recommend" column="recommend" />
+		<result property="thank" column="thank" />
+		<result property="latitude" column="latitude" />
+		<result property="longitude" column="longitude" />
+		<result property="image1" column="image1" />
+		<result property="image2" column="image2" />
+		<result property="image3" column="image3" />
+		<result property="image4" column="image4" />
+	</resultMap>
+	
+	<!-- 댓글  mapper -->
+	<select id="placeReplyList" resultType="Reply">
+		SELECT
+		no,
+		place_no AS placeNo,
+		user_id AS userId, 
+		user_nick AS userNick,
+		reply_content AS replyContent, 
+		reg_date AS regDate
+		FROM
+		placeReply
+		WHERE place_no =#{no}
+		ORDER BY	no DESC
+	</select>
+	
+	<insert id="placeReplyAdd" parameterType="Reply">
+		INSERT INTO
+		placeReply(place_no, user_id, user_nick, reply_content , reg_date)
+		VALUES(#{placeNo},#{userId}, #{userNick}, #{replyContent}, SYSDATE())
+	</insert>
+	
+	<update id="placeReplyUpdate" parameterType="Reply">
+		UPDATE placeReply
+		SET reply_content = #{replyContent}
+		WHERE no = #{no}
+	</update>
+	
+	<delete id="placeReplyDelete">
+		DELETE FROM placeReply
+		WHERE no = #{no}
+	</delete>	
+	
+	
+	
+</mapper>	
+
+
+

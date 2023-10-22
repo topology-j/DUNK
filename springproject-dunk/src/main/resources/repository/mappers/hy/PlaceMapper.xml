@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.springproject.dunk.mapper.PlaceBookMapper" >
+
+	<select id="placeBookList" resultMap="placeBookResultMap">
+		select * from place_book where user_id=#{id}
+	</select>
+	
+	<select id="getPlaceBook" resultMap="placeBookResultMap">
+		select * from place_book where no=#{no}
+	</select>
+
+
+	<resultMap id="placeBookResultMap" type="PlaceBook">
+		<id property="no" column="no" />
+		<result property="placeNo" column="place_no" />
+		<result property="placeName" column="place_name" />
+		<result property="placeAddress1" column="place_address1" />
+		<result property="placeAddress2" column="place_address2" />
+		<result property="placePay" column="place_pay" />		
+		<result property="userId" column="user_id" />
+		<result property="userNick" column="user_nick" />
+		<result property="dates" column="dates" />
+		<result property="playerNum" column="player_num" />
+		<result property="timeBook" column="time_book" />
+	</resultMap>
+
+</mapper>	
+
+
+

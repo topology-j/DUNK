@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.springproject.dunk.mapper.TeamMatchMapper" >
+
+	<insert id="addTeamMatch" parameterType="TeamMatch">
+		insert into team_match (title, writer_id, writer_nick, book_no, team_no1, date, time, gender, 
+			level, pay, process, information, read_count) values(#{title}, #{writerId}, #{writerNick}, 
+			#{bookNo}, #{teamNo1}, #{date}, #{time}, #{gender}, #{level}, #{pay}, #{process}, 
+			#{information}, 0)
+	</insert>
+
+	<insert id="addTeamMatchUser" parameterType="hashmap">
+		insert into team_match_user (book_no, team_no, place_name, dates, time_book, team_name, user_id, user_nick, is_delete) 
+			values(#{bookNo}, #{teamNo}, #{placeName}, #{dates}, #{timeBook}, #{teamName}, #{userId}, #{userNick}, 'No')
+	</insert>
+	
+	<update id="addTeamMatchUserNick" parameterType="hashmap">
+		update team_match_user set user_nick=#{userNick} 
+			where book_no=#{bookNo} and team_no=#{teamNo} and user_id=#{userId}
+	</update>
+	
+	<update id="addTeamNo2" parameterType="hashmap">
+		update team_match set team_no2=#{teamNo} where book_no=#{bookNo}
+	</update>	
+	
+	<select id="teamMatchList" resultMap="teamMatchResultMap">
+		select * from team_match
+	</select>
+	
+	<select id="getTeamMatch" resultMap="teamMatchResultMap">
+		select * from team_match where no=#{no}
+	</select>
+	
+	<select id="getTeamMatch2" resultMap="teamMatchResultMap">
+		select * from team_match where book_no=#{bookNo}
+	</select>
+	
+	<select id="teamMatchUserList1" resultMap="teamMatchUserResultMap">
+		select * from team_match_user where book_no=#{bookNo} and team_no=#{teamNo}
+	</select>	
+
+	<update id="updateTeamMatchProcess">
+		update team_match set process='마감' where no=#{no}
+	</update>
+	
+	<select id="teamMatchUserList2" resultMap="teamMatchUserResultMap">
+		select * from team_match_user where user_id=#{id} and is_delete='No' and partner_team_name is not null
+	</select>
+	
+	<select id="getTeamMatchById" resultMap="teamMatchResultMap">
+		select * from team_match where writer_id=#{id}
+	</select>
+	
+	<update id="updateTeamMatchUser" parameterType="hashmap">
+		update team_match_user set partner_team_name=#{teamName} where user_id=#{id} and book_no=#{bookNo}
+	</update>
+	
+	<select id="teamMatchUserListPartner" resultMap="teamMatchUserResultMap">
+		select * from team_match_user where team_no=#{teamNo} and book_no=#{bookNo}
+	</select>
+	
+	<select id="teamMatchUserListFinal" resultMap="teamMatchUserResultMap">
+		select * from team_match_user where book_no=#{bookNo} and team_name=#{teamName}
+	</select>
+	
+	<insert id="addTeamMatchUserEval" parameterType="hashmap">
+		insert into team_match_user_eval (book_no, user_id, partner_id, is_eval) values(#{bookNo}, #{userId}, #{partnerId}, '평가전')
+	</insert>
+	
+	<select id="teamMatchUserEvalList" resultMap="teamMatchUserEvalResultMap">
+		select * from team_match_user_eval where book_no=#{bookNo}
+	</select>
+	
+	<update id="updateTeamMatchUserEval" parameterType="hashmap">
+		update team_match_user_eval set is_eval='평가후' where book_no=#{bookNo} and user_id=#{userId} and partner_id=#{partnerId}
+	</update>
+	
+	<update id="updateTeamMatchUser2" parameterType="hashmap">
+		update team_match_user set is_delete='Yes' where book_no=#{bookNo} and team_no=#{teamNo} and user_id=#{userId}
+	</update>
+	
+	<delete id="deleteTeamMatchUserEval" parameterType="hashmap">
+		delete from team_match_user_eval where book_no=#{bookNo} and user_id=#{userId}
+	</delete>
+
+	
+	
+	<resultMap id="teamMatchResultMap" type="TeamMatch">
+		<id property="no" column="no" />
+		<result property="title" column="title" />
+		<result property="writerId" column="writer_id" />
+		<result property="writerNick" column="writer_nick" />
+		<result property="bookNo" column="book_no" />
+		<result property="teamNo1" column="team_no1" />
+		<result property="teamNo2" column="team_no2" />
+		<result property="date" column="date" />
+		<result property="time" column="time" />
+		<result property="gender" column="gender" />
+		<result property="level" column="level" />
+		<result property="pay" column="pay" />
+		<result property="information" column="information" />
+		<result property="readCount" column="read_count" />		
+	</resultMap>
+	
+	<resultMap id="teamMatchUserResultMap" type="TeamMatchUser">
+		<id property="no" column="no" />
+		<result property="bookNo" column="book_no" />
+		<result property="teamNo" column="team_no" />
+		<result property="placeName" column="place_name" />
+		<result property="dates" column="dates" />
+		<result property="timeBook" column="time_book" />
+		<result property="teamName" column="team_name" />
+		<result property="partnerTeamName" column="partner_team_name" />
+		<result property="userId" column="user_id" />
+		<result property="userNick" column="user_nick" />
+		<result property="isDelete" column="is_delete" />			
+	</resultMap>
+	
+	<resultMap id="teamMatchUserEvalResultMap" type="TeamMatchUserEval">
+		<id property="no" column="no" />
+		<result property="bookNo" column="book_no" />
+		<result property="userId" column="user_id" />
+		<result property="partnerId" column="partner_id" />
+		<result property="isEval" column="is_eval" />			
+	</resultMap>
+
+</mapper>	
+
+
+

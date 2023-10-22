@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<annotation-driven />
+	
+	<resources mapping="/resources/**" location="/resources/" />
+	
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/index.jsp?body=views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+	
+	<context:component-scan base-package="com.springproject.dunk" />
+		
+	<!-- 로고클릭시 매칭리스트 -->
+   <view-controller path="/" view-name="redirect:matchingList" />
+   <!-- 매칭 -->
+   <view-controller path="/matchingWriteForm" view-name="matching/matchingWriteForm" />   
+   
+   <!-- 이벤트 -->
+   <view-controller path="/eventWriteForm" view-name="event/eventWriteForm" />
+   <view-controller path="/eventList" view-name="event/eventList" />
+   <!-- 마이페이지 user -->
+   <view-controller path="/myCalender" view-name="user/myCalender" />
+   <view-controller path="/loginForm" view-name="user/loginForm" />
+   <view-controller path="/joinForm" view-name="user/joinForm" />	
+	
+	<!-- place 경로 -->
+	<view-controller path="/placeWriteForm" view-name="place/placeWriteForm" />	
+	<!-- 환불규정 -->
+	<view-controller path="/refundPolicy" view-name="forward:/WEB-INF/views/place/refundPolicy.jsp" />	
+	<!-- 장소 설명 -->	
+	<view-controller path="/placeDescription" view-name="forward:/WEB-INF/views/place/placeDescription.jsp" />
+
+	<view-controller path="/placeWriteForm" view-name="place/placeWriteForm" />
+	
+	<beans:bean id="loginCheckInterceptor" 	class="com.springproject.dunk.hy.interceptor.LoginCheckInterceptor" />
+	<interceptors>
+		<interceptor>					
+			<mapping path="/add*" />
+			<mapping path="/write*" />
+			<mapping path="/update*" />	
+			<mapping path="/delete*" />			
+			<beans:ref bean="loginCheckInterceptor" />			
+		</interceptor>			
+	</interceptors>	
+
+</beans:beans>
